@@ -1,0 +1,10 @@
+{
+    "apps" : [
+        {
+        "name"      : "Democrify",
+        "script"    : "npx",
+        "interpreter": "none",
+        "args": "serve -p 80 -T"
+        }
+    ]
+}

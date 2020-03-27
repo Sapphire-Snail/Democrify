@@ -17,7 +17,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "react-scripts build",
-    "deploy": "pm2 start ./server.sh --name Democrify"
+    "deploy": "pm2 start app.config.json"
   },
   "eslintConfig": {
     "extends": "react-app"
