@@ -4,7 +4,7 @@
         "name"      : "Democrify",
         "script"    : "npx",
         "interpreter": "none",
-        "args": "serve -p 80 -T"
+        "args": "serve -p 80"
         }
     ]
 }
