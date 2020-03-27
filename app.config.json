@@ -2,7 +2,7 @@
     "apps" : [
         {
         "name"      : "Democrify",
-        "script"    : "npx",
+        "script"    : "npm",
         "interpreter": "none",
         "args": "serve -p 80"
         }
