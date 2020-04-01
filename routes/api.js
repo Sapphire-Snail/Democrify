@@ -12,6 +12,7 @@ export default router => {
     router.get("/login", (req, res) => {
 
         res.send("login server active");
+        console.log(clientId + " " + redirectUri + " " + scopes);
 
     });
 }
