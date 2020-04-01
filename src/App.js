@@ -12,24 +12,45 @@ var spotifyApi = new SpotifyWebApi({
   redirectUri: redirectUri
 });
 // Create the authorization URL
-var authorizeURL = spotifyApi.createAuthorizeURL(scopes);
+var authorizeURL = spotifyApi.createAuthorizeURL(scopes) + "&show_dialog=true";
 //console.log(authorizeURL);
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { loggedIn : "" };
+    this.state = { loggedIn : "",
+                   accessToken : "" };
+    this.callLogin = this.callLogin.bind(this);
   }
 
+  // getLoginCode() {
+  //   const queryString = window.location.search;
+  //   const urlParams = new URLSearchParams(queryString);
+  //   const code = urlParams.get('code');
+  //   console.log("CODE IS: " + code);
+  //   this.setState({loggedIn : code});
+  // }
+
   callLogin() {
-    fetch("/api/login")
-    .then(res => res.text())
-    .then(res => this.setState({ loggedIn : res}))
-    .catch(err => err);
+    var popup = window.open(
+      authorizeURL,
+      'Login with Spotify',
+      'width=600,height=800'
+    )
+    window.spotifyCallback = (payload) => { 
+      popup.close();
+      console.log(payload);
+    }
   }
 
   componentDidMount() {
-    this.callLogin();
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const code = urlParams.get('code');
+    console.log("TOKEN IS: " + code);
+    if (code) {
+      window.opener.spotifyCallback(code);
+    }
     //Get code
     //const queryString = window.location.search;
     //const urlParams = new URLSearchParams(queryString);
@@ -61,19 +82,14 @@ class App extends Component {
           Democrify up in this bitch.
           </p>
           
-          <a
+          <button
             className="btn btn--loginApp-link"
-            //href={authorizeURL}
+            onClick={this.callLogin}
           >
             Login to Spotify
-          </a>
+          </button>
 
           <h1> Logged in?: {this.state.loggedIn} </h1>
-          {spotifyApi.getAccessToken() && (
-            [
-            <p> Access token: {spotifyApi.getAccessToken()}</p>,
-            ]
-          )}
         </header>
       </div>
     );
@@ -81,3 +97,4 @@ class App extends Component {
 }
 
 export default App;
+
