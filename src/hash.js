@@ -1,4 +1,4 @@
-// Get the hash of the url
+// Get the hash of the url (probably not used)
 const hash = window.location.hash
   .substring(1)
   .split("&")

@@ -1,59 +1,55 @@
-//Followed tutorial from https://levelup.gitconnected.com/how-to-build-a-spotify-player-with-react-in-15-minutes-7e01991bc4b6
 import React, { Component } from "react";
-import * as $ from "jquery";
-import { authEndpoint, clientId, redirectUri, scopes } from "./config";
-import hash from "./hash";
-import Player from "./Player";
+import { clientId, redirectUri, scopes } from "./config";
+//import hash from "./hash";
 import logo from "./logo.svg";
 import "./App.css";
+var SpotifyWebApi = require('spotify-web-api-node');
+
+//Create spotify api
+var spotifyApi = new SpotifyWebApi({
+  clientId: clientId,
+  clientSecret: '3fbb80a0fa384eab8e096c6a96582cc6',
+  redirectUri: redirectUri
+});
+// Create the authorization URL
+var authorizeURL = spotifyApi.createAuthorizeURL(scopes);
+//console.log(authorizeURL);
 
 class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      token: null,
-      item: {
-        album: {
-          images: [{ url: "" }]
-        },
-        name: "",
-        artists: [{ name: "" }],
-        duration_ms: 0
-      },
-      is_playing: "Paused",
-      progress_ms: 0
-    };
-    this.getCurrentlyPlaying = this.getCurrentlyPlaying.bind(this);
+  constructor(props) {
+    super(props);
+    this.state = { loggedIn : "" };
   }
+
+  callLogin() {
+    fetch("http://localhost:5000/api/login")
+    .then(res => res.text())
+    .then(res => this.setState({ loggedIn : res}))
+    .catch(err => err);
+  }
+
   componentDidMount() {
-    // Set token
-    let _token = hash.access_token;
+    this.callLogin();
+    //Get code
+    //const queryString = window.location.search;
+    //const urlParams = new URLSearchParams(queryString);
+    //const code = urlParams.get('code');
+    // Retrieve an access token and a refresh token
+    //console.log('CODE IS: ' + code);
+    // spotifyApi.authorizationCodeGrant(code).then(
+    //   function(data) {
+    //     console.log('The token expires in ' + data.body['expires_in']);
+    //     console.log('The access token is ' + data.body['access_token']);
+    //     console.log('The refresh token is ' + data.body['refresh_token']);
 
-    if (_token) {
-      // Set token
-      this.setState({
-        token: _token
-      });
-      this.getCurrentlyPlaying(_token);
-    }
-  }
-
-  getCurrentlyPlaying(token) {
-    // Make a call using the token
-    $.ajax({
-      url: "https://api.spotify.com/v1/me/player",
-      type: "GET",
-      beforeSend: xhr => {
-        xhr.setRequestHeader("Authorization", "Bearer " + token);
-      },
-      success: data => {
-        this.setState({
-          item: data.item,
-          is_playing: data.is_playing,
-          progress_ms: data.progress_ms
-        });
-      }
-    });
+    //     // Set the access token on the API object to use it in later calls
+    //     spotifyApi.setAccessToken(data.body['access_token']);
+    //     spotifyApi.setRefreshToken(data.body['refresh_token']);
+    //   },
+    //   function(err) {
+    //     console.log('Something went wrong!', err);
+    //   }
+    // );
   }
 
   render() {
@@ -64,22 +60,19 @@ class App extends Component {
           <p>
           Democrify up in this.
           </p>
-          {!this.state.token && (
-            <a
-              className="btn btn--loginApp-link"
-              href={`${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join(
-                "%20"
-              )}&response_type=token&show_dialog=true`}
-            >
-              Login to Spotify
-            </a>
-          )}
-          {this.state.token && (
-            <Player
-              item={this.state.item}
-              is_playing={this.state.is_playing}
-              progress_ms={this.progress_ms}
-            />
+          
+          <a
+            className="btn btn--loginApp-link"
+            //href={authorizeURL}
+          >
+            Login to Spotify
+          </a>
+
+          <h1> Logged in?: {this.state.loggedIn} </h1>
+          {spotifyApi.getAccessToken() && (
+            [
+            <p> Access token: {spotifyApi.getAccessToken()}</p>,
+            ]
           )}
         </header>
       </div>
