@@ -22,7 +22,7 @@ class App extends Component {
   }
 
   callLogin() {
-    fetch("http://localhost:5000/api/login")
+    fetch("/api/login")
     .then(res => res.text())
     .then(res => this.setState({ loggedIn : res}))
     .catch(err => err);
