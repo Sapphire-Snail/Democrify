@@ -58,7 +58,7 @@ class App extends Component {
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <p>
-          Democrify up in this.
+          Democrify up in this bitch.
           </p>
           
           <a
