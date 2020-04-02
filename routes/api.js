@@ -30,7 +30,7 @@ export default router => {
     });
 
     router.get("/getLoginURL", (req, res) => {
-        var URL = spotifyApi.createAuthorizeURL(scopes) + "&show_dialog=true";
+        var URL = spotifyApi.createAuthorizeURL(scopes);// + "&show_dialog=true";
         res.send(URL);
         //res.json({ URL: spotifyApi.createAuthorizeURL(scopes) + "&show_dialog=true"});
     })
