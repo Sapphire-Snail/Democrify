@@ -22,16 +22,20 @@ class App extends Component {
   }
 
   //Called on click of login button
-  callLogin() {
+  async callLogin() {
+    var URLres = await Promise.all([axios.get("/api/getLoginURL")]);
+    console.log(URLres[0].data);
+
     var popup = window.open(
-      authorizeURL,
+      URLres[0].data,
       'Login with Spotify',
-      'width=600,height=800'
+      'width=800,height=900'
     )
     //Create callback function to be called 
-    window.spotifyCallback =async (payload) => { 
+    window.spotifyCallback = async (payload) => { 
       //Close popup and tell server to log in
       popup.close();
+
       await Promise.all([
         axios({
           method: "post",
@@ -41,7 +45,6 @@ class App extends Component {
             code: payload
           }
         })]);
-
       const response = await axios.get("/api/me");
       console.log(response.data.body);
       this.setState({loggedIn: response.data.body.display_name});
@@ -50,8 +53,7 @@ class App extends Component {
 
   componentDidMount() {
     //Retrieve auth code from URL
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
+    const urlParams = new URLSearchParams(window.location.search);
     const code = urlParams.get('code');
     //If code exists i.e if this component is within the popup, call the previous callback function to close popup
     if (code) {
