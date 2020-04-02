@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { clientId, redirectUri, scopes } from "./config";
 import logo from "./logo.svg";
 import axios from "axios";
 import "./App.css";
@@ -7,16 +6,6 @@ import "./App.css";
 //Components
 import UserInfo from './components/UserInfo';
 
-var SpotifyWebApi = require('spotify-web-api-node');
-
-//Create spotify api (needed to create authorization URL)
-var spotifyApi = new SpotifyWebApi({
-  clientId: clientId,
-  clientSecret: '3fbb80a0fa384eab8e096c6a96582cc6',
-  redirectUri: redirectUri
-});
-// Create the authorization URL
-var authorizeURL = spotifyApi.createAuthorizeURL(scopes) + "&show_dialog=true";
 
 class App extends Component {
   constructor(props) {
@@ -27,15 +16,17 @@ class App extends Component {
 
   //Called on click of login button
   async callLogin() {
+    //Get auth URL from backend
     var URLres = await Promise.all([axios.get("/api/getLoginURL")]);
-    console.log(URLres[0].data);
 
+    //Open login popup
     var popup = window.open(
       URLres[0].data,
       'Login with Spotify',
       'width=800,height=900'
     )
-    //Create callback function to be called 
+
+    //Create callback function to be called when user clicks login
     window.spotifyCallback = async (payload) => { 
       //Close popup and tell server to log in
       popup.close();
@@ -44,7 +35,7 @@ class App extends Component {
         axios({
           method: "post",
           url: "/api/login",
-          timeout: 5000,
+          timeout: 50000,
           data: {
             code: payload
           }
@@ -81,8 +72,7 @@ class App extends Component {
             Login to Spotify
           </button>
 
-          <h1> Logged in?: </h1>
-          <UserInfo userInfo = {this.state.userInfo}></UserInfo>
+          {<UserInfo userInfo = {this.state.userInfo}></UserInfo>}
         </header>
       </div>
     );
