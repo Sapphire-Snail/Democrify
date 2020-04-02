@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { clientId, redirectUri, scopes } from "./config";
 import logo from "./logo.svg";
+import axios from "axios";
 import "./App.css";
 var SpotifyWebApi = require('spotify-web-api-node');
 
@@ -28,21 +29,22 @@ class App extends Component {
       'width=600,height=800'
     )
     //Create callback function to be called 
-    window.spotifyCallback = (payload) => { 
+    window.spotifyCallback =async (payload) => { 
       //Close popup and tell server to log in
       popup.close();
-      fetch("/api/login", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
+      await Promise.all([
+        axios({
+          method: "post",
+          url: "/api/login",
+          timeout: 5000,
+          data: {
             code: payload
-        })
-      })
-      .then(
-        res => res.json())
-        .then(json => console.log(json));
+          }
+        })]);
+
+      const response = await axios.get("/api/me");
+      console.log(response.data.body);
+      this.setState({loggedIn: response.data.body.display_name});
     }
   }
 

@@ -44,7 +44,7 @@ export default router => {
             },
             function(err) {
                 console.log('Something went wrong!', err);
-                res.status(400).end();
+                res.status(401).end();
             });
     });
 
