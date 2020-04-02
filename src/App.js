@@ -3,6 +3,10 @@ import { clientId, redirectUri, scopes } from "./config";
 import logo from "./logo.svg";
 import axios from "axios";
 import "./App.css";
+
+//Components
+import UserInfo from './components/UserInfo';
+
 var SpotifyWebApi = require('spotify-web-api-node');
 
 //Create spotify api (needed to create authorization URL)
@@ -17,7 +21,7 @@ var authorizeURL = spotifyApi.createAuthorizeURL(scopes) + "&show_dialog=true";
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { loggedIn : "" };
+    this.state = { userInfo : {} };
     this.callLogin = this.callLogin.bind(this);
   }
 
@@ -47,7 +51,7 @@ class App extends Component {
         })]);
       const response = await axios.get("/api/me");
       console.log(response.data.body);
-      this.setState({loggedIn: response.data.body.display_name});
+      this.setState({userInfo : response.data.body});
     }
   }
 
@@ -77,7 +81,8 @@ class App extends Component {
             Login to Spotify
           </button>
 
-          <h1> Logged in?: {this.state.loggedIn} </h1>
+          <h1> Logged in?: </h1>
+          <UserInfo userInfo = {this.state.userInfo}></UserInfo>
         </header>
       </div>
     );
