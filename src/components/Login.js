@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from "axios";
+import { trackPromise } from "react-promise-tracker";
 
 
 class Login extends Component {
@@ -11,29 +12,28 @@ class Login extends Component {
     //Called on click of login button
     async callLogin() {
         //Get auth URL from backend
-        var URLres = await Promise.all([axios.get("/api/getLoginURL")]);
+        var URLres = await axios.get("/api/getLoginURL");
 
         //Open login popup
         var popup = window.open(
-        URLres[0].data,
+        URLres.data,
         'Login with Spotify',
-        'width=800,height=900'
+        'width=800, height=900'
         )
 
         //Create callback function to be called when user clicks login
         window.spotifyCallback = async (payload) => { 
             //Close popup and tell server to log in
             popup.close();
-
-            await axios({
-                method: "post",
-                url: "/api/login",
-                timeout: 8000,
-                data: {
-                    code: payload
-                }
+                await axios({
+                    method: "post",
+                    url: "/api/login",
+                    timeout: 8000,
+                    data: {
+                        code: payload
+                    }
             });
-            const response = await axios.get("/api/me");
+            const response = await trackPromise(axios.get("/api/me"));
             //console.log(response.data.body);
             this.props.handleLogin(response.data.body);
         }
@@ -53,7 +53,7 @@ class Login extends Component {
         return(
             <div>
                 {
-                    !this.props.userInfo.display_name && 
+                    !this.props.userInfo.display_name &&
                     <button className="btn btn--loginApp-link" onClick={this.callLogin}>
                         Login to Spotify { this.props.userInfo.display_name }
                     </button>
