@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from "axios";
 import "./App.css";
 
 //Components
@@ -17,7 +18,20 @@ class App extends Component {
     this.setState({ userInfo: userInfo });
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    //See if we already are logged in
+    axios.get("/api/me")
+      .then(res => {
+        if(res.status === 200) {
+          this.setState({ userInfo: res.data.body});
+          console.log("Logged in");
+        }
+      })
+      .catch(err => {
+        console.log("Not logged in");
+        //console.log(err.response);
+      });
+  }
 
   render() {
     return (

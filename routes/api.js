@@ -12,12 +12,6 @@ var spotifyApi = new SpotifyWebApi({
 
 export default router => {
 
-    router.get("/greeting", (req, res) => {
-
-        res.json({ message: `Hello, world! Unique ID: ${uuid()}` });
-
-    });
-
     router.get("/me", (req, res) => {
         spotifyApi.getMe()
         .then(function(data) {
@@ -49,7 +43,7 @@ export default router => {
                 res.json(data);
             },
             function(err) {
-                console.log('Something went wrong!', err);
+                console.log('Something went wrong! (login)', err);
                 res.status(401).end();
             });
     });
