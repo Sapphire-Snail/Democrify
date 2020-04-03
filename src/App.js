@@ -5,17 +5,24 @@ import "./App.css";
 //Components
 import UserInfo from './components/UserInfo';
 import Login from './components/Login';
+import Playlists from './components/Playlists/Playlists';
 
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { userInfo : {} };
+    this.state = { 
+      loggedIn : false,
+      userInfo : {} 
+    };
     this.handleLogin = this.handleLogin.bind(this);
   }
 
   handleLogin(userInfo){
-    this.setState({ userInfo: userInfo });
+    this.setState({ 
+      loggedIn: true,
+      userInfo: userInfo
+     });
   }
 
   componentDidMount() {
@@ -23,7 +30,10 @@ class App extends Component {
     axios.get("/api/me")
       .then(res => {
         if(res.status === 200) {
-          this.setState({ userInfo: res.data.body});
+          this.setState({ 
+            loggedIn: true,
+            userInfo: res.data.body
+          });
           console.log("Logged in");
         }
       })
@@ -38,8 +48,14 @@ class App extends Component {
          <div className="App">
           <header>
             <h1>Democrify.me</h1>
-            {<Login userInfo = {this.state.userInfo} handleLogin = {this.handleLogin}></Login>}
-            {<UserInfo userInfo = {this.state.userInfo}></UserInfo>}   
+            {this.state.loggedIn
+              ? 
+              [ 
+              <UserInfo key={0} userInfo = {this.state.userInfo}></UserInfo>,
+              <Playlists key={1} userId = {this.state.userInfo.id}/>
+              ]
+              : <Login userInfo = {this.state.userInfo} handleLogin = {this.handleLogin}></Login>
+            }   
           </header>
         </div>
     );

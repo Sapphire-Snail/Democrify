@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from "axios";
 import { trackPromise } from "react-promise-tracker";
+import { Spinner } from "./Spinner"
 
 
 class Login extends Component {
@@ -25,13 +26,13 @@ class Login extends Component {
         window.spotifyCallback = async (payload) => { 
             //Close popup and tell server to log in
             popup.close();
-                await axios({
-                    method: "post",
-                    url: "/api/login",
-                    timeout: 8000,
-                    data: {
-                        code: payload
-                    }
+            await axios({
+                method: "post",
+                url: "/api/login",
+                timeout: 8000,
+                data: {
+                    code: payload
+                }
             });
             const response = await trackPromise(axios.get("/api/me"));
             //console.log(response.data.body);
@@ -52,12 +53,12 @@ class Login extends Component {
     render() {
         return(
             <div>
-                {
-                    !this.props.userInfo.display_name &&
-                    <button className="btn btn--loginApp-link" onClick={this.callLogin}>
-                        Login to Spotify { this.props.userInfo.display_name }
-                    </button>
-                }
+                {[
+                    <button key={0} className="btn btn--loginApp-link" onClick={this.callLogin}>
+                        Login to Spotify
+                    </button>,  
+                    <Spinner key={1} />
+                ]}
             </div>
         );
     }

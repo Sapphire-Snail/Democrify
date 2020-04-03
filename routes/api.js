@@ -15,10 +15,21 @@ export default router => {
     router.get("/me", (req, res) => {
         spotifyApi.getMe()
         .then(function(data) {
-            console.log('Some information about the authenticated user', data.body);
+            //console.log('Some information about the authenticated user', data.body);
             res.json(data);
         }, function(err) {
             console.log('Something went wrong! (me)', err);
+            res.status(400).end();
+        });
+    });
+
+    router.post("/getUserPlaylists", (req, res) => {
+        spotifyApi.getUserPlaylists(req.body.userId, { limit : 10 })
+        .then(function(data) {
+            //console.log('Users playlists', data.body);
+            res.json(data);
+        }, function(err) {
+            console.log('Something went wrong! (get playlists)', err);
             res.status(400).end();
         });
     });
