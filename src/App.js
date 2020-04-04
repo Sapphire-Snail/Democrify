@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import axios from "axios";
+import { connect } from 'react-redux';
+import { loadPlaylists } from './redux/actions/thunk';
 import "./App.css";
 
 //Components
@@ -23,25 +24,11 @@ class App extends Component {
       loggedIn: true,
       userInfo: userInfo
      });
+     //Load user playlists
+     this.props.loadPlaylists();
   }
 
-  componentDidMount() {
-    //See if we already are logged in
-    axios.get("/api/me")
-      .then(res => {
-        if(res.status === 200) {
-          this.setState({ 
-            loggedIn: true,
-            userInfo: res.data.body
-          });
-          console.log("Logged in");
-        }
-      })
-      .catch(err => {
-        console.log("Not logged in");
-        //console.log(err.response);
-      });
-  }
+  componentDidMount() {}
 
   render() {
     return (
@@ -62,5 +49,14 @@ class App extends Component {
   }
 }
 
-export default App;
+function mapStateToProps(state) {
+  return {state};
+}
 
+const mapDispatchToProps = {
+  loadPlaylists
+}
+
+// Applies the config using the "connect" higher-order component provided by Redux
+export default connect(mapStateToProps, mapDispatchToProps)(App);
+// -------------------------------------------------------------
