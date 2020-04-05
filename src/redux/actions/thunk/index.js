@@ -24,7 +24,7 @@ export function loadUser() {
     return dispatch => {
         dispatch(getUserLoading());
 
-        Api.login()
+        Api.getUser()
             .then(
                 events => dispatch(getUserSuccess(events)),
 

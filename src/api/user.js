@@ -1,5 +1,5 @@
 import axios from "axios";
-//NOT YET BEING USED
-export function login() {
+
+export function getUser() {
     return axios.get("/api/me")
 }
