@@ -1,6 +1,4 @@
-import { ADD_PLAYLISTDATA_LOADING, ADD_PLAYLISTDATA_SUCCESS, ADD_PLAYLISTDATA_ERROR } from '../actions/action-types';
-//import moment from 'moment';
-//import { v4 as uuid } from 'uuid';
+import { GET_PLAYLISTDATA_LOADING, GET_PLAYLISTDATA_SUCCESS, GET_PLAYLISTDATA_ERROR } from '../actions/action-types';
 
 /**
  * This function handles modifications to the "playlists" property of the overall state.
@@ -13,13 +11,13 @@ export default function playlists(state = [], action) {
     // Perform different things based on the type of action
     switch (action.type) {
 
-        case ADD_PLAYLISTDATA_LOADING:
+        case GET_PLAYLISTDATA_LOADING:
             return playlists_LoadPlaylistsLoading(state, action);
 
-        case ADD_PLAYLISTDATA_SUCCESS:
+        case GET_PLAYLISTDATA_SUCCESS:
             return playlists_LoadPlaylistsSuccess(state, action);
 
-        case ADD_PLAYLISTDATA_ERROR:
+        case GET_PLAYLISTDATA_ERROR:
             return playlists_LoadPlaylistsError(state, action);
 
         default:

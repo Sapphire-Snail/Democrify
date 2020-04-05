@@ -1,6 +1,6 @@
 import { GET_USER_LOADING, GET_USER_SUCCESS, GET_USER_ERROR } from '../actions/action-types';
 
-export default function login(state = [], action) {
+export default function user(state = [], action) {
     // Perform different things based on the type of action
     switch (action.type) {
 
@@ -19,15 +19,27 @@ export default function login(state = [], action) {
 }
 
 function user_getUserLoading(state, action) {
-    return state;
+    return {
+        ...state,
+        loading: true,
+        error: null
+      };
 }
 
 //Get data returned from the server and return it as the new state for user data
 function user_getUserSuccess(state, action) {
-    return action.userData.data.body;
+    return {
+        ...state,
+        loading: false,
+        data: action.userData.data.body
+      };
 }
 
 //TODO: Set some state to indicate error
 function user_getUserError(state, action) {
-    return state;
+    return {
+        state: state,
+        loading: false,
+        error: action.userData.error
+      };
 }

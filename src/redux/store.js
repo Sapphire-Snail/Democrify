@@ -10,7 +10,8 @@ import thunk from 'redux-thunk';
 
 // Initial state
 const initialState = {
-    playlists: []
+    playlists: {},
+    user: {}
 }
 
 // Config for redux-persist

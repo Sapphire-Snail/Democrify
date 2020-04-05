@@ -26,7 +26,7 @@ export function loadUser() {
 
         Api.getUser()
             .then(
-                events => dispatch(getUserSuccess(events)),
+                userData => dispatch(getUserSuccess(userData)),
 
                 error => dispatch(getUserError(error.message || "Unexpected error!")));
 

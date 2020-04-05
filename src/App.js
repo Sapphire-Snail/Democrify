@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from 'react-redux';
 import { loadPlaylists } from './redux/actions/thunk';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
-import axios from "axios";
+import Api from './api';
 import "./App.css";
 
 //Components
@@ -88,40 +88,14 @@ const mapDispatchToProps = {
 export default connect(mapStateToProps, mapDispatchToProps)(App);
 // -------------------------------------------------------------
 
-
-// class Callback extends Component {
-  
-//   componentWillUnmount() {
-//     //Retrieve auth code from URL
-//     const urlParams = new URLSearchParams(window.location.search);
-//     const code = urlParams.get('code');
-//     console.log("AHHH" + code);
-//     if (code) {
-//         console.log(code);
-//     }
-//     window.location.href = ""
-//   }
-
-//   render() {
-//     return <Redirect to='/playlists'/>
-//   }
-// }
-
+//Define callback object to retrieve code from URL and tell server to create access tokens
 const Callback = () => {
   //Retrieve auth code from URL
   const urlParams = new URLSearchParams(window.location.search);
   const code = urlParams.get('code');
   if (code){
-    //If code exists, tell server to go grab access tokens
-    console.log(code);
-    axios({
-      method: "post",
-      url: "/api/login",
-      timeout: 8000,
-      data: {
-          code: code
-      }
-    })
+    //If code exists, get user access tokens
+    Api.getUserTokens(code);
     return <Redirect to='/me'/>
   }
  return <Redirect to='/login'/>

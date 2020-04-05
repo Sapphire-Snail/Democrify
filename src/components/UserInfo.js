@@ -9,20 +9,31 @@ class UserInfo extends Component {
     }
 
     render() {
-        return(
-            <div>
-                hey
-                {/* <p> Hello { this.props.userData.display_name } </p> */}
-                {/* <p> Country: { this.props.userData.country } </p>  */}
-            </div>
-        );
+        const { error, loading, data } = this.props.userData;
+        if(error) {
+            return <p>Error {error.message}</p>
+        }
+        
+        if(loading) {
+            return <p>Loading info...</p>
+        }
+
+        if(data) {
+            return(
+                <div>
+                    {<p> Hello { data.display_name } </p>}
+                    {<p> Country: { data.country } </p>}
+                </div>
+            );
+        }
+        return <div/>
     }
 }
 
 //State is entire state tree
 function mapStateToProps(state) {
     return {
-        userData: state.userData
+        userData: state.user
     };
 }
 
