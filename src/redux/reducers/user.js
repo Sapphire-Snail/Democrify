@@ -35,11 +35,10 @@ function user_getUserSuccess(state, action) {
       };
 }
 
-//TODO: Set some state to indicate error
 function user_getUserError(state, action) {
     return {
         state: state,
         loading: false,
-        error: action.userData.error
+        error: action.err
       };
 }

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { loadUser } from '../redux/actions/thunk';
 import { connect } from 'react-redux';
+import Loader from "react-loader-spinner";
+import Playlists from "./Playlists/Playlists"
 
 class UserInfo extends Component {
 
@@ -15,14 +17,15 @@ class UserInfo extends Component {
         }
         
         if(loading) {
-            return <p>Loading info...</p>
+            return <Loader type="ThreeDots" color="#1ECD97" height={100} width={100} />
         }
 
         if(data) {
             return(
                 <div>
-                    {<p> Hello { data.display_name } </p>}
+                    {<p> Whaddup { data.display_name } </p>}
                     {<p> Country: { data.country } </p>}
+                    <Playlists/>
                 </div>
             );
         }
@@ -37,8 +40,10 @@ function mapStateToProps(state) {
     };
 }
 
+//Map necessary dispatch functions to props
 const mapDispatchToProps = {
-    loadUser
+    loadUser,
 }
 
+//Connect to redux store
 export default connect(mapStateToProps, mapDispatchToProps)(UserInfo);

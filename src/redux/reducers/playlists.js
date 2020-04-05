@@ -30,15 +30,26 @@ export default function playlists(state = [], action) {
  * loaded from the backend. For example, set a flag that would signal the UI to display a "loading..." bar.
  */
 function playlists_LoadPlaylistsLoading(state, action) {
-    return state;
+    return {
+        ...state,
+        loading: true,
+        error: null
+      };
 }
 
 //Get data returned from the server and return it as the new state for playlists
 function playlists_LoadPlaylistsSuccess(state, action) {
-    return action.playlists.data.body;
+    return {
+        ...state,
+        loading: false,
+        data: action.playlists.data.body
+      };
 }
 
-//TODO: Set some state to indicate error
 function playlists_LoadPlaylistsError(state, action) {
-    return state;
+    return {
+        state: state,
+        loading: false,
+        error: action.playlists.error
+      };
 }

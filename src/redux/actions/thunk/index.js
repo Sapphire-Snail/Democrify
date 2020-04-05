@@ -1,16 +1,15 @@
 import { loadPlaylistsLoading, loadPlaylistsSuccess, loadPlaylistsError, getUserLoading, getUserSuccess, getUserError } from '..';
 import Api from '../../../api';
 
-export function loadPlaylists() {
+export function loadPlaylists(userId) {
     return dispatch => {
         // First, dispatch the LOAD_PLAYLISTS_LOADING action, allowing the rest of our app to detect when
         // we've started loading playlists.
         dispatch(loadPlaylistsLoading());
 
         // Now, start loading the todos.
-        Api.getPlaylists()
+        Api.getPlaylists(userId)
             .then(
-
                 // If the todos were loaded successfully, dispatch the LOAD_PLAYLISTS_SUCCESS action allowing the playlists to be added to the store
                 playlists => dispatch(loadPlaylistsSuccess(playlists)),
 
