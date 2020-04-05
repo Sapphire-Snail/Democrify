@@ -14,7 +14,6 @@ class App extends Component {
     super(props);
     this.state = { 
       loggedIn : false,
-      userInfo : {} 
     };
     this.handleLogin = this.handleLogin.bind(this);
   }

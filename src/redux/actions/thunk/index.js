@@ -1,4 +1,4 @@
-import { loadPlaylistsLoading, loadPlaylistsSuccess, loadPlaylistsError } from '..';
+import { loadPlaylistsLoading, loadPlaylistsSuccess, loadPlaylistsError, loginUserLoading, loginUserSuccess, loginUserError } from '..';
 import Api from '../../../api';
 
 export function loadPlaylists() {
@@ -17,6 +17,19 @@ export function loadPlaylists() {
 
                 // If there was an error loading todos, dispatch the LOAD_PLAYLISTS_ERROR action providing details of the error
                 error => dispatch(loadPlaylistsError(error.message || "Unexpected error!")));
+
+    }
+}
+
+export function login(code) {
+    return dispatch => {
+        dispatch(loginUserLoading());
+        console.log("dispatch");
+        Api.login(code)
+            .then(
+                events => dispatch(loginUserSuccess(events)),
+
+                error => dispatch(loginUserError(error.message || "Unexpected error!")));
 
     }
 }

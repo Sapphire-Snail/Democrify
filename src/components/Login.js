@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import axios from "axios";
+import { connect } from 'react-redux';
+import { login } from '../redux/actions/thunk';
 import { trackPromise } from "react-promise-tracker";
-import { Spinner } from "./Spinner"
-
 
 class Login extends Component {
     constructor(props) {
@@ -12,7 +12,7 @@ class Login extends Component {
 
     //Called on click of login button
     async callLogin() {
-        //Get auth URL from backend
+        //Get auth URL from backend (this should probably all be moved to redux but hey)
         var URLres = await axios.get("/api/getLoginURL");
 
         //Open login popup
@@ -35,7 +35,6 @@ class Login extends Component {
                 }
             });
             const response = await trackPromise(axios.get("/api/me"));
-            //console.log(response.data.body);
             this.props.handleLogin(response.data.body);
         }
     }
@@ -57,11 +56,21 @@ class Login extends Component {
                     <button key={0} className="btn btn--loginApp-link" onClick={this.callLogin}>
                         Login to Spotify
                     </button>,  
-                    <Spinner key={1} />
                 ]}
             </div>
         );
     }
 }
 
-export default Login;
+//State is entire state tree
+function mapStateToProps(state) {
+    return {
+        userData: state.userData
+    };
+}
+
+const mapDispatchToProps = {
+    login
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
