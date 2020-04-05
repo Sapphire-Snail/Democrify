@@ -34,8 +34,9 @@ class Login extends Component {
                     code: payload
                 }
             });
-            const response = await trackPromise(axios.get("/api/me"));
-            this.props.handleLogin(response.data.body);
+            //const response = await trackPromise(axios.get("/api/me"));
+            login();
+            this.props.handleLogin();
         }
     }
 

@@ -3,7 +3,6 @@ import Api from '../../../api';
 
 export function loadPlaylists() {
     return dispatch => {
-
         // First, dispatch the LOAD_PLAYLISTS_LOADING action, allowing the rest of our app to detect when
         // we've started loading playlists.
         dispatch(loadPlaylistsLoading());
@@ -21,11 +20,11 @@ export function loadPlaylists() {
     }
 }
 
-export function login(code) {
+export function login() {
     return dispatch => {
         dispatch(loginUserLoading());
-        console.log("dispatch");
-        Api.login(code)
+
+        Api.login()
             .then(
                 events => dispatch(loginUserSuccess(events)),
 
