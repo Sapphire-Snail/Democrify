@@ -13,7 +13,7 @@ class UserInfo extends Component {
     render() {
         const { error, loading, data } = this.props.userData;
         if(error) {
-            return <p>Error {error.message}</p>
+            return <p>Error {error}</p>
         }
         
         if(loading) {

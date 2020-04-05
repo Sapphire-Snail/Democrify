@@ -14,7 +14,7 @@ class Playlists extends Component  {
         const { error, loading, data } = this.props.playlists;
 
         if(error) {
-            return <p>Error {error.message}</p>
+            return <p>Error {error}</p>
         }
 
         if(loading) {

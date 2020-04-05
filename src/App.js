@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import Loader from "react-loader-spinner";
 import Api from './api';
 import "./App.css";
 
@@ -51,15 +52,46 @@ function mapStateToProps(state) {
 export default connect(mapStateToProps)(App);
 // -------------------------------------------------------------
 
-//Define callback object to retrieve code from URL and tell server to create access tokens
-const Callback = () => {
-  //Retrieve auth code from URL
-  const urlParams = new URLSearchParams(window.location.search);
-  const code = urlParams.get('code');
-  if (code){
-    //If code exists, get user access tokens
-    Api.getUserTokens(code);
-    return <Redirect to='/me'/>
+//Class that's instantiated when Spotify login screen is closed
+ class Callback extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+        gotTokens: false
+    };
+}
+
+  async componentDidMount() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const code = urlParams.get('code');
+    await Api.getUserTokens(code);
+    //Update state once response is received, thus re-rendering and directing to home page
+    this.setState({gotTokens: true})
   }
- return <Redirect to='/login'/>
- }
+
+  render() {
+      if(this.state.gotTokens) {
+        return <Redirect to='/me'/>
+      } else {
+        return <Loader type="ThreeDots" color="#1ECD97" height={100} width={100} />
+      }
+  }
+}
+
+//Old method (keeping in case)
+//Define callback object to retrieve code from URL and tell server to create access tokens
+// const Callback = () => {
+//   //Retrieve auth code from URL
+//   const urlParams = new URLSearchParams(window.location.search);
+//   const code = urlParams.get('code');
+//   //Take the user to me page if code retrieved
+//   if (code){
+//     //If code exists, get user access tokens
+//     //Api.getUserTokens(code);
+//     Api.getUserTokens(code).then(res => console.log(res));
+//     return <Redirect to='/me'/>
+//   }
+//   //Otherwise back to the login with you
+//  return <Redirect to='/login'/>
+//  }
