@@ -1,5 +1,5 @@
 import { loadPlaylistsLoading, loadPlaylistsSuccess, loadPlaylistsError } from './playlists';
-import { loginUserLoading, loginUserSuccess, loginUserError } from './login';
+import { getUserLoading, getUserSuccess, getUserError } from './user';
 
 
 export {
@@ -7,7 +7,7 @@ export {
     loadPlaylistsSuccess,
     loadPlaylistsError,
 
-    loginUserLoading,
-    loginUserSuccess,
-    loginUserError
+    getUserLoading,
+    getUserSuccess,
+    getUserError
 };

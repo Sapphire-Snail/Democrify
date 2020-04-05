@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
+import { loadUser } from '../redux/actions/thunk';
+import { connect } from 'react-redux';
 
 class UserInfo extends Component {
+
+    componentDidMount() {
+        this.props.loadUser();
+    }
 
     render() {
         return(
@@ -12,4 +18,15 @@ class UserInfo extends Component {
     }
 }
 
-export default UserInfo;
+//State is entire state tree
+function mapStateToProps(state) {
+    return {
+        userData: state.userData
+    };
+}
+
+const mapDispatchToProps = {
+    loadUser
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserInfo);

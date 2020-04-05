@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import axios from "axios";
 import { connect } from 'react-redux';
-import { login } from '../redux/actions/thunk';
 import { trackPromise } from "react-promise-tracker";
 
-class Login extends Component {
+class LoginPage extends Component {
     constructor(props) {
         super(props);
-        this.callLogin = this.callLogin.bind(this);
+        //this.callLogin = this.callLogin.bind(this);
     }
 
     //Called on click of login button
@@ -16,38 +15,34 @@ class Login extends Component {
         var URLres = await axios.get("/api/getLoginURL");
 
         //Open login popup
-        var popup = window.open(
-        URLres.data,
-        'Login with Spotify',
-        'width=800, height=900'
-        )
+        window.location = URLres.data;
 
         //Create callback function to be called when user clicks login
-        window.spotifyCallback = async (payload) => { 
-            //Close popup and tell server to log in
-            popup.close();
-            await axios({
-                method: "post",
-                url: "/api/login",
-                timeout: 8000,
-                data: {
-                    code: payload
-                }
-            });
-            //const response = await trackPromise(axios.get("/api/me"));
-            login();
-            this.props.handleLogin();
-        }
+        // window.spotifyCallback = async (payload) => { 
+        //     //Close popup and tell server to log in
+        //     popup.close();
+        //     await axios({
+        //         method: "post",
+        //         url: "/api/login",
+        //         timeout: 8000,
+        //         data: {
+        //             code: payload
+        //         }
+        //     });
+        //     //const response = await trackPromise(axios.get("/api/me"));
+        //     login();
+        //     this.props.handleLogin();
+        // }
     }
 
     componentDidMount() {
         //Retrieve auth code from URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const code = urlParams.get('code');
-        //If code exists i.e if this component is within the popup, call the previous callback function to close popup
-        if (code) {
-            window.opener.spotifyCallback(code);
-        }
+        // const urlParams = new URLSearchParams(window.location.search);
+        // const code = urlParams.get('code');
+        // //If code exists i.e if this component is within the popup, call the previous callback function to close popup
+        // if (code) {
+        //     window.opener.spotifyCallback(code);
+        // }
     }
 
     render() {
@@ -63,15 +58,4 @@ class Login extends Component {
     }
 }
 
-//State is entire state tree
-function mapStateToProps(state) {
-    return {
-        userData: state.userData
-    };
-}
-
-const mapDispatchToProps = {
-    login
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default LoginPage
