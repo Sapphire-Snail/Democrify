@@ -55,7 +55,8 @@ export default router => {
             },
             function(err) {
                 console.log('Something went wrong! (login)', err);
-                res.status(401).end();
+                console.log(err);
+                res.status(err.statusCode).end();
             });
     });
 

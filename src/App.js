@@ -1,14 +1,12 @@
 import React, { Component } from "react";
-import { connect } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
-import Loader from "react-loader-spinner";
-import Api from './api';
 import "./App.css";
 
 //Components
 import LoginPage from "./components/LoginPage";
+import Callback from "./Callback";
 import UserInfo from './components/UserInfo';
-//import Playlists from "./components/Playlists/Playlists";
+//import Playlists from './components/Playlists/Playlists';
 
 class App extends Component {
 
@@ -26,6 +24,7 @@ class App extends Component {
               </Route>
               <Route path="/me">
                 <UserInfo/>
+                {/* <Playlists/> WILL add back once host/join page is complete*/}
               </Route>
               <Route exact path="/">
                 <Redirect to="/login" />
@@ -44,54 +43,4 @@ class App extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {state};
-}
-
-// Applies the config using the "connect" higher-order component provided by Redux
-export default connect(mapStateToProps)(App);
-// -------------------------------------------------------------
-
-//Class that's instantiated when Spotify login screen is closed
- class Callback extends Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {
-        gotTokens: false
-    };
-}
-
-  async componentDidMount() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const code = urlParams.get('code');
-    await Api.getUserTokens(code);
-    //Update state once response is received, thus re-rendering and directing to home page
-    this.setState({gotTokens: true})
-  }
-
-  render() {
-      if(this.state.gotTokens) {
-        return <Redirect to='/me'/>
-      } else {
-        return <Loader type="ThreeDots" color="#1ECD97" height={100} width={100} />
-      }
-  }
-}
-
-//Old method (keeping in case)
-//Define callback object to retrieve code from URL and tell server to create access tokens
-// const Callback = () => {
-//   //Retrieve auth code from URL
-//   const urlParams = new URLSearchParams(window.location.search);
-//   const code = urlParams.get('code');
-//   //Take the user to me page if code retrieved
-//   if (code){
-//     //If code exists, get user access tokens
-//     //Api.getUserTokens(code);
-//     Api.getUserTokens(code).then(res => console.log(res));
-//     return <Redirect to='/me'/>
-//   }
-//   //Otherwise back to the login with you
-//  return <Redirect to='/login'/>
-//  }
+export default App

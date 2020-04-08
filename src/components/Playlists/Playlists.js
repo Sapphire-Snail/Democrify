@@ -7,7 +7,11 @@ import SinglePlaylist from './SinglePlaylist';
 class Playlists extends Component  {
 
     componentDidMount() {
-        this.props.loadPlaylists(this.props.userId);
+        if(this.props.userId) {
+            this.props.loadPlaylists(this.props.userId);
+        } else {
+            console.log("bad");
+        }
     }
 
     render() {
@@ -48,7 +52,7 @@ class Playlists extends Component  {
 function mapStateToProps(state) {
     return {
         playlists: state.playlists,
-        userId: state.user.data.id
+        userId: state.user.data ? state.user.data.id : false
     };
 }
 

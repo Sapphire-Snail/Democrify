@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import axios from "axios";
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+
 
 class LoginPage extends Component {
 
@@ -13,6 +16,10 @@ class LoginPage extends Component {
     }
 
     render() {
+        //If we're already logged in, send them over to /me
+        if(this.props.loggedIn) {
+            return <Redirect to='/me'/>
+        }
         return(
             <div>
                 {[
@@ -25,4 +32,11 @@ class LoginPage extends Component {
     }
 }
 
-export default LoginPage
+//State is entire state tree
+function mapStateToProps(state) {
+    return {
+        loggedIn: state.user ? state.user.loggedIn : false
+    };
+}
+//Connect to redux store
+export default connect(mapStateToProps)(LoginPage);

@@ -1,4 +1,4 @@
-import { loadPlaylistsLoading, loadPlaylistsSuccess, loadPlaylistsError, getUserLoading, getUserSuccess, getUserError } from '..';
+import { loadPlaylistsLoading, loadPlaylistsSuccess, loadPlaylistsError, getUserLoading, getUserSuccess, getUserError, setLoggedInLoading, setLoggedInSuccess, setLoggedInError } from '..';
 import Api from '../../../api';
 
 export function loadPlaylists(userId) {
@@ -29,5 +29,23 @@ export function loadUser() {
 
                 error => dispatch(getUserError(error.message || "Unexpected error!")));
 
+    }
+}
+
+export function login(code) {
+    return dispatch => {
+        dispatch(setLoggedInLoading());
+
+        Api.getUserTokens(code)
+            .then(
+                res => {
+                    console.log(res);
+                    dispatch(setLoggedInSuccess(res));
+                    dispatch(loadUser());
+                },
+
+                error => {
+                    dispatch(setLoggedInError(error.message || "Unexpected Error"));
+                });
     }
 }
