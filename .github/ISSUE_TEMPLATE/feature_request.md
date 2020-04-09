@@ -1,23 +1,31 @@
 ---
 name: Feature request
 about: Adding functionality to the project
-title: "[FEATURE]"
-labels: feature
+title: '[FEATURE]'
+labels: 'feature'
 assignees: ''
 
 ---
 
-**User story**
-A clear and concise description of what is wanted to be implemented.    
-Ex: As a Developer,    
-    I want to be able to map my data models into the database    
-    So that we can persist objects into the database.   
+**User Story**
+For example: 
+As a developer
+I want to add this feature
+So this can happen
 
-**Acceptance criteria**
-The criteria determining success upon completion of the issue.   
-Ex.     
- - Update database with the migration   
- - Create migration for database
+**Priority**
+-[ ] High
+-[ ] Medium
+-[ ] Low
+
+**Describe the solution you want to implement**
+Solution explanation
+
+**Describe alternatives you've considered**
+A clear and concise description of any alternative solutions or features you've considered.
+
+**Issue Dependencies**
+Does this issue depend on any other issues?
 
 **Additional context**
 Add any other context or screenshots about the feature request here.
