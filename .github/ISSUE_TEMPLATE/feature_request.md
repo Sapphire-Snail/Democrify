@@ -14,9 +14,9 @@ I want to add this feature
 So this can happen
 
 **Priority**
--[ ] High
--[ ] Medium
--[ ] Low
+- [ ] High
+- [ ] Medium
+- [ ] Low
 
 **Describe the solution you want to implement**
 Solution explanation
