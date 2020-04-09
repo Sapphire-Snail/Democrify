@@ -19,15 +19,15 @@ Steps to reproduce the behavior:
 
 **Severity**
 Mark with an x.
-[]: Minor effect eg. graphical
-[]: Functional error eg. App does not function correctly
-[]: Severe eg. Crashing
+- [ ] Minor effect eg. graphical
+- [ ] Functional error eg. App does not function correctly
+- [ ] Severe eg. Crashing
 
 **Reproducibility**
-Mark with an x.
-[]: Consistent
-[]: Occasional
-[]: Cannot reproduce at the moment eg. unsure
+Mark with an
+- [ ]  Consistent
+- [ ]  Occasional
+- [ ]  Cannot reproduce at the moment eg. unsure
 
 **Expected behavior**
 A clear and concise description of what you expected to happen.
