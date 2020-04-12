@@ -22,7 +22,7 @@ Include screenshots if necessary
 ## Checklist
 <!-- Please check all items which apply from the following (Change "[ ]" to "[x]") -->
 - [ ] Pull request has suitable title and labels, adequately described and associated with a github issue
-- [ ] Branch name follows correct convention (e.g. feature/#[id]-some-feature)
+- [ ] Branch name is descriptive
 - [ ] Branch builds and executes with no errors
 - [ ] Test cases has been generated for the feature and test cases pass
 - [ ] Updated relevant wiki/documentation
