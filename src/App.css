@@ -126,6 +126,12 @@ body {
 }
 
 .slogan {
-  margin-top: -1.5em;
   color: white;
+  font-size: xx-large;
+}
+
+@media screen and (max-width: 1000px) {
+  .slogan {
+    font-size: medium;
+  }
 }
