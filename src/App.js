@@ -1,16 +1,17 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Redirect,
-} from 'react-router-dom';
-import './App.css';
+} from "react-router-dom";
+import "./App.css";
 
 // Components
-import LoginPage from './components/LoginPage';
-import Callback from './Callback';
-import UserInfo from './components/UserInfo';
+import LoginPage from "./components/LoginPage";
+import Callback from "./Callback";
+import UserInfo from "./components/UserInfo";
+
 // import Playlists from './components/Playlists/Playlists';
 
 class App extends Component {
@@ -19,7 +20,8 @@ class App extends Component {
       <Router>
         <div className="App">
           <header>
-            <h1>Democrify.me</h1>
+            <img className="App-logo" src={require("./assets/logo.svg")} />
+            <h2 className="slogan">Music for the people</h2>
           </header>
           <main>
             <Switch>
