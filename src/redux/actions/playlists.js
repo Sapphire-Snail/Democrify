@@ -1,4 +1,5 @@
-import { GET_PLAYLISTDATA_LOADING, GET_PLAYLISTDATA_SUCCESS, GET_PLAYLISTDATA_ERROR } from './action-types';
+import { GET_PLAYLISTDATA_LOADING, GET_PLAYLISTDATA_SUCCESS, GET_PLAYLISTDATA_ERROR, 
+    CREATE_PLAYLIST_LOADING, CREATE_PLAYLIST_SUCCESS, CREATE_PLAYLIST_ERROR } from './action-types';
 
 export function loadPlaylistsLoading() {
   return {
@@ -15,8 +16,31 @@ export function loadPlaylistsSuccess(playlists) {
 }
 
 export function loadPlaylistsError(err) {
-  return {
-    type: GET_PLAYLISTDATA_ERROR,
-    err,
-  };
+    return {
+        type: GET_PLAYLISTDATA_ERROR,
+        err
+    }
+}
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+export function createPlaylistLoading() {
+    return {
+        type: CREATE_PLAYLIST_LOADING
+    }
+}
+
+//playlist is the new playlist returned by spotify api
+export function createPlaylistSuccess(playlist) {
+    return {
+        type: CREATE_PLAYLIST_SUCCESS,
+        playlist
+    }
+}
+
+export function createPlaylistError(err) {
+    return {
+        type: CREATE_PLAYLIST_ERROR,
+        err
+    }
 }

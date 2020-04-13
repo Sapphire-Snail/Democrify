@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { loadPlaylists } from '../redux/actions/thunk';
+import { loadPlaylists, createPlaylist } from '../redux/actions/thunk';
 import { connect } from 'react-redux';
 import Playlists from './Playlists/Playlists';
 
@@ -9,8 +9,8 @@ class PlaylistsPage extends Component  {
         this.props.loadPlaylists(this.props.userId);
     }
 
-    createPlaylist() {
-        console.log("ligma");
+    createPlaylist = () => { //This notation allows us to keep reference to this
+        this.props.createPlaylist(this.props.userId, "Made with Democrify!"); //All playlists called this until UI updated to let user enter name
     }
 
     render() {
@@ -33,7 +33,8 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = {
-    loadPlaylists
+    loadPlaylists,
+    createPlaylist
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlaylistsPage);

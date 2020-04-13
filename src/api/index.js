@@ -1,8 +1,10 @@
-import { getPlaylists } from './playlists';
+import { getPlaylists, createPlaylist } from './playlists';
 import { getUser, getUserTokens } from './user';
 
 export default {
-  getPlaylists,
-  getUser,
-  getUserTokens,
+    getPlaylists,
+    createPlaylist,
+    
+    getUser,
+    getUserTokens,
 };
