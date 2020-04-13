@@ -1,5 +1,4 @@
-import { v4 as uuid } from 'uuid';
-import { clientId, redirectUri, scopes } from '../src/config';
+import { clientId, redirectUri, scopes } from "../src/config";
 
 const SpotifyWebApi = require('spotify-web-api-node');
 

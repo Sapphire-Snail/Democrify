@@ -11,7 +11,7 @@ import './App.css';
 import LoginPage from './components/LoginPage';
 import Callback from './Callback';
 import UserInfo from './components/UserInfo';
-// import Playlists from './components/Playlists/Playlists';
+import PlaylistsPage from './components/PlaylistsPage';
 
 class App extends Component {
   render() {
@@ -27,8 +27,8 @@ class App extends Component {
                 <LoginPage />
               </Route>
               <Route path="/me">
-                <UserInfo />
-                {/* <Playlists/> WILL add back once host/join page is complete */}
+                <UserInfo/>
+                <PlaylistsPage/>
               </Route>
               <Route exact path="/">
                 <Redirect to="/login" />
