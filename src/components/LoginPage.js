@@ -5,7 +5,8 @@ import { Redirect } from 'react-router-dom';
 import { Collapse, Button, CardBody, Card } from 'reactstrap';
 import './LoginPage.css';
 
-class LoginPage extends Component {  
+class LoginPage extends Component {
+  
   state = {
     isOpen: false,
   };
@@ -23,7 +24,6 @@ class LoginPage extends Component {
     // Open login popup
     window.location = URLres.data;
   }
-
 
   render() {
     // If we're already logged in, send them over to /me
@@ -57,7 +57,6 @@ class LoginPage extends Component {
             </Card>
           </Collapse>
         </div>
-
       </div>
     );
   }

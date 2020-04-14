@@ -1,4 +1,4 @@
-import { GET_PLAYLISTDATA_LOADING, GET_PLAYLISTDATA_SUCCESS, GET_PLAYLISTDATA_ERROR } from '../actions/action-types';
+import { GET_PLAYLISTDATA_LOADING, GET_PLAYLISTDATA_SUCCESS, GET_PLAYLISTDATA_ERROR, CREATE_PLAYLIST_LOADING, CREATE_PLAYLIST_SUCCESS, CREATE_PLAYLIST_ERROR } from '../actions/action-types';
 
 /**
  * This function handles modifications to the "playlists" property of the overall state.
@@ -18,10 +18,19 @@ export default function playlists(state = [], action) {
 
     case GET_PLAYLISTDATA_ERROR:
       return playlists_LoadPlaylistsError(state, action);
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    case CREATE_PLAYLIST_LOADING:
+      return playlists_CreatePlaylistLoading(state, action);
+
+    case CREATE_PLAYLIST_SUCCESS:
+      return playlists_CreatePlaylistSuccess(state, action);
+
+    case CREATE_PLAYLIST_ERROR:
+      return playlists_CreatePlaylistError(state, action);
 
     default:
       return state;
-  }
+    }
 }
 
 /**
@@ -46,9 +55,40 @@ function playlists_LoadPlaylistsSuccess(state, action) {
 }
 
 function playlists_LoadPlaylistsError(state, action) {
-  return {
-    state,
-    loading: false,
-    error: action.playlists.error,
-  };
+    return {
+        ...state,
+        loading: false,
+        error: action.playlists.error
+      };
+}
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+function playlists_CreatePlaylistLoading(state, action) {
+    return {
+        ...state,
+        loading: true,
+        error: null
+      };
+}
+
+//Get new playlist returned by server and return existing playlists PLUS the new one we just made 
+function playlists_CreatePlaylistSuccess(state, action) {
+    //Add new playlist to our array
+    state.data.items.unshift(action.playlist.data.body);
+    console.log('Successfully created playlist');
+    return {
+        ...state,
+        loading: false,
+        error: null
+      };
+}
+
+function playlists_CreatePlaylistError(state, action) {
+    console.log(action);
+    return {
+        ...state,
+        loading: false,
+        error: action.playlist.error
+      };
 }

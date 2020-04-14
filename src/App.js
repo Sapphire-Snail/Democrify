@@ -1,3 +1,19 @@
+import React, { Component } from "react";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
+import "./App.css";
+
+import LoginPage from './components/LoginPage';
+import Callback from './Callback';
+import UserInfo from './components/UserInfo';
+import PlaylistsPage from './components/PlaylistsPage';
+
+
+=======
 
 import React, { Component } from 'react';
 import {
@@ -29,8 +45,9 @@ class App extends Component {
                 <LoginPage />
               </Route>
               <Route path="/me">
-                <UserInfo />
-                {/* <Playlists/> WILL add back once host/join page is complete */}
+                <UserInfo/>
+                <PlaylistsPage/>
+
               </Route>
               <Route exact path="/">
                 <Redirect to="/login" />
