@@ -34,7 +34,7 @@ class LoginPage extends Component {
       <div className="centerContainer">
         <div style={{ display: 'block' }}>
           <button key={0} className="button button--loginApp-link" onClick={this.callLogin}>
-            🔥 Login to Spotify 🔥
+            🔥 Login with Spotify 🔥
           </button>
         </div>
         <div className="infoContainer">

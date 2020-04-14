@@ -63,7 +63,7 @@ export default router => {
                 res.json(data);
             },
             function(err) {
-                console.log('Something went wrong! (get playlists)', err);
+                console.log('Something went wrong! (create playlist)', err);
                 res.status(err.statusCode).end();
         });
     });

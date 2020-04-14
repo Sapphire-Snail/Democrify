@@ -55,11 +55,12 @@ function playlists_LoadPlaylistsSuccess(state, action) {
 }
 
 function playlists_LoadPlaylistsError(state, action) {
-    return {
-        ...state,
-        loading: false,
-        error: action.playlists.error
-      };
+  console.log(action);  
+  return {
+      ...state,
+      loading: false,
+      error: action.error
+  };
 }
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -89,6 +90,6 @@ function playlists_CreatePlaylistError(state, action) {
     return {
         ...state,
         loading: false,
-        error: action.playlist.error
+        error: action.error
       };
 }
