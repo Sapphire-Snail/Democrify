@@ -7,28 +7,12 @@ import {
 } from "react-router-dom";
 import "./App.css";
 
+//Components
 import LoginPage from './components/LoginPage';
 import Callback from './Callback';
 import UserInfo from './components/UserInfo';
 import PlaylistsPage from './components/PlaylistsPage';
 
-
-=======
-
-import React, { Component } from 'react';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-} from 'react-router-dom';
-import './App.css';
-
-// Components
-import LoginPage from './components/LoginPage';
-import Callback from './Callback';
-import UserInfo from './components/UserInfo';
-// import Playlists from './components/Playlists/Playlists';
 
 class App extends Component {
   render() {
