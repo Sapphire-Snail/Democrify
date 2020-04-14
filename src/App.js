@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 import {
   BrowserRouter as Router,
@@ -19,7 +20,8 @@ class App extends Component {
       <Router>
         <div className="App">
           <header>
-            <h1>Democrify.me</h1>
+            <img className="App-logo" src={require("./assets/logo.svg")} />
+            <h2 className="slogan">Music for the people</h2>
           </header>
           <main>
             <Switch>

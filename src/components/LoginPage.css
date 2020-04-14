@@ -1,0 +1,34 @@
+/** Root container **/
+.centerContainer {
+  margin-top: 7em;
+}
+
+/** Styles for button with additional info, overrides some of the reactstrap styles **/
+.infoButton {
+  width: fit-content;
+  background: #c030ed !important;
+  border-color: #c030ed !important;
+}
+.infoButton:focus {
+  width: fit-content;
+  box-shadow: 0 0 0 0.2rem #c030ed !important;
+  border-color: #c030ed !important;
+}
+
+/** Container for info button and description **/
+.infoContainer {
+  width: 35%;
+  margin: auto;
+  margin-top: 1em;
+  padding: 10px;
+}
+
+@media screen and (max-width: 1000px) {
+  .infoContainer {
+    width: fit-content;
+    font-size: small;
+  }
+  .infoButton {
+    font-size: x-small !important;
+  }
+}
