@@ -7,19 +7,28 @@ import {
 } from "react-router-dom";
 import "./App.css";
 
-// Components
-<<<<<<< HEAD
 import LoginPage from './components/LoginPage';
 import Callback from './Callback';
 import UserInfo from './components/UserInfo';
 import PlaylistsPage from './components/PlaylistsPage';
-=======
-import LoginPage from "./components/LoginPage";
-import Callback from "./Callback";
-import UserInfo from "./components/UserInfo";
 
+
+=======
+
+import React, { Component } from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from 'react-router-dom';
+import './App.css';
+
+// Components
+import LoginPage from './components/LoginPage';
+import Callback from './Callback';
+import UserInfo from './components/UserInfo';
 // import Playlists from './components/Playlists/Playlists';
->>>>>>> Created a Welcome screen
 
 class App extends Component {
   render() {
@@ -38,6 +47,7 @@ class App extends Component {
               <Route path="/me">
                 <UserInfo/>
                 <PlaylistsPage/>
+
               </Route>
               <Route exact path="/">
                 <Redirect to="/login" />

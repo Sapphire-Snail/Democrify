@@ -14,7 +14,6 @@ function SinglePlaylist(props) {
             </td>
         </tr>
     );
-
 }
 
 export default SinglePlaylist;

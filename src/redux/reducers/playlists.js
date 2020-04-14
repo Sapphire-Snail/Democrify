@@ -18,7 +18,6 @@ export default function playlists(state = [], action) {
 
     case GET_PLAYLISTDATA_ERROR:
       return playlists_LoadPlaylistsError(state, action);
-
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     case CREATE_PLAYLIST_LOADING:
       return playlists_CreatePlaylistLoading(state, action);

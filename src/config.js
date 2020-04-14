@@ -9,4 +9,5 @@ export const scopes = [
     'playlist-read-private',
     'playlist-modify-private',
     'playlist-modify-public'
+
 ];

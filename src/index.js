@@ -8,8 +8,6 @@ import { store, persistor } from "./redux/store";
 import App from "./App";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-// import * as serviceWorker from './serviceWorker';
-
 ReactDOM.render(
   <Provider store={store}>
     <PersistGate

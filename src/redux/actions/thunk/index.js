@@ -28,7 +28,7 @@ export function loadUser() {
       .then(
         (userData) => dispatch(getUserSuccess(userData)),
 
-                error => dispatch(getUserError(error.message || "Unexpected error!")));
+        error => dispatch(getUserError(error.message || "Unexpected error!")));
     }
 }
 

@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 export function getPlaylists(userId) {
+
     return axios({
         method: "post",
         url: "/api/getUserPlaylists",
@@ -21,4 +22,5 @@ export function createPlaylist(userId, playlist_name) {
             name: playlist_name
         }
     });
+
 }

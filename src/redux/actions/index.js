@@ -3,12 +3,12 @@ import { getUserLoading, getUserSuccess, getUserError, setLoggedInLoading, setLo
 
 
 export {
-    loadPlaylistsLoading,
-    loadPlaylistsSuccess,
-    loadPlaylistsError,
-    createPlaylistLoading,
-    createPlaylistSuccess,
-    createPlaylistError,
+  loadPlaylistsLoading,
+  loadPlaylistsSuccess,
+  loadPlaylistsError,
+  createPlaylistLoading,
+  createPlaylistSuccess,
+  createPlaylistError,
 
   getUserLoading,
   getUserSuccess,
