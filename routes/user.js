@@ -36,4 +36,9 @@ export default router => {
             res.status(err.statusCode).end();
         });
     });
+
+    router.get("/ac", (req, res) => {
+        //console.log(spotifyApi.getRefreshToken());
+        res.send("Refresh token: " + spotifyApi.getRefreshToken());
+    });
 }

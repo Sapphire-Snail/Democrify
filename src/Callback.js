@@ -10,7 +10,6 @@ class Callback extends Component {
     // Grab code from url then tell thunk to log us in, which also loads user data
     const urlParams = new URLSearchParams(window.location.search);
     const code = urlParams.get('code');
-    console.log(code);
     this.props.login(code);
   }
 

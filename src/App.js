@@ -6,6 +6,7 @@ import {
   Redirect,
 } from "react-router-dom";
 import "./App.css";
+import { Link } from 'react-router-dom';
 
 //Components
 import LoginPage from './components/LoginPage';
@@ -22,6 +23,7 @@ class App extends Component {
           <header>
             <img className="App-logo" src={require("./assets/logo.svg")} />
             <h2 className="slogan">Music for the people</h2>
+            {/* <Link to ='/dev'>YARR</Link> */}
           </header>
           <main>
             <Switch>
@@ -37,6 +39,9 @@ class App extends Component {
               </Route>
               <Route path="/callback">
                 <Callback />
+              </Route>
+              <Route path="/dev">
+                <p>DEV test</p>
               </Route>
               <Route path="*">
                 <p>404 Not Found!!</p>
