@@ -2,17 +2,6 @@ import { spotifyApi } from './index';
 import { scopes } from '../src/config';
 
 export default router => {
-
-    router.get("/me", (req, res) => {
-        spotifyApi.getMe()
-        .then(function(data) {
-            res.json(data);
-        }, function(err) {
-            console.log('Something went wrong! (me)', err);
-            res.status(err.statusCode).end();
-        });
-    });
-
     router.get("/getLoginURL", (req, res) => {
         var URL = spotifyApi.createAuthorizeURL(scopes);// + "&show_dialog=true";
         res.send(URL);
@@ -36,5 +25,15 @@ export default router => {
                 console.log(err);
                 res.status(err.statusCode).end();
             });
+    });
+
+    router.get("/me", (req, res) => {
+        spotifyApi.getMe()
+        .then(function(data) {
+            res.json(data);
+        }, function(err) {
+            console.log('Something went wrong! (me)', err);
+            res.status(err.statusCode).end();
+        });
     });
 }
