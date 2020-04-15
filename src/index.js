@@ -7,6 +7,7 @@ import Loader from "react-loader-spinner";
 import { store, persistor } from "./redux/store";
 import App from "./App";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Notifications from 'react-notify-toast';
 
 ReactDOM.render(
   <Provider store={store}>
@@ -16,6 +17,7 @@ ReactDOM.render(
       }
       persistor={persistor}
     >
+      <Notifications/>
       <App />
     </PersistGate>
   </Provider>,

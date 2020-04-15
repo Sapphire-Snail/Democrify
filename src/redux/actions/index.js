@@ -1,5 +1,5 @@
 import { loadPlaylistsLoading, loadPlaylistsSuccess, loadPlaylistsError, createPlaylistLoading, createPlaylistSuccess, createPlaylistError } from './playlists';
-import { getUserLoading, getUserSuccess, getUserError, setLoggedInLoading, setLoggedInSuccess, setLoggedInError } from './user';
+import { getUserLoading, getUserSuccess, getUserError, setLoggedInLoading, setLoggedInSuccess, setLoggedInError, setLoggedOutLoading, setLoggedOutSuccess, setLoggedOutError } from './user';
 
 
 export {
@@ -16,4 +16,7 @@ export {
   setLoggedInLoading,
   setLoggedInSuccess,
   setLoggedInError,
+  setLoggedOutLoading,
+  setLoggedOutSuccess,
+  setLoggedOutError
 };

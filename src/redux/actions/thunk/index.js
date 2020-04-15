@@ -1,5 +1,5 @@
 import { loadPlaylistsLoading, loadPlaylistsSuccess, loadPlaylistsError, createPlaylistLoading, createPlaylistSuccess, createPlaylistError,
-    getUserLoading, getUserSuccess, getUserError, setLoggedInLoading, setLoggedInSuccess, setLoggedInError } from '..';
+    getUserLoading, getUserSuccess, getUserError, setLoggedInLoading, setLoggedInSuccess, setLoggedInError, setLoggedOutLoading, setLoggedOutSuccess, setLoggedOutError } from '..';
 import Api from '../../../api';
 
 export function loadPlaylists(userId) {
@@ -59,4 +59,10 @@ export function createPlaylist(userId, playlist_name) {
 
                 error => dispatch(createPlaylistError(error.message || "Unexpected error!")));
     }
+}
+
+export function logout() {
+  return dispatch => {
+      dispatch(setLoggedOutLoading()).then(console.log('test'));
+  }
 }

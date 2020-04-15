@@ -8,7 +8,7 @@ export function getUserTokens(code) {
   return axios({
     method: 'post',
     url: '/api/login',
-    timeout: 8000,
+    timeout: 10000,
     data: {
       code,
     },

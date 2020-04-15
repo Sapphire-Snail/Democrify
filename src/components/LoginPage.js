@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { Collapse, Button, CardBody, Card } from 'reactstrap';
 import './LoginPage.css';
+import {notify} from 'react-notify-toast';
 
 class LoginPage extends Component {
   
@@ -19,10 +20,13 @@ class LoginPage extends Component {
   // Called on click of login button
   async callLogin() {
     // Get auth URL from backend (this should probably all be moved to redux but hey)
-    const URLres = await axios.get('/api/getLoginURL');
-
-    // Open login popup
-    window.location = URLres.data;
+    try{
+      const URLres = await axios.get('/api/getLoginURL');
+      // Open login popup
+      window.location = URLres.data;
+    } catch(err) {
+      notify.show('Could not connect to Democrify server!', 'error', );
+    }
   }
 
   render() {
@@ -34,7 +38,7 @@ class LoginPage extends Component {
       <div className="centerContainer">
         <div style={{ display: 'block' }}>
           <button key={0} className="button button--loginApp-link" onClick={this.callLogin}>
-            🔥 Login to Spotify 🔥
+            🔥 Login with Spotify 🔥
           </button>
         </div>
         <div className="infoContainer">

@@ -14,6 +14,13 @@ class Callback extends Component {
   }
 
   render() {
+    const { error } = this.props.userData;
+    if(error) {
+      return <p>
+               Error {error}
+             </p>
+    }
+
     if (this.props.loggedIn) {
       return <Redirect to="/me" />;
     }
@@ -24,6 +31,7 @@ class Callback extends Component {
 // State is entire state tree
 function mapStateToProps(state) {
   return {
+    userData: state.user,
     loggedIn: state.user.loggedIn,
   };
 }
