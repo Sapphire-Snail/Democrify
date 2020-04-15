@@ -22,14 +22,10 @@ class UserInfo extends Component {
       return (
         <div>
           <p>
-            {' '}
-            Whaddup
-            { data.display_name }
+            Whaddup { data.display_name }
           </p>
           <p>
-            {' '}
-            Country:
-            { data.country }
+            Country: { data.country }
           </p>
         </div>
       );

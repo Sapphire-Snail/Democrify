@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Loader from 'react-loader-spinner';
-import { loadPlaylists } from '../../redux/actions/thunk';
 import SinglePlaylist from './SinglePlaylist';
 
 class Playlists extends Component {

@@ -1,13 +1,5 @@
-import { clientId, redirectUri, scopes } from "../src/config";
-
-const SpotifyWebApi = require('spotify-web-api-node');
-
-// Create spotify api
-const spotifyApi = new SpotifyWebApi({
-  clientId,
-  clientSecret: '3fbb80a0fa384eab8e096c6a96582cc6',
-  redirectUri,
-});
+import { spotifyApi } from './index';
+import { scopes } from '../src/config';
 
 export default router => {
 
@@ -21,20 +13,9 @@ export default router => {
         });
     });
 
-    router.post("/getUserPlaylists", (req, res) => {
-        spotifyApi.getUserPlaylists(req.body.userId, { limit : 10 })
-        .then(function(data) {
-            res.json(data);
-        }, function(err) {
-            console.log('Something went wrong! (get playlists)', err);
-            res.status(err.statusCode).end();
-        });
-    });
-
     router.get("/getLoginURL", (req, res) => {
         var URL = spotifyApi.createAuthorizeURL(scopes);// + "&show_dialog=true";
         res.send(URL);
-        //res.json({ URL: spotifyApi.createAuthorizeURL(scopes) + "&show_dialog=true"});
     });
 
     router.post("/login", (req, res) => {
@@ -56,16 +37,4 @@ export default router => {
                 res.status(err.statusCode).end();
             });
     });
-
-    router.post("/createPlaylist", (req, res) => {
-        spotifyApi.createPlaylist(req.body.userId, req.body.name, { public : false }).then(
-            function(data) {
-                res.json(data);
-            },
-            function(err) {
-                console.log('Something went wrong! (create playlist)', err);
-                res.status(err.statusCode).end();
-        });
-    });
 }
-
