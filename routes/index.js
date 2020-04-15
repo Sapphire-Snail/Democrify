@@ -13,6 +13,7 @@ export const spotifyApi = new SpotifyWebApi({
   redirectUri,
 });
 
+
 //Import routes from other api files (user, playlist, etc.)
 addPlaylistRoutes(router);
 addUserRoutes(router);

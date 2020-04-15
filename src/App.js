@@ -31,7 +31,6 @@ class App extends Component {
               <Route path="/me">
                 <UserInfo/>
                 <PlaylistsPage/>
-
               </Route>
               <Route exact path="/">
                 <Redirect to="/login" />
