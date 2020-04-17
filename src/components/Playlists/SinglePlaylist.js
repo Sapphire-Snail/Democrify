@@ -25,19 +25,16 @@ class SinglePlaylist extends Component {
             return <Redirect to={'/playlist/' + this.props.playlistInfo.id}/>
         }
 
-
         return(
             <tr key={this.props.playlistInfo.id}>
                 <td>
-                <img src={this.props.playlistInfo.images[0] ? this.props.playlistInfo.images[0].url : 'https://f4.bcbits.com/img/a4139357031_10.jpg'} alt="playlist" style={{width: 100, height: 100, position: 'absolute'}}/>
+                    <img src={this.props.playlistInfo.images[0] ? this.props.playlistInfo.images[0].url : 'https://f4.bcbits.com/img/a4139357031_10.jpg'} alt="playlist" style={{width: 100, height: 100, position: 'absolute'}}/>
                 </td>
                 <td>
-                {/* <Link to ={'/playlist/' + props.playlistInfo.id}> */}
-                    <span onClick={this.handleChange(this.props.playlistInfo)}>{this.props.playlistInfo.name}</span>
-                {/* </Link> */}
+                    <span style={{cursor:'pointer', color:'blue'}} onClick={this.handleChange(this.props.playlistInfo)}>{this.props.playlistInfo.name}</span>
                 </td>
                 <td>
-                <span>{this.props.playlistInfo.tracks.total}</span>
+                    <span>{this.props.playlistInfo.tracks.total}</span>
                 </td>
             </tr>
         );

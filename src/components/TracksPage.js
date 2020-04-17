@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getPlaylistTracks } from '../redux/actions/thunk';
+import Tracks from './Tracks';
+import { Link } from 'react-router-dom';
 
 class TracksPage extends Component  {
     componentDidMount() {
@@ -8,15 +10,13 @@ class TracksPage extends Component  {
     }
 
     render() {
-        if(this.props.activePlaylist) {
-            return (
-                <div>
-                    Playlist: {this.props.activePlaylist.name}
-                    Data's been got (if you look in redux devtools extension) just need to display it here
-                </div>
-            )
-        }
-        return <div/>
+        return (
+            <div>
+                <Link to='/me'>Back we go bois</Link>
+                {this.props.activePlaylist.name}
+                <Tracks/>
+            </div>
+        )
     }
 }
 
