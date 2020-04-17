@@ -1,5 +1,5 @@
 import { loadPlaylistsLoading, loadPlaylistsSuccess, loadPlaylistsError, createPlaylistLoading, createPlaylistSuccess, createPlaylistError,
-    getUserLoading, getUserSuccess, getUserError, setLoggedIn, setActivePlaylist, getPlaylistTracksLoading, getPlaylistTracksSuccess, getPlaylistTracksError } from '..';
+    getUserLoading, getUserSuccess, getUserError, setLoggedIn, setLoggedOut, setActivePlaylist, getPlaylistTracksLoading, getPlaylistTracksSuccess, getPlaylistTracksError } from '..';
 import * as spotify from '../../../SpotifyFunctions.js'
 
 export function loadPlaylists() {
@@ -43,6 +43,13 @@ export function login(accessToken) {
       dispatch(setLoggedIn(accessToken)); //Set logged in to be true
       dispatch(loadUser()); //Start loading the user for when we redirect to /me
     }
+}
+
+export function logout() {
+  return dispatch => {  
+    spotify.setAccessToken(null); //Set access token in spotify api
+    dispatch(setLoggedOut()); //Set logged out to be true and remove access token
+  }
 }
 
 export function createPlaylist(userId, playlist_name) {

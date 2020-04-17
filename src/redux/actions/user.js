@@ -1,6 +1,6 @@
 import {
   GET_USER_LOADING, GET_USER_SUCCESS, GET_USER_ERROR, 
-  SET_LOGGEDIN,
+  SET_LOGGEDIN, SET_LOGGEDOUT
 } from './action-types';
 
 export function getUserLoading() {
@@ -29,5 +29,11 @@ export function setLoggedIn(token) {
   return {
     type: SET_LOGGEDIN,
     token,
+  };
+}
+
+export function setLoggedOut() {
+  return {
+    type: SET_LOGGEDOUT,
   };
 }

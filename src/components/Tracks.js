@@ -27,7 +27,7 @@ class Tracks extends Component {
                       </tr>
                   </thead>
                   <tbody>
-                      {data.items && data.items.map((item) => <SingleTrack key={item.id} trackInfo={item.track}/>)}
+                      {data.items && data.items.map((item) => <SingleTrack key={item.track.id} trackInfo={item.track}/>)}
                   </tbody>
                   </table>
               </div>

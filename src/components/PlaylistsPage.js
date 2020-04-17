@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { loadPlaylists, createPlaylist } from '../redux/actions/thunk';
 import { connect } from 'react-redux';
 import Playlists from './Playlists/Playlists';
+import { Link } from 'react-router-dom';
 
 class PlaylistsPage extends Component  {
 
@@ -16,6 +17,7 @@ class PlaylistsPage extends Component  {
     render() {
         return (
             <div>
+                <Link to='/me'>Back we go bois</Link>
                 <Playlists/>
                 <button key={0} className="btn btn--loginApp-link" onClick={this.createPlaylist}>
                             Create Playlist

@@ -18,3 +18,4 @@ export const GET_USER_SUCCESS = 'GET_USER_SUCCESS';
 export const GET_USER_ERROR = 'GET_USER_ERROR';
 
 export const SET_LOGGEDIN = "SET_LOGGEDIN";
+export const SET_LOGGEDOUT = "SET_LOGGEDOUT";

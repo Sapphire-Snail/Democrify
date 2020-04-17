@@ -12,7 +12,7 @@ class TracksPage extends Component  {
     render() {
         return (
             <div>
-                <Link to='/me'>Back we go bois</Link>
+                <Link to='/playlists'>Back we go bois</Link>
                 <h1>{this.props.activePlaylist.name}</h1>
                 <Tracks/>
             </div>
