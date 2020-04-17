@@ -14,6 +14,7 @@ import LoginPage from './components/LoginPage';
 import Callback from './Callback';
 import UserInfo from './components/UserInfo';
 import PlaylistsPage from './components/PlaylistsPage';
+import TracksPage from "./components/TracksPage";
 
 
 class App extends Component {
@@ -31,21 +32,21 @@ class App extends Component {
           </header>
           <main>
             <Switch>
+              <Route exact path="/">
+                <Redirect to="/login" />
+              </Route>
               <Route path="/login">
                 <LoginPage />
+              </Route>
+              <Route path="/callback">
+                <Callback />
               </Route>
               <Route path="/me">
                 <UserInfo/>
                 <PlaylistsPage/>
               </Route>
-              <Route exact path="/">
-                <Redirect to="/login" />
-              </Route>
-              <Route path="/callback">
-                <Callback />
-              </Route>
-              <Route path="/dev">
-                <p>DEV test</p>
+              <Route path="/playlist">
+                <TracksPage/>
               </Route>
               <Route path="*">
                 <p>404 Not Found!!</p>
