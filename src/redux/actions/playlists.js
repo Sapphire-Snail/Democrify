@@ -1,5 +1,5 @@
 import { GET_PLAYLISTDATA_LOADING, GET_PLAYLISTDATA_SUCCESS, GET_PLAYLISTDATA_ERROR, 
-    CREATE_PLAYLIST_LOADING, CREATE_PLAYLIST_SUCCESS, CREATE_PLAYLIST_ERROR } from './action-types';
+    CREATE_PLAYLIST_LOADING, CREATE_PLAYLIST_SUCCESS, CREATE_PLAYLIST_ERROR, SET_ACTIVE_PLAYLIST } from './action-types';
 
 export function loadPlaylistsLoading() {
   return {
@@ -42,5 +42,14 @@ export function createPlaylistError(err) {
     return {
         type: CREATE_PLAYLIST_ERROR,
         err
+    }
+}
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+export function setActivePlaylist(playlist) {
+    return {
+        type: SET_ACTIVE_PLAYLIST,
+        playlist
     }
 }

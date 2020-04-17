@@ -1,5 +1,5 @@
 import { loadPlaylistsLoading, loadPlaylistsSuccess, loadPlaylistsError, createPlaylistLoading, createPlaylistSuccess, createPlaylistError,
-    getUserLoading, getUserSuccess, getUserError, setLoggedIn } from '..';
+    getUserLoading, getUserSuccess, getUserError, setLoggedIn, setActivePlaylist } from '..';
 import * as spotify from '../../../SpotifyFunctions.js'
 
 export function loadPlaylists() {
@@ -57,4 +57,10 @@ export function createPlaylist(userId, playlist_name) {
         }
       );
     }
+}
+
+export function setPlaylist(playlist) {
+  return dispatch => {  
+    dispatch(setActivePlaylist(playlist));
+  }
 }

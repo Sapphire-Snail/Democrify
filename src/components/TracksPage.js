@@ -2,13 +2,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 class TracksPage extends Component  {
-
     render() {
-        return (
-            <div>
-                Playlist id: {this.props.playlistId}
-            </div>
-        )
+        if(this.props.activePlaylist) {
+            return (
+                <div>
+                    Playlist id: {this.props.activePlaylist.name}
+                </div>
+            )
+        }
+        return <div/>
     }
 }
 
@@ -16,10 +18,9 @@ class TracksPage extends Component  {
 function mapStateToProps(state) {
     return {
         playlistId: window.location.pathname.split('/').pop(), //Grab playlist ID from URL
+        playlists: state.playlists,
+        activePlaylist: state.activePlaylist
     };
 }
 
-const mapDispatchToProps = {
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(TracksPage);
+export default connect(mapStateToProps)(TracksPage);

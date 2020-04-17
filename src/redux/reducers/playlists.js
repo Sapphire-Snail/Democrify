@@ -1,4 +1,4 @@
-import { GET_PLAYLISTDATA_LOADING, GET_PLAYLISTDATA_SUCCESS, GET_PLAYLISTDATA_ERROR, CREATE_PLAYLIST_LOADING, CREATE_PLAYLIST_SUCCESS, CREATE_PLAYLIST_ERROR } from '../actions/action-types';
+import { GET_PLAYLISTDATA_LOADING, GET_PLAYLISTDATA_SUCCESS, GET_PLAYLISTDATA_ERROR, CREATE_PLAYLIST_LOADING, CREATE_PLAYLIST_SUCCESS, CREATE_PLAYLIST_ERROR, SET_ACTIVE_PLAYLIST } from '../actions/action-types';
 
 /**
  * This function handles modifications to the "playlists" property of the overall state.
@@ -27,6 +27,9 @@ export default function playlists(state = [], action) {
 
     case CREATE_PLAYLIST_ERROR:
       return playlists_CreatePlaylistError(state, action);
+
+    case SET_ACTIVE_PLAYLIST:
+      return playlist_SetActivePlaylist(state, action);
 
     default:
       return state;
@@ -90,4 +93,13 @@ function playlists_CreatePlaylistError(state, action) {
         loading: false,
         error: action.err
       };
+}
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+function playlist_SetActivePlaylist(state, action) {
+  return {
+    ...state,
+    active_playlist: action.playlist
+  };
 }

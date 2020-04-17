@@ -1,4 +1,4 @@
-import { loadPlaylistsLoading, loadPlaylistsSuccess, loadPlaylistsError, createPlaylistLoading, createPlaylistSuccess, createPlaylistError } from './playlists';
+import { loadPlaylistsLoading, loadPlaylistsSuccess, loadPlaylistsError, createPlaylistLoading, createPlaylistSuccess, createPlaylistError, setActivePlaylist } from './playlists';
 import { getUserLoading, getUserSuccess, getUserError, setLoggedIn } from './user';
 
 
@@ -9,6 +9,7 @@ export {
   createPlaylistLoading,
   createPlaylistSuccess,
   createPlaylistError,
+  setActivePlaylist,
 
   getUserLoading,
   getUserSuccess,
