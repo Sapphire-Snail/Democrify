@@ -1,19 +1,51 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
+import { setPlaylist } from '../../redux/actions/thunk';
+import { connect } from 'react-redux';
 
-function SinglePlaylist(props) {
-    return(
-        <tr key={props.playlistInfo.id}>
-            <td>
-            <img src={props.playlistInfo.images[0] ? props.playlistInfo.images[0].url : 'https://f4.bcbits.com/img/a4139357031_10.jpg'} alt="playlist" style={{width: 100, height: 100, position: 'absolute'}}/>
-            </td>
-            <td>
-            <span>{props.playlistInfo.name}</span>
-            </td>
-            <td>
-            <span>{props.playlistInfo.tracks.total}</span>
-            </td>
-        </tr>
-    );
+
+class SinglePlaylist extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            isRedirect: false
+        };
+    }
+    
+    handleChange = param => e => {
+        // param is the argument you passed to the function
+        // e is the event object that returned
+        this.props.setPlaylist(param);
+        this.setState({isRedirect: true});
+    };
+    
+    render() {
+        if(this.state.isRedirect) {
+            return <Redirect to={'/playlist/' + this.props.playlistInfo.id}/>
+        }
+
+
+        return(
+            <tr key={this.props.playlistInfo.id}>
+                <td>
+                <img src={this.props.playlistInfo.images[0] ? this.props.playlistInfo.images[0].url : 'https://f4.bcbits.com/img/a4139357031_10.jpg'} alt="playlist" style={{width: 100, height: 100, position: 'absolute'}}/>
+                </td>
+                <td>
+                {/* <Link to ={'/playlist/' + props.playlistInfo.id}> */}
+                    <span onClick={this.handleChange(this.props.playlistInfo)}>{this.props.playlistInfo.name}</span>
+                {/* </Link> */}
+                </td>
+                <td>
+                <span>{this.props.playlistInfo.tracks.total}</span>
+                </td>
+            </tr>
+        );
+    }
 }
 
-export default SinglePlaylist;
+const mapDispatchToProps = {
+    setPlaylist,
+}
+
+export default connect(null, mapDispatchToProps)(SinglePlaylist);

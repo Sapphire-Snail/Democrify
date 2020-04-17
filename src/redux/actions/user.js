@@ -1,6 +1,6 @@
 import {
-  GET_USER_LOADING, GET_USER_SUCCESS, GET_USER_ERROR, SET_LOGGEDIN_LOADING, SET_LOGGEDIN_SUCCESS, SET_LOGGEDIN_ERROR,
-  SET_LOGGEDOUT_LOADING, SET_LOGGEDOUT_SUCCESS, SET_LOGGEDOUT_ERROR
+  GET_USER_LOADING, GET_USER_SUCCESS, GET_USER_ERROR, 
+  SET_LOGGEDIN,
 } from './action-types';
 
 export function getUserLoading() {
@@ -25,45 +25,9 @@ export function getUserError(err) {
 }
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //Login
-export function setLoggedInLoading() {
+export function setLoggedIn(token) {
   return {
-    type: SET_LOGGEDIN_LOADING,
-  };
-}
-
-// res is the info returned by spotify token
-export function setLoggedInSuccess(res) {
-  return {
-    type: SET_LOGGEDIN_SUCCESS,
-    res,
-  };
-}
-
-export function setLoggedInError(err) {
-  return {
-    type: SET_LOGGEDIN_ERROR,
-    err,
-  };
-}
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-//Logout
-export function setLoggedOutLoading() {
-  return {
-    type: SET_LOGGEDOUT_LOADING,
-  };
-}
-
-// res is the info returned by spotify token
-export function setLoggedOutSuccess(res) {
-  return {
-    type: SET_LOGGEDOUT_SUCCESS,
-    res,
-  };
-}
-
-export function setLoggedOutError(err) {
-  return {
-    type: SET_LOGGEDOUT_ERROR,
-    err,
+    type: SET_LOGGEDIN,
+    token,
   };
 }

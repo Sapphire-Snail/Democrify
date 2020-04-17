@@ -11,6 +11,7 @@ import rootReducer from './reducers';
 const initialState = {
   playlists: {},
   user: {},
+  tracks: {},
 };
 
 // Config for redux-persist

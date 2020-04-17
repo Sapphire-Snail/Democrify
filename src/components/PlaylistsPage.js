@@ -6,7 +6,7 @@ import Playlists from './Playlists/Playlists';
 class PlaylistsPage extends Component  {
 
     componentDidMount() {
-        this.props.loadPlaylists(this.props.userId);
+        this.props.loadPlaylists();
     }
 
     createPlaylist = () => { //This notation allows us to keep reference to this

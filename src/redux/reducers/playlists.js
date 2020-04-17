@@ -1,4 +1,4 @@
-import { GET_PLAYLISTDATA_LOADING, GET_PLAYLISTDATA_SUCCESS, GET_PLAYLISTDATA_ERROR, CREATE_PLAYLIST_LOADING, CREATE_PLAYLIST_SUCCESS, CREATE_PLAYLIST_ERROR } from '../actions/action-types';
+import { GET_PLAYLISTDATA_LOADING, GET_PLAYLISTDATA_SUCCESS, GET_PLAYLISTDATA_ERROR, CREATE_PLAYLIST_LOADING, CREATE_PLAYLIST_SUCCESS, CREATE_PLAYLIST_ERROR, SET_ACTIVE_PLAYLIST } from '../actions/action-types';
 
 /**
  * This function handles modifications to the "playlists" property of the overall state.
@@ -28,6 +28,9 @@ export default function playlists(state = [], action) {
     case CREATE_PLAYLIST_ERROR:
       return playlists_CreatePlaylistError(state, action);
 
+    case SET_ACTIVE_PLAYLIST:
+      return playlist_SetActivePlaylist(state, action);
+
     default:
       return state;
     }
@@ -50,16 +53,15 @@ function playlists_LoadPlaylistsSuccess(state, action) {
   return {
     ...state,
     loading: false,
-    data: action.playlists.data.body,
+    data: action.playlists,
   };
 }
 
 function playlists_LoadPlaylistsError(state, action) {
-  console.log(action);  
   return {
       ...state,
       loading: false,
-      error: action.error
+      error: action.err
   };
 }
 
@@ -76,7 +78,7 @@ function playlists_CreatePlaylistLoading(state, action) {
 //Get new playlist returned by server and return existing playlists PLUS the new one we just made 
 function playlists_CreatePlaylistSuccess(state, action) {
     //Add new playlist to our array
-    state.data.items.unshift(action.playlist.data.body);
+    state.data.items.unshift(action.playlist);
     console.log('Successfully created playlist');
     return {
         ...state,
@@ -85,11 +87,19 @@ function playlists_CreatePlaylistSuccess(state, action) {
       };
 }
 
-function playlists_CreatePlaylistError(state, action) {
-    console.log(action);
+function playlists_CreatePlaylistError(state, action) {    
     return {
         ...state,
         loading: false,
-        error: action.error
+        error: action.err
       };
+}
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+function playlist_SetActivePlaylist(state, action) {
+  return {
+    ...state,
+    active_playlist: action.playlist
+  };
 }
