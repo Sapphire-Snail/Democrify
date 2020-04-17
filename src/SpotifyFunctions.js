@@ -57,3 +57,7 @@ export function getUserPlaylists() {
 export function createPlaylist(userId, playlistName) {
     return spotifyApi.createPlaylist(userId, {name: playlistName});
 }
+
+export function getPlaylistTracks(playlistId) {
+	return spotifyApi.getPlaylistTracks(playlistId);
+}

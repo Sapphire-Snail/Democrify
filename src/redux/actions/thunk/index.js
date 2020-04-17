@@ -1,5 +1,5 @@
 import { loadPlaylistsLoading, loadPlaylistsSuccess, loadPlaylistsError, createPlaylistLoading, createPlaylistSuccess, createPlaylistError,
-    getUserLoading, getUserSuccess, getUserError, setLoggedIn, setActivePlaylist } from '..';
+    getUserLoading, getUserSuccess, getUserError, setLoggedIn, setActivePlaylist, getPlaylistTracksLoading, getPlaylistTracksSuccess, getPlaylistTracksError } from '..';
 import * as spotify from '../../../SpotifyFunctions.js'
 
 export function loadPlaylists() {
@@ -62,5 +62,20 @@ export function createPlaylist(userId, playlist_name) {
 export function setPlaylist(playlist) {
   return dispatch => {  
     dispatch(setActivePlaylist(playlist));
+  }
+}
+
+export function getPlaylistTracks(playlistId) {
+  return (dispatch) => {
+    dispatch(getPlaylistTracksLoading());
+    spotify.getPlaylistTracks(playlistId)
+      .then(
+        tracks => dispatch(getPlaylistTracksSuccess(tracks)),
+
+        error => {
+          var err = JSON.parse(error.response);
+          dispatch(getPlaylistTracksError(err.error.status + ' ' + err.error.message || 'Unexpected error!'));
+        }
+      ); 
   }
 }
