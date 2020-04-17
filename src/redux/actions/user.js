@@ -25,8 +25,9 @@ export function getUserError(err) {
 }
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //Login
-export function setLoggedIn() {
+export function setLoggedIn(token) {
   return {
     type: SET_LOGGEDIN,
+    token,
   };
 }

@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { Collapse, Button, CardBody, Card } from 'reactstrap';
 import './LoginPage.css';
 import * as spotify from '../SpotifyFunctions.js'
-import {notify} from 'react-notify-toast';
+// import {notify} from 'react-notify-toast';
 
 class LoginPage extends Component {
   

@@ -59,5 +59,6 @@ function user_setLoggedIn(state, action) {
     ...state,
     error: null,
     loggedIn: true,
+    accessToken: action.token
   };
 }

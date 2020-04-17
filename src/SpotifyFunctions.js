@@ -46,7 +46,7 @@ export function setAccessToken(accessToken) {
 }
 
 export function getUserInfo() {
-        return spotifyApi.getMe();
+	return spotifyApi.getMe();
 }
 
 //If no user id is supplied, it uses the id of the user who authenticated

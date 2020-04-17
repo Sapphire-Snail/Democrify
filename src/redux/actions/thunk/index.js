@@ -31,7 +31,7 @@ export function loadUser() {
 
         error => {
           var err = JSON.parse(error.response);
-          dispatch(loadPlaylistsError(err.error.status + ' ' + err.error.message || 'Unexpected error!'));
+          dispatch(getUserError(err.error.status + ' ' + err.error.message || 'Unexpected error!'));
         }
       ); 
   }
@@ -40,7 +40,7 @@ export function loadUser() {
 export function login(accessToken) {
     return dispatch => {  
       spotify.setAccessToken(accessToken); //Set access token in spotify api
-      dispatch(setLoggedIn()); //Set logged in to be true
+      dispatch(setLoggedIn(accessToken)); //Set logged in to be true
       dispatch(loadUser()); //Start loading the user for when we redirect to /me
     }
 }
@@ -53,7 +53,7 @@ export function createPlaylist(userId, playlist_name) {
         playlist => dispatch(createPlaylistSuccess(playlist)),
         error => {
           var err = JSON.parse(error.response);
-          dispatch(loadPlaylistsError(err.error.status + ' ' + err.error.message || 'Unexpected error!'));
+          dispatch(createPlaylistError(err.error.status + ' ' + err.error.message || 'Unexpected error!'));
         }
       );
     }

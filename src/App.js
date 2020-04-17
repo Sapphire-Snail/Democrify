@@ -6,7 +6,8 @@ import {
   Redirect,
 } from "react-router-dom";
 import "./App.css";
-import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import * as spotify from './SpotifyFunctions.js';
 
 //Components
 import LoginPage from './components/LoginPage';
@@ -17,6 +18,9 @@ import PlaylistsPage from './components/PlaylistsPage';
 
 class App extends Component {
   render() {
+    //When app is refreshed, reload access token from persist (will update)
+    spotify.setAccessToken(this.props.accessToken);
+    
     return (
       <Router>
         <div className="App">
@@ -54,4 +58,11 @@ class App extends Component {
   }
 }
 
-export default App;
+// State is entire state tree
+function mapStateToProps(state) {
+  return {
+    accessToken: state.user.accessToken,
+  };
+}
+// Connect to redux store
+export default connect(mapStateToProps)(App);
