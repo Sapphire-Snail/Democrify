@@ -3,14 +3,18 @@ import { Redirect } from 'react-router-dom';
 import Loader from 'react-loader-spinner';
 import { connect } from 'react-redux';
 import { login } from './redux/actions/thunk';
+import * as spotify from './SpotifyFunctions.js'
 
-// Class that's instantiated when Spotify login screen is closed
+// Class that's instantiated when Spotify login screen is closed (redirects us to here)
 class Callback extends Component {
-  async componentDidMount() {
-    // Grab code from url then tell thunk to log us in, which also loads user data
-    const urlParams = new URLSearchParams(window.location.search);
-    const code = urlParams.get('code');
-    this.props.login(code);
+
+  componentDidMount() {
+    var token = spotify.checkUrlForAccessToken();
+    if(token) {
+      this.props.login(token);
+    } else {
+      console.log("COULD NOT LOG IN");
+    }
   }
 
   render() {
@@ -24,6 +28,7 @@ class Callback extends Component {
     if (this.props.loggedIn) {
       return <Redirect to="/me" />;
     }
+
     return <Loader type="ThreeDots" color="#1ECD97" height={100} width={100} />;
   }
 }

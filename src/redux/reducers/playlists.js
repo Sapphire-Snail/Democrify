@@ -50,16 +50,15 @@ function playlists_LoadPlaylistsSuccess(state, action) {
   return {
     ...state,
     loading: false,
-    data: action.playlists.data.body,
+    data: action.playlists,
   };
 }
 
 function playlists_LoadPlaylistsError(state, action) {
-  console.log(action);  
   return {
       ...state,
       loading: false,
-      error: action.error
+      error: action.err
   };
 }
 
@@ -76,7 +75,7 @@ function playlists_CreatePlaylistLoading(state, action) {
 //Get new playlist returned by server and return existing playlists PLUS the new one we just made 
 function playlists_CreatePlaylistSuccess(state, action) {
     //Add new playlist to our array
-    state.data.items.unshift(action.playlist.data.body);
+    state.data.items.unshift(action.playlist);
     console.log('Successfully created playlist');
     return {
         ...state,
@@ -85,11 +84,10 @@ function playlists_CreatePlaylistSuccess(state, action) {
       };
 }
 
-function playlists_CreatePlaylistError(state, action) {
-    console.log(action);
+function playlists_CreatePlaylistError(state, action) {    
     return {
         ...state,
         loading: false,
-        error: action.error
+        error: action.err
       };
 }

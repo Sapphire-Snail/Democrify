@@ -1,68 +1,60 @@
 import { loadPlaylistsLoading, loadPlaylistsSuccess, loadPlaylistsError, createPlaylistLoading, createPlaylistSuccess, createPlaylistError,
-    getUserLoading, getUserSuccess, getUserError, setLoggedInLoading, setLoggedInSuccess, setLoggedInError, setLoggedOutLoading, setLoggedOutSuccess, setLoggedOutError } from '..';
-import Api from '../../../api';
+    getUserLoading, getUserSuccess, getUserError, setLoggedIn } from '..';
+import * as spotify from '../../../SpotifyFunctions.js'
 
-export function loadPlaylists(userId) {
+export function loadPlaylists() {
   return (dispatch) => {
     // First, dispatch the LOAD_PLAYLISTS_LOADING action, allowing the rest of our app to detect when
     // we've started loading playlists.
     dispatch(loadPlaylistsLoading());
-
-    // Now, start loading the todos.
-    Api.getPlaylists(userId)
+    
+    spotify.getUserPlaylists()
       .then(
         // If the todos were loaded successfully, dispatch the LOAD_PLAYLISTS_SUCCESS action allowing the playlists to be added to the store
-        (playlists) => dispatch(loadPlaylistsSuccess(playlists)),
+        playlists => dispatch(loadPlaylistsSuccess(playlists)),
 
         // If there was an error loading todos, dispatch the LOAD_PLAYLISTS_ERROR action providing details of the error
-        (error) => dispatch(loadPlaylistsError(error.message || 'Unexpected error!')),
+        error => {
+          var err = JSON.parse(error.response);
+          dispatch(loadPlaylistsError(err.error.status + ' ' + err.error.message || 'Unexpected error!'));
+        }
       );
   };
 }
 
 export function loadUser() {
   return (dispatch) => {
-    dispatch(getUserLoading());
-
-    Api.getUser()
+    dispatch(getUserLoading()); //Dispatch loading action
+    spotify.getUserInfo() //Dispatch get user info function
       .then(
-        (userData) => dispatch(getUserSuccess(userData)),
+        userData => dispatch(getUserSuccess(userData)),
 
-        error => dispatch(getUserError(error.message || "Unexpected error!")));
-    }
+        error => {
+          var err = JSON.parse(error.response);
+          dispatch(loadPlaylistsError(err.error.status + ' ' + err.error.message || 'Unexpected error!'));
+        }
+      ); 
+  }
 }
 
-export function login(code) {
-    return dispatch => {
-        dispatch(setLoggedInLoading());
-
-        Api.getUserTokens(code)
-            .then(
-                res => {
-                    dispatch(setLoggedInSuccess(res));
-                    dispatch(loadUser());
-                },
-
-                error => {
-                    dispatch(setLoggedInError(error.message || "Unexpected Error"));
-                });
+export function login(accessToken) {
+    return dispatch => {  
+      spotify.setAccessToken(accessToken); //Set access token in spotify api
+      dispatch(setLoggedIn()); //Set logged in to be true
+      dispatch(loadUser()); //Start loading the user for when we redirect to /me
     }
 }
 
 export function createPlaylist(userId, playlist_name) {
-    return dispatch => {
-        dispatch(createPlaylistLoading());
-        
-        Api.createPlaylist(userId, playlist_name)
-            .then(
-                userData => dispatch(createPlaylistSuccess(userData)),
-
-                error => dispatch(createPlaylistError(error.message || "Unexpected error!")));
-    }
-}
-
-export function logout() {
   return dispatch => {
-      dispatch(setLoggedOutLoading()).then(console.log('test'));
-  }
+    dispatch(createPlaylistLoading());
+    spotify.createPlaylist(userId, playlist_name)
+      .then(
+        playlist => dispatch(createPlaylistSuccess(playlist)),
+        error => {
+          var err = JSON.parse(error.response);
+          dispatch(loadPlaylistsError(err.error.status + ' ' + err.error.message || 'Unexpected error!'));
+        }
+      );
+    }
 }
