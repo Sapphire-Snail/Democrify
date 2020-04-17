@@ -6,22 +6,23 @@ import {
   Redirect,
 } from "react-router-dom";
 import "./App.css";
-import { connect } from 'react-redux';
-import * as spotify from './SpotifyFunctions.js';
+import { connect } from "react-redux";
+import * as spotify from "./SpotifyFunctions.js";
 
 //Components
-import LoginPage from './components/LoginPage';
-import Callback from './Callback';
-import UserInfo from './components/UserInfo';
-import PlaylistsPage from './components/PlaylistsPage';
+import LoginPage from "./components/LoginPage";
+import Callback from "./Callback";
+import UserInfo from "./components/UserInfo";
+import PlaylistsPage from "./components/PlaylistsPage";
 import TracksPage from "./components/TracksPage";
-
+import { Container } from "reactstrap";
+import WelcomeScreen from "./components/WelcomeScreen";
 
 class App extends Component {
   render() {
     //When app is refreshed, reload access token from persist (will update)
     spotify.setAccessToken(this.props.accessToken);
-    
+
     return (
       <Router>
         <div className="App">
@@ -42,11 +43,11 @@ class App extends Component {
                 <Callback />
               </Route>
               <Route path="/me">
-                <UserInfo/>
-                <PlaylistsPage/>
+                <UserInfo />
+                <WelcomeScreen />
               </Route>
               <Route path="/playlist">
-                <TracksPage/>
+                <TracksPage />
               </Route>
               <Route path="*">
                 <p>404 Not Found!!</p>
