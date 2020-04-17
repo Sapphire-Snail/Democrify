@@ -1,10 +1,31 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Loader from "react-loader-spinner";
+import { Redirect } from 'react-router-dom';
+import { logout } from '../redux/actions/thunk';
 import { Container, Row, Col, Button } from "reactstrap";
 import "./UserInfo.css"
 class UserInfo extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+        isRedirect: false
+    };
+  }
+  
+  logout = () => {
+    this.props.logout();
+    this.setState({isRedirect: true});
+  }
+  
   render() {
+    //Not sure if this is the best way to do a redirect but hey
+    if(this.state.isRedirect) {
+      return <Redirect to={'/login/'}/>
+    }
+
+    //Otherwise get the data and display it
     const { error, loading, data } = this.props.userData;
     if (error) {
       return (
@@ -28,7 +49,7 @@ class UserInfo extends Component {
             <Row>
               <Col>
                 <p style={{ marginBottom: 0, display:'inline' }}> Welcome, {data.display_name} ! </p>
-                <Button style={{ display:'inline', paddingTop:'0'}} color="link">Log out</Button>
+                <Button onClick={this.logout} style={{ display:'inline', paddingTop:'0'}} color="link">Log out</Button>
               </Col>
             </Row>
           </Container>
@@ -45,5 +66,10 @@ function mapStateToProps(state) {
     userData: state.user,
   };
 }
+
+const mapDispatchToProps = {
+  logout,
+}
+
 // Connect to redux store
-export default connect(mapStateToProps)(UserInfo);
+export default connect(mapStateToProps, mapDispatchToProps)(UserInfo);

@@ -46,7 +46,12 @@ class App extends Component {
                 <UserInfo />
                 <WelcomeScreen />
               </Route>
+              <Route path="/playlists">
+                <UserInfo />
+                <PlaylistsPage />
+              </Route>
               <Route path="/playlist">
+                <UserInfo />
                 <TracksPage />
               </Route>
               <Route path="*">

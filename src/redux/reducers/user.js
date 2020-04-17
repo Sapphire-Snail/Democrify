@@ -4,7 +4,8 @@ import {
   GET_USER_LOADING,
   GET_USER_SUCCESS,
   GET_USER_ERROR,
-  SET_LOGGEDIN
+  SET_LOGGEDIN,
+  SET_LOGGEDOUT
 } from '../actions/action-types';
 
 export default function user(state = [], action) {
@@ -21,6 +22,9 @@ export default function user(state = [], action) {
 
     case SET_LOGGEDIN:
       return user_setLoggedIn(state, action);
+
+    case SET_LOGGEDOUT:
+      return user_setLoggedOut(state, action);
 
     default:
       return state;
@@ -60,5 +64,13 @@ function user_setLoggedIn(state, action) {
     error: null,
     loggedIn: true,
     accessToken: action.token
+  };
+}
+
+function user_setLoggedOut(state, action) {
+  return {
+    error: null,
+    loggedIn: false,
+    accessToken: null
   };
 }

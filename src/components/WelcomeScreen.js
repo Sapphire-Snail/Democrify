@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from 'react-router-dom';
 import {
   Button,
   InputGroup,
@@ -8,13 +9,13 @@ import {
   Row,
   Col,
   Popover,
-  PopoverHeader,
+  //PopoverHeader,
   PopoverBody,
-  InputGroupText,
+  //InputGroupText,
   ButtonGroup,
 } from "reactstrap";
 import "./WelcomeScreen.css";
-import * as spotify from "../SpotifyFunctions.js";
+//import * as spotify from "../SpotifyFunctions.js";
 
 class WelcomeScreen extends Component {
   state = {
@@ -75,9 +76,11 @@ class WelcomeScreen extends Component {
         </Container>
         <Container className="hostButtonContainer">
           <ButtonGroup>
-            <Button color="success" size="lg">
-              Host a party
-            </Button>
+            <Link to='/playlists'>
+              <Button color="success" size="lg">
+                Host a party
+              </Button>
+            </Link>
             <Button
               color="info"
               size="sm"
