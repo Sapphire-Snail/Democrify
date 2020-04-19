@@ -12,6 +12,7 @@ const initialState = {
   playlists: {},
   user: {},
   tracks: {},
+  webplayer: {},
 };
 
 // Config for redux-persist

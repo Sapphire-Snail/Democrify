@@ -61,3 +61,11 @@ export function createPlaylist(userId, playlistName) {
 export function getPlaylistTracks(playlistId) {
 	return spotifyApi.getPlaylistTracks(playlistId);
 }
+
+export function play(contextURI, deviceId) {
+	return spotifyApi.play({device_id: deviceId, context_uri: contextURI});
+}
+
+export function pause(deviceId) {
+	return spotifyApi.pause({device_id: deviceId});
+}

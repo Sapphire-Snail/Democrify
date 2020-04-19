@@ -15,8 +15,11 @@ import Callback from "./Callback";
 import UserInfo from "./components/UserInfo";
 import PlaylistsPage from "./components/PlaylistsPage";
 import TracksPage from "./components/TracksPage";
-import { Container } from "reactstrap";
+import WebPlayer from "./components/WebPlayer";
+// import { Container } from "reactstrap";
 import WelcomeScreen from "./components/WelcomeScreen";
+
+window.onSpotifyWebPlaybackSDKReady = () => {};
 
 class App extends Component {
   render() {
@@ -29,7 +32,7 @@ class App extends Component {
           <header>
             <img className="App-logo" src={require("./assets/logo.svg")} />
             <h2 className="slogan">Music for the people</h2>
-            {/* <Link to ='/dev'>YARR</Link> */}
+            { this.props.loggedIn && <WebPlayer />} {/* At the moment the whole app gets a web player, but in the future only load if they are hosting */}
           </header>
           <main>
             <Switch>
@@ -69,6 +72,7 @@ class App extends Component {
 function mapStateToProps(state) {
   return {
     accessToken: state.user.accessToken,
+    loggedIn: state.user.loggedIn
   };
 }
 // Connect to redux store
