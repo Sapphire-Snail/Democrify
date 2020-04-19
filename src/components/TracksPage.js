@@ -9,18 +9,11 @@ class TracksPage extends Component  {
     componentDidMount() {
         this.props.getPlaylistTracks(this.props.playlistId);
     }
-
-    play = () => { //This notation allows us to keep reference to this
-        spotify.play(this.props.activePlaylist.uri, this.props.deviceId);
-    }
-
+    
     render() {
         return (
             <div>
                 <Link to='/playlists'>Back we go bois</Link>
-                <button onClick={this.play}>
-                    Play
-                </button>
                 <h1>{this.props.activePlaylist.name}</h1>
                 <Tracks/>
             </div>
