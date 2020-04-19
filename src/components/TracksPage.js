@@ -3,12 +3,13 @@ import { connect } from 'react-redux';
 import { getPlaylistTracks } from '../redux/actions/thunk';
 import Tracks from './Tracks';
 import { Link } from 'react-router-dom';
+import * as spotify from "../SpotifyFunctions.js";
 
 class TracksPage extends Component  {
     componentDidMount() {
         this.props.getPlaylistTracks(this.props.playlistId);
     }
-
+    
     render() {
         return (
             <div>
@@ -25,6 +26,7 @@ function mapStateToProps(state) {
     return {
         activePlaylist: state.playlists.active_playlist,
         playlistId: window.location.pathname.split('/').pop(), //Grab playlist ID from URL
+        deviceId: state.webplayer.deviceId
     };
 }
 

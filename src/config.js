@@ -8,6 +8,7 @@ export const scopes = [
     'user-read-email',
     'playlist-read-private',
     'playlist-modify-private',
-    'playlist-modify-public'
-
+    'playlist-modify-public',
+    'streaming',
+    'user-modify-playback-state'
 ];

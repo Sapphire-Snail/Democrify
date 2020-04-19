@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Loader from 'react-loader-spinner';
+import SingleTrack from './SingleTrack';
 
 class Tracks extends Component {
 
@@ -27,7 +28,7 @@ class Tracks extends Component {
                       </tr>
                   </thead>
                   <tbody>
-                      {data.items && data.items.map((item) => <SingleTrack key={item.track.id} trackInfo={item.track}/>)}
+                      {data.items && data.items.map((item, index) => <SingleTrack key={item.track.id} trackInfo={item.track}/>)}
                   </tbody>
                   </table>
               </div>
@@ -41,25 +42,9 @@ class Tracks extends Component {
 function mapStateToProps(state) {
     return {
         tracks: state.tracks,
+        deviceId: state.webplayer.deviceId
     };
 }
 
 export default connect(mapStateToProps)(Tracks);
-
-//Quick single track item used above
-function SingleTrack(props) {
-    return(            
-        <tr key={props.trackInfo.id}>
-            <td>
-                <img src={props.trackInfo.album.images[0] ? props.trackInfo.album.images[0].url : 'https://f4.bcbits.com/img/a4139357031_10.jpg'} alt="track" style={{width: 100, height: 100, position: 'absolute'}}/>
-            </td>
-            <td>
-                <span>{props.trackInfo.name}</span>
-            </td>
-            <td>
-                <span>{props.trackInfo.artists[0].name}</span>
-            </td>
-        </tr>
-    )
-}
 

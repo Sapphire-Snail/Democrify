@@ -19,8 +19,8 @@ class PlaylistsPage extends Component  {
             <div>
                 <Link to='/me'>Back we go bois</Link>
                 <Playlists/>
-                <button key={0} className="btn btn--loginApp-link" onClick={this.createPlaylist}>
-                            Create Playlist
+                <button className="button button--loginApp-link" onClick={this.createPlaylist}>
+                    Create Playlist
                 </button>
             </div>
         )
