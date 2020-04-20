@@ -23,6 +23,25 @@ import PlayerControls from "./components/PlayerControls";
 window.onSpotifyWebPlaybackSDKReady = () => {};
 
 class App extends Component {
+
+    // Things to do before unloading/closing the tab (CURRENTLY NOTHING)
+    unloadCurrentlyPlaying = () => {
+        console.log('goodbye');
+    }
+
+  //Set up listener to run code when window unmounts
+  setupBeforeUnloadListener = () => {
+    window.addEventListener("beforeunload", (ev) => {
+        ev.preventDefault();
+        return this.unloadCurrentlyPlaying();
+    });
+  };
+
+  componentDidMount() {
+    // Activate the event listener
+    this.setupBeforeUnloadListener();
+  }
+
   render() {
     //When app is refreshed, reload access token from persist (will update)
     spotify.setAccessToken(this.props.accessToken);
@@ -36,33 +55,35 @@ class App extends Component {
             { this.props.loggedIn && <WebPlayer />} {/* At the moment the whole app gets a web player, but in the future only load if they are hosting */}
           </header>
           <main>
-            <Switch>
-              <Route exact path="/">
-                <Redirect to="/login" />
-              </Route>
-              <Route path="/login">
-                <LoginPage />
-              </Route>
-              <Route path="/callback">
-                <Callback />
-              </Route>
-              <Route path="/me">
-                <UserInfo />
-                <WelcomeScreen />
-              </Route>
-              <Route path="/playlists">
-                <UserInfo />
-                <PlaylistsPage />
-              </Route>
-              <Route path="/playlist">
-                <UserInfo />
-                <TracksPage />
-              </Route>
-              <Route path="*">
-                <p>404 Not Found!!</p>
-              </Route>
-            </Switch>
-            <PlayerControls/>
+            <div style={{marginBottom: 110}}>
+              <Switch>
+                <Route exact path="/">
+                  <Redirect to="/login" />
+                </Route>
+                <Route path="/login">
+                  <LoginPage />
+                </Route>
+                <Route path="/callback">
+                  <Callback />
+                </Route>
+                <Route path="/me">
+                  <UserInfo />
+                  <WelcomeScreen />
+                </Route>
+                <Route path="/playlists">
+                  <UserInfo />
+                  <PlaylistsPage />
+                </Route>
+                <Route path="/playlist">
+                  <UserInfo />
+                  <TracksPage />
+                </Route>
+                <Route path="*">
+                  <p>404 Not Found!!</p>
+                </Route>
+              </Switch>
+              <PlayerControls/>
+              </div>
           </main>
         </div>
       </Router>
@@ -74,7 +95,7 @@ class App extends Component {
 function mapStateToProps(state) {
   return {
     accessToken: state.user.accessToken,
-    loggedIn: state.user.loggedIn
+    loggedIn: state.user.loggedIn,
   };
 }
 // Connect to redux store

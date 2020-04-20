@@ -72,3 +72,7 @@ export function play(contextURI, deviceId, startUri) {
 export function pause(deviceId) {
 	return spotifyApi.pause({device_id: deviceId});
 }
+
+export function skipToNext(deviceId) {
+	return spotifyApi.skipToNext({device_id: deviceId});
+}
