@@ -21,3 +21,4 @@ export const SET_LOGGEDIN = "SET_LOGGEDIN";
 export const SET_LOGGEDOUT = "SET_LOGGEDOUT";
 
 export const SET_DEVICE_ID = "SET_DEVICE_ID";
+export const SET_PLAYSTATE = "SET_PLAYSTATE";

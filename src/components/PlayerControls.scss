@@ -1,0 +1,71 @@
+.player {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: black;
+  color: white;
+  //text-align: center;
+}
+
+//Code itaken from: https://codepen.io/MarioDesigns/pen/ENevMJ/
+.pcontainer {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: center;
+}
+
+.pbtn {
+	position: relative;
+	width: 40px;
+	height: 40px;
+	border: white 3px solid;
+	border-radius: 50%;
+	cursor: pointer;
+	transition: border 0.1s ease-in-out;
+	
+	&:hover {
+		border: #333 3px solid;
+		.bar {
+			background-color: #333;	
+		}
+	}
+	
+	.bar {
+		display: block;
+		position: absolute;
+		top: 10px;
+		left: 0;
+		width: 3px;
+		height: 20px;
+		border-radius: 3px;
+		background-color: white;
+		transform-origin: center;
+    transition: transform 0.4s ease-in-out, 
+    background 0.1s ease-in-out;
+	}
+	
+	&.pause {
+		.bar-1 {
+			transform: translateX(13.5px) translateY(0px) rotate(0deg);
+		}
+		.bar-2 {
+			transform: translateX(24px) translateY(0px) rotate(0deg);
+		}
+	}
+	
+	&.play {
+		.bar-1 {
+			transform: translateX(20px) translateY(-5px) rotate(-55deg);
+		}
+		.bar-2 {
+			transform: translateX(20px) translateY(5px) rotate(-125deg);
+		}
+	}
+	
+}

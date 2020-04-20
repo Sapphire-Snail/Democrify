@@ -18,6 +18,7 @@ import TracksPage from "./components/TracksPage";
 import WebPlayer from "./components/WebPlayer";
 // import { Container } from "reactstrap";
 import WelcomeScreen from "./components/WelcomeScreen";
+import PlayerControls from "./components/PlayerControls";
 
 window.onSpotifyWebPlaybackSDKReady = () => {};
 
@@ -30,7 +31,7 @@ class App extends Component {
       <Router>
         <div className="App">
           <header>
-            <img className="App-logo" src={require("./assets/logo.svg")} />
+            <img className="App-logo" src={require("./assets/logo.svg")} alt='logo'/>
             <h2 className="slogan">Music for the people</h2>
             { this.props.loggedIn && <WebPlayer />} {/* At the moment the whole app gets a web player, but in the future only load if they are hosting */}
           </header>
@@ -61,6 +62,7 @@ class App extends Component {
                 <p>404 Not Found!!</p>
               </Route>
             </Switch>
+            <PlayerControls/>
           </main>
         </div>
       </Router>

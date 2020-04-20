@@ -63,6 +63,9 @@ export function getPlaylistTracks(playlistId) {
 }
 
 export function play(contextURI, deviceId, startUri) {
+	if(contextURI == null || startUri == null) {
+		return spotifyApi.play({device_id: deviceId});
+	}
 	return spotifyApi.play({context_uri: contextURI, device_id: deviceId, offset: {uri: startUri}});
 }
 

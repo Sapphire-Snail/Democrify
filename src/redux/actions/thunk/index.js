@@ -1,5 +1,6 @@
 import { loadPlaylistsLoading, loadPlaylistsSuccess, loadPlaylistsError, createPlaylistLoading, createPlaylistSuccess, createPlaylistError,
-    getUserLoading, getUserSuccess, getUserError, setLoggedIn, setLoggedOut, setActivePlaylist, getPlaylistTracksLoading, getPlaylistTracksSuccess, getPlaylistTracksError, setDeviceId } from '..';
+    getUserLoading, getUserSuccess, getUserError, setLoggedIn, setLoggedOut, setActivePlaylist, getPlaylistTracksLoading, getPlaylistTracksSuccess, getPlaylistTracksError, 
+    setDeviceId, setPlayState } from '..';
 import * as spotify from '../../../SpotifyFunctions.js'
 
 export function loadPlaylists() {
@@ -90,5 +91,11 @@ export function getPlaylistTracks(playlistId) {
 export function setDeviceID(deviceId) {
   return dispatch => {  
     dispatch(setDeviceId(deviceId));
+  }
+}
+
+export function updatePlayState(state) {
+  return dispatch => {  
+    dispatch(setPlayState(state));
   }
 }

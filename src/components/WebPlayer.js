@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { setDeviceID } from '../redux/actions/thunk';
+import { setDeviceID, updatePlayState } from '../redux/actions/thunk';
 
 //Code adapted from: https://glitch.com/edit/#!/spotify-web-playback-react?path=src/App.js:63:30
 class WebPlayer extends Component {
@@ -43,7 +43,8 @@ class WebPlayer extends Component {
     });
 
     this.webPlaybackInstance.on("player_state_changed", async state => {
-      console.log('state changed', state);
+      //console.log('state changed', state);
+      this.props.updatePlayState(state);
     });
 
     this.webPlaybackInstance.on("ready", device_id => {
@@ -83,6 +84,7 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = {
   setDeviceID,
+  updatePlayState
 }
 
 // Connect to redux store
