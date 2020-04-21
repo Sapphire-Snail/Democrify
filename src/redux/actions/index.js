@@ -2,6 +2,7 @@ import { loadPlaylistsLoading, loadPlaylistsSuccess, loadPlaylistsError, createP
 import { getUserLoading, getUserSuccess, getUserError, setLoggedIn, setLoggedOut } from './user';
 import { getPlaylistTracksLoading, getPlaylistTracksSuccess, getPlaylistTracksError } from './tracks';
 import { setDeviceId } from './webplayer';
+import { searchLoading, searchSuccess, searchError } from './search';
 
 
 export {
@@ -23,5 +24,9 @@ export {
   getPlaylistTracksSuccess,
   getPlaylistTracksError,
 
-  setDeviceId
+  setDeviceId,
+
+  searchLoading,
+  searchError,
+  searchSuccess
 };

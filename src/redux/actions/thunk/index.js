@@ -1,5 +1,6 @@
 import { loadPlaylistsLoading, loadPlaylistsSuccess, loadPlaylistsError, createPlaylistLoading, createPlaylistSuccess, createPlaylistError,
-    getUserLoading, getUserSuccess, getUserError, setLoggedIn, setLoggedOut, setActivePlaylist, getPlaylistTracksLoading, getPlaylistTracksSuccess, getPlaylistTracksError, setDeviceId } from '..';
+    getUserLoading, getUserSuccess, getUserError, setLoggedIn, setLoggedOut, setActivePlaylist, getPlaylistTracksLoading, getPlaylistTracksSuccess,
+    getPlaylistTracksError, setDeviceId, searchLoading, searchSuccess, searchError } from '..';
 import * as spotify from '../../../SpotifyFunctions.js'
 
 export function loadPlaylists() {
@@ -90,5 +91,20 @@ export function getPlaylistTracks(playlistId) {
 export function setDeviceID(deviceId) {
   return dispatch => {  
     dispatch(setDeviceId(deviceId));
+  }
+}
+
+export function searchSong(keyword) {
+  return dispatch => {  
+    dispatch(searchLoading);
+    spotify.searchSong(keyword)
+      .then(
+        tracks => dispatch(searchSuccess(tracks)),
+
+        error => {
+          var err = JSON.parse(error.response);
+          dispatch(searchError(err.error.status + ' ' + err.error.message || 'Unexpected error!'));
+        }
+      ); 
   }
 }
