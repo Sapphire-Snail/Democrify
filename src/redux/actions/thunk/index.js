@@ -96,9 +96,10 @@ export function setDeviceID(deviceId) {
 
 export function searchSong(keyword) {
   return dispatch => {  
-    dispatch(searchLoading);
+    dispatch(searchLoading());
     spotify.searchSong(keyword)
       .then(
+        
         tracks => dispatch(searchSuccess(tracks)),
 
         error => {

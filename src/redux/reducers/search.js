@@ -11,7 +11,7 @@ export default function user(state = [], action) {
             return searchLoading(state, action);
 
         case SEARCH_SUCCESS:
-            return searchSuccess(state, action);
+            return search_searchSuccess(state, action);
 
         case SEARCH_ERROR:
             return searchError(state, action);     
@@ -30,11 +30,11 @@ function searchLoading(state, action) {
   }
 
 // Get data returned from the server and return it as the new state for user data
-function searchSuccess(state, action) {
+function search_searchSuccess(state, action) {
     return {
       ...state,
       loading: false,
-      searchResult: action.searchResult,
+      data: action.searchResult,
     };
 }
 
