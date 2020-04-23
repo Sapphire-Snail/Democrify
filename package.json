@@ -12,9 +12,11 @@
     "cors": "^2.8.5",
     "esm": "^3.2.25",
     "express": "^4.17.1",
+    "node-sass": "^4.13.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-emoji-render": "^1.2.2",
+    "react-icons": "^3.9.0",
     "react-loader-spinner": "^3.1.5",
     "react-notify-toast": "^0.5.1",
     "react-promise-tracker": "^2.1.0",
@@ -38,7 +40,6 @@
     "eject": "react-scripts eject",
     "lint": "eslint ."
   },
-  "proxy": "http://localhost:5000",
   "eslintConfig": {
     "extends": "react-app"
   },

@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { getPlaylistTracks } from '../redux/actions/thunk';
 import Tracks from './Tracks';
 import { Link } from 'react-router-dom';
-import * as spotify from "../SpotifyFunctions.js";
 
 class TracksPage extends Component  {
     componentDidMount() {

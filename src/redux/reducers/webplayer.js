@@ -1,7 +1,8 @@
 /* eslint-disable no-use-before-define */
 /* eslint-disable camelcase */
 import {
-    SET_DEVICE_ID
+    SET_DEVICE_ID,
+    SET_PLAYSTATE
   } from '../actions/action-types';
   
   export default function user(state = [], action) {
@@ -9,6 +10,9 @@ import {
     switch (action.type) {
       case SET_DEVICE_ID:
         return webplayer_setDeviceId(state, action);
+
+      case SET_PLAYSTATE:
+        return webplayer_setPlayState(state, action);
   
       default:
         return state;
@@ -22,3 +26,11 @@ import {
       deviceId: action.deviceId
     };
   }
+
+    /* ------------------------------------------------------SET PLAY STATE------*/
+    function webplayer_setPlayState(state, action) {
+      return {
+        ...state,
+        playState: action.playState
+      };
+    }

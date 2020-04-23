@@ -63,9 +63,16 @@ export function getPlaylistTracks(playlistId) {
 }
 
 export function play(contextURI, deviceId, startUri) {
+	if(contextURI == null || startUri == null) {
+		return spotifyApi.play({device_id: deviceId});
+	}
 	return spotifyApi.play({context_uri: contextURI, device_id: deviceId, offset: {uri: startUri}});
 }
 
 export function pause(deviceId) {
 	return spotifyApi.pause({device_id: deviceId});
+}
+
+export function skipToNext(deviceId) {
+	return spotifyApi.skipToNext({device_id: deviceId});
 }
