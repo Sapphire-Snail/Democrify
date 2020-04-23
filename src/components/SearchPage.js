@@ -10,20 +10,23 @@ class SearchPage extends Component  {
     constructor() {
         super();
         this.search = this.search.bind(this);
+        this.state = {
+            searchString: ""
+        }
     }
     
-    search() {
-        const searchString = document.getElementById("searchBox").value;
-        if (searchString != "") {
-            this.props.searchSong(searchString);
+    search(e) {
+        this.setState({searchString:e.target.value});
+        if (this.state.searchString != "") {
+            this.props.searchSong(this.state.searchString);
         }
     }
 
     render() {
         return (
             <div style={{textAlign:"center"}}>
-                <Input id="searchBox" placeholder="Search" style={{width:'50%', display:'inline-block'}} onChange={this.search}></Input>
-                <Search />
+                <Input id="searchBox" placeholder="Search" style={{width:'50%', display:'inline-block', marginBottom:10}} onChange={(e) => this.search(e)}></Input>
+                {this.state.searchString && <Search />}
             </div>
         )
     }

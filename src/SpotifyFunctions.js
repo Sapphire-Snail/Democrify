@@ -73,3 +73,7 @@ export function pause(deviceId) {
 export function searchSong(keyword) {
 	return spotifyApi.searchTracks(keyword);
 }
+
+export function addSong(activePlaylistID, songURI) {
+	return spotifyApi.addTracksToPlaylist(activePlaylistID, [songURI]);
+}

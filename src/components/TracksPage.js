@@ -19,7 +19,7 @@ class TracksPage extends Component  {
 
     toggleSearch() {
         this.setState({searchShowing:!this.state.searchShowing});
-        if(!this.state.searchShowing) {
+        if(this.state.searchShowing) {
             this.componentDidMount();
         }
     }
