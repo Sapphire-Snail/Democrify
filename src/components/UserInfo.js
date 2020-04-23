@@ -51,8 +51,8 @@ class UserInfo extends Component {
           <Container>
             <Row>
               <Col>
-                <p style={{ marginBottom: 0, display:'inline' }}> Welcome, {data.display_name} ! </p>
-                <Button onClick={this.logout} style={{ display:'inline', paddingTop:'0'}} color="link">Log out</Button>
+                <p style={{ marginBottom: 0, display:'inline', color:'white' }}> Welcome, {data.display_name}! </p>
+                <Button onClick={this.logout} style={{ display:'inline', paddingTop:'0'}} color="link" className="logoutButton">Log out</Button>
               </Col>
             </Row>
           </Container>

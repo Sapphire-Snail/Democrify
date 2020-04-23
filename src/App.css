@@ -5,6 +5,7 @@
 .App-logo {
   height: 20vmin;
   pointer-events: none;
+  margin-top: 10px;
 }
 
 .App-header {
@@ -126,8 +127,10 @@ body {
 }
 
 .slogan {
-  color: white;
+  color: black;
   font-size: xx-large;
+  font-weight: bold;
+  margin: 0;
 }
 
 @media screen and (max-width: 1000px) {

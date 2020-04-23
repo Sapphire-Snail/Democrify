@@ -9,3 +9,7 @@
 .informationButton {
   border-radius: 0 !important;
 }
+
+.joinButton {
+  background-color: #c030ed;
+}

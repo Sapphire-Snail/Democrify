@@ -46,13 +46,14 @@ class WelcomeScreen extends Component {
               <InputGroup className="inputPartyCode">
                 <Input placeholder="Enter the party code" />
                 <InputGroupAddon addonType="append">
-                  <Button color="warning">Join!</Button>
+                  <Button style={{backgroundColor: "#c030ed", borderColor : "#c030ed"}}>Join!</Button>
                   <InputGroupAddon addonType="append">
                     <Button
-                      color="info"
+                      style={{backgroundColor: "black", borderColor : "black"}}
                       className="informationButton"
                       id="PopoverCode"
                       type="button"
+                      size="sm"
                       onClick={this.togglePopover}
                     >
                       ?
@@ -77,13 +78,14 @@ class WelcomeScreen extends Component {
         <Container className="hostButtonContainer">
           <ButtonGroup>
             <Link to='/playlists'>
-              <Button color="success" size="lg">
+              <Button style={{backgroundColor: "#1ed760", borderColor : "#1ed760"}} size="lg">
                 Host a party
               </Button>
             </Link>
             <Button
-              color="info"
+              style={{backgroundColor: "black", borderColor : "black"}}
               size="sm"
+              className="informationButton"
               id="PopoverHost"
               type="button"
               onClick={this.togglePopover}

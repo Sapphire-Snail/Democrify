@@ -21,4 +21,13 @@ export const SET_LOGGEDIN = "SET_LOGGEDIN";
 export const SET_LOGGEDOUT = "SET_LOGGEDOUT";
 
 export const SET_DEVICE_ID = "SET_DEVICE_ID";
+
+//
+export const SEARCH_LOADING = "SEARCH_LOADING";
+export const SEARCH_SUCCESS = "SEARCH_SUCCESS";
+export const SEARCH_ERROR = "SEARCH_ERROR";
+
+export const ADD_SONG_LOADING = "ADD_SONG_LOADING";
+export const ADD_SONG_SUCCESS = "ADD_SONG_SUCCESS";
+export const ADD_SONG_ERROR = "ADD_SONG_ERROR";
 export const SET_PLAYSTATE = "SET_PLAYSTATE";

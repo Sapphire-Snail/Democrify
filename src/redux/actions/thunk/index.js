@@ -1,6 +1,6 @@
 import { loadPlaylistsLoading, loadPlaylistsSuccess, loadPlaylistsError, createPlaylistLoading, createPlaylistSuccess, createPlaylistError,
-    getUserLoading, getUserSuccess, getUserError, setLoggedIn, setLoggedOut, setActivePlaylist, getPlaylistTracksLoading, getPlaylistTracksSuccess, getPlaylistTracksError, 
-    setDeviceId, setPlayState } from '..';
+    getUserLoading, getUserSuccess, getUserError, setLoggedIn, setLoggedOut, setActivePlaylist, getPlaylistTracksLoading, getPlaylistTracksSuccess,
+    getPlaylistTracksError, setDeviceId, searchLoading, searchSuccess, searchError, addSongLoading, addSongError, addSongSuccess, setPlayState } from '..';
 import * as spotify from '../../../SpotifyFunctions.js'
 
 export function loadPlaylists() {
@@ -91,6 +91,38 @@ export function getPlaylistTracks(playlistId) {
 export function setDeviceID(deviceId) {
   return dispatch => {  
     dispatch(setDeviceId(deviceId));
+  }
+}
+
+export function searchSong(keyword) {
+  return dispatch => {  
+    dispatch(searchLoading());
+    spotify.searchSong(keyword)
+      .then(
+        
+        tracks => dispatch(searchSuccess(tracks)),
+
+        error => {
+          var err = JSON.parse(error.response);
+          dispatch(searchError(err.error.status + ' ' + err.error.message || 'Unexpected error!'));
+        }
+      ); 
+  }
+}
+
+export function addSong(activePlaylistID, songURI) {
+  return dispatch => {  
+    dispatch(addSongLoading());
+    spotify.addSong(activePlaylistID, songURI)
+      .then(
+        
+        () => dispatch(addSongSuccess()),
+
+        error => {
+          var err = JSON.parse(error.response);
+          dispatch(addSongError(err.error.status + ' ' + err.error.message || 'Unexpected error!'));
+        }
+      ); 
   }
 }
 
