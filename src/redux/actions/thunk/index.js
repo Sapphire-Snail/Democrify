@@ -50,7 +50,6 @@ export function logout() {
   return dispatch => {  
     spotify.setAccessToken(null); //Set access token in spotify api
     dispatch(setLoggedOut()); //Set logged out to be true and remove access token
-    dispatch(updatePlayState(null)); //Remove currently playing state
   }
 }
 

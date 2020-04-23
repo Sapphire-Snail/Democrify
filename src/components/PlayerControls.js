@@ -20,7 +20,7 @@ class PlayerControls extends Component {
      }
 
     render() {
-        if(!this.props.nowPlaying) {
+        if(!this.props.nowPlaying || !this.props.loggedIn) {
             return <div/>
         }
         return(
@@ -55,6 +55,7 @@ function mapStateToProps(state) {
         deviceId: state.webplayer.deviceId,
         isPaused: state.webplayer.playState ? state.webplayer.playState.paused : true,
         nowPlaying: state.webplayer.playState ? state.webplayer.playState.track_window.current_track : null,
+        loggedIn: state.user ? state.user.loggedIn : false
     };
 }
   

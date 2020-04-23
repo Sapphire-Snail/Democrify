@@ -44,7 +44,9 @@ class WebPlayer extends Component {
 
     this.webPlaybackInstance.on("player_state_changed", async state => {
       //console.log('state changed', state);
-      this.props.updatePlayState(state);
+      if(this.props.loggedIn) {
+        this.props.updatePlayState(state);
+      }
     });
 
     this.webPlaybackInstance.on("ready", device_id => {
