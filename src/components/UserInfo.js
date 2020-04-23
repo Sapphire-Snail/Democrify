@@ -16,6 +16,7 @@ class UserInfo extends Component {
   }
   
   logout = () => {
+    //Pause before we log out
     spotify.pause(this.props.deviceId);
     this.props.logout();
     this.setState({isRedirect: true});

@@ -26,11 +26,11 @@ class WelcomeScreen extends Component {
   togglePopover = (event) => {
     const id = event.target.id;
     console.log(id);
-    if (id == "PopoverCode") {
+    if (id === "PopoverCode") {
       this.setState({
         popoverCodeOpen: !this.state.popoverCodeOpen,
       });
-    } else if (id == "PopoverHost") {
+    } else if (id === "PopoverHost") {
       this.setState({
         popoverHostOpen: !this.state.popoverHostOpen,
       });
