@@ -1,4 +1,4 @@
-import { spotifyApi } from './index';
+import { spotifyApi } from './oldIndex';
 import { scopes } from '../src/config';
 
 export default router => {

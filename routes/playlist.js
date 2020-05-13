@@ -1,4 +1,4 @@
-import { spotifyApi } from './index';
+import { spotifyApi } from './oldIndex';
 
 export default router => {
     router.post("/getUserPlaylists", (req, res) => {
