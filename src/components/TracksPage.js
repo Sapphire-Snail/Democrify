@@ -38,9 +38,8 @@ class TracksPage extends Component  {
             <div>
                 <button onClick={this.createSession}>Create Session!</button>
                 <Link to='/playlists'>Back we go bois</Link>
-                <h1>{this.props.activePlaylist.name}</h1>
                 <div style={{textAlign:"right", marginRight : 10, marginBottom : 10}}><Button style={{backgroundColor: "#c030ed", borderColor : "#c030ed"}} onClick={this.toggleSearch}>{this.state.searchShowing ? 'Back' : 'Add track'}</Button></div>
-                {this.state.searchShowing ? <SearchPage/> : <Tracks/>}
+                {this.state.searchShowing ? <SearchPage/> : <Tracks title={this.props.activePlaylist.name} col1Name="Name" col2Name="Artist"/>}
             </div>
         )
     }

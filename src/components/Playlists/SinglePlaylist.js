@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { setPlaylist } from '../../redux/actions/thunk';
 import { connect } from 'react-redux';
+import "./Playlists.css"
 
 
 class SinglePlaylist extends Component {
@@ -28,13 +29,13 @@ class SinglePlaylist extends Component {
         return(
             <tr key={this.props.playlistInfo.id}>
                 <td>
-                    <img src={this.props.playlistInfo.images[0] ? this.props.playlistInfo.images[0].url : 'https://f4.bcbits.com/img/a4139357031_10.jpg'} alt="playlist" style={{width: 100, height: 100, position: 'absolute'}}/>
+                    <img src={this.props.playlistInfo.images[0] ? this.props.playlistInfo.images[0].url : 'https://f4.bcbits.com/img/a4139357031_10.jpg'} alt="playlist" class="albumImage"/>
                 </td>
                 <td>
-                    <span style={{cursor:'pointer', color:'blue'}} onClick={this.handleChange(this.props.playlistInfo)}>{this.props.playlistInfo.name}</span>
+                    <span style={{cursor:'pointer', color:'white'}} onClick={this.handleChange(this.props.playlistInfo)}>{this.props.playlistInfo.name}</span>
                 </td>
                 <td>
-                    <span>{this.props.playlistInfo.tracks.total}</span>
+                    <span style={{cursor:'pointer'}}>{this.props.playlistInfo.tracks.total}</span>
                 </td>
             </tr>
         );
