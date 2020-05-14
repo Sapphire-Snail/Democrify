@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import Loader from "react-loader-spinner";
 import SinglePlaylist from "./SinglePlaylist";
 import { Table } from "reactstrap";
-
+import "./Playlists.css";
 class Playlists extends Component {
   render() {
     const { error, loading, data } = this.props.playlists;
@@ -21,22 +21,26 @@ class Playlists extends Component {
     if (data) {
       return (
         <div>
-          <h1>{this.props.title}</h1>
-          <Table dark size="l">
-            <thead>
-              <tr>
-                <th></th>
-                <th>{this.props.col1Name}</th>
-                <th>{this.props.col2Name}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {data.items &&
-                data.items.map((item) => (
-                  <SinglePlaylist key={item.id} playlistInfo={item} />
-                ))}
-            </tbody>
-          </Table>
+          <div className="tableCaptionContainer">
+            <h1 style={{color: "white"}}>{this.props.title}</h1>
+          </div>
+          <div className="container tableContainer">
+            <table className="table">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>{this.props.col1Name}</th>
+                  <th>{this.props.col2Name}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {data.items &&
+                  data.items.map((item) => (
+                    <SinglePlaylist key={item.id} playlistInfo={item} />
+                  ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       );
     }
