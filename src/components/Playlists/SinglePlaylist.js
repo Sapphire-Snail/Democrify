@@ -29,7 +29,7 @@ class SinglePlaylist extends Component {
         return(
             <tr key={this.props.playlistInfo.id}>
                 <td>
-                    <img src={this.props.playlistInfo.images[0] ? this.props.playlistInfo.images[0].url : 'https://f4.bcbits.com/img/a4139357031_10.jpg'} alt="playlist" class="albumImage"/>
+                    <img src={this.props.playlistInfo.images[0] ? this.props.playlistInfo.images[0].url : 'https://f4.bcbits.com/img/a4139357031_10.jpg'} alt="playlist" className="albumImage"/>
                 </td>
                 <td>
                     <span style={{cursor:'pointer', color:'white'}} onClick={this.handleChange(this.props.playlistInfo)}>{this.props.playlistInfo.name}</span>
