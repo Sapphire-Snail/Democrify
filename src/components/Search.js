@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Loader from 'react-loader-spinner';
 import SingleSearchItem from './SingleSearchItem';
 import { Alert } from 'reactstrap';
+import "./Playlists/Playlists.css"
 
 class Search extends Component {
     constructor() {
@@ -38,12 +39,13 @@ class Search extends Component {
             return(
                 <div>
                     {this.state.showAlert && <Alert style={{position:'fixed', top:10, left: '50%', transform: 'translate(-50%, 0)'}}color="success">{this.state.alertText}</Alert>}
+                    <div className="container tableContainer">>
                     <table className="table">
                     <thead>
                         <tr>
                             <th></th>
-                            <th>Name</th>
-                            <th>Artist</th>
+                            <th>{this.props.col1Name}</th>
+                            <th>{this.props.col2Name}</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -51,6 +53,7 @@ class Search extends Component {
                         {data.tracks.items && data.tracks.items.map((item, index) => <SingleSearchItem key={item.id} trackInfo={item} showAlert={this.showAlert}></SingleSearchItem>)}
                     </tbody>
                     </table>
+                    </div>
                 </div>
             );
         }

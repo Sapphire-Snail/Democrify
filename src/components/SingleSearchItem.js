@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import * as spotify from "../SpotifyFunctions.js";
 import { Button, Alert } from 'reactstrap';
 import { addSong } from '../redux/actions/thunk';
+import "./Playlists/Playlists.css"
 
 class SingleSearchItem extends Component {
     constructor() {
@@ -21,7 +22,7 @@ class SingleSearchItem extends Component {
         return(            
             <tr onClick={() => {spotify.play(this.props.trackInfo.album.uri, this.props.deviceId, this.props.trackInfo.uri)}} key={this.props.trackInfo.id}>
                 <td>
-                    <img src={this.props.trackInfo.album.images[0] ? this.props.trackInfo.album.images[0].url : 'https://f4.bcbits.com/img/a4139357031_10.jpg'} alt="track" style={{width: 100, height: 100, position: 'absolute'}}/>
+                    <img src={this.props.trackInfo.album.images[0] ? this.props.trackInfo.album.images[0].url : 'https://f4.bcbits.com/img/a4139357031_10.jpg'} alt="track" className="albumImage"/>
                 </td>
                 <td>
                     <span style={{cursor:'pointer', color:'blue'}}>{this.props.trackInfo.name}</span>

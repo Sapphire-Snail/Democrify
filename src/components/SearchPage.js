@@ -26,7 +26,7 @@ class SearchPage extends Component  {
         return (
             <div style={{textAlign:"center"}}>
                 <Input id="searchBox" placeholder="Search" style={{width:'50%', display:'inline-block', marginBottom:10}} onChange={(e) => this.search(e)}></Input>
-                {this.state.searchString && <Search />}
+                {this.state.searchString && <Search col1Name="Name" col2Name="Artist"/>}
             </div>
         )
     }
