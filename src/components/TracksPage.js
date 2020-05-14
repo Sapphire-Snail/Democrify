@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getPlaylistTracks } from '../redux/actions/thunk';
+import { getPlaylistTracks, createPlaylistSession } from '../redux/actions/thunk';
 import Tracks from './Tracks';
 import { Link } from 'react-router-dom';
 import * as spotify from "../SpotifyFunctions.js";
@@ -15,6 +15,11 @@ class TracksPage extends Component  {
             searchShowing: false
         }
         this.toggleSearch = this.toggleSearch.bind(this);
+        this.createSession = this.createSession.bind(this);
+    }
+
+    createSession() {
+        this.props.createPlaylistSession(this.props.activePlaylist.id,this.props.userID)
     }
 
     toggleSearch() {
@@ -31,6 +36,7 @@ class TracksPage extends Component  {
     render() {
         return (
             <div>
+                <button onClick={this.createSession}>Create Session!</button>
                 <Link to='/playlists'>Back we go bois</Link>
                 <h1>{this.props.activePlaylist.name}</h1>
                 <div style={{textAlign:"right", marginRight : 10, marginBottom : 10}}><Button style={{backgroundColor: "#c030ed", borderColor : "#c030ed"}} onClick={this.toggleSearch}>{this.state.searchShowing ? 'Back' : 'Add track'}</Button></div>
@@ -45,12 +51,14 @@ function mapStateToProps(state) {
     return {
         activePlaylist: state.playlists.active_playlist,
         playlistId: window.location.pathname.split('/').pop(), //Grab playlist ID from URL
-        deviceId: state.webplayer.deviceId
+        deviceId: state.webplayer.deviceId,
+        userID: state.user.data.id
     };
 }
 
 const mapDispatchToProps = {
     getPlaylistTracks,
+    createPlaylistSession
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TracksPage);

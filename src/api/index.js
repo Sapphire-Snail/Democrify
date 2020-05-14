@@ -1,10 +1,7 @@
 // import { getPlaylists, createPlaylist } from './playlists';
 // import { getUser, getUserTokens } from './user';
+import { createSession } from './mongoDB';
 
-// export default {
-//     getPlaylists,
-//     createPlaylist,
-    
-//     getUser,
-//     getUserTokens,
-// };
+export default {
+    createSession
+};
