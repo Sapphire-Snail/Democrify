@@ -12,7 +12,7 @@ const Schema = mongoose.Schema;
 const voteSchema = new Schema({
     userID: { type: String },
     trackURI: [{ type: String }],
-    hostID: { type: String }
+    playlistSessionID: { type: Schema.Types.ObjectId, ref: 'PlaylistSession' }
 }, { /* This second object allows us to specify more config info. In this case, we're enabling automatic timetamps using the default options.
         For more options, see the URL above. */
     timestamps: {}

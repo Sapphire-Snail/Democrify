@@ -11,7 +11,7 @@ const Schema = mongoose.Schema;
 
 const playlistSessionSchema = new Schema({
 
-    playlistURI: { type: String, unique: true },
+    playlistURI: { type: String },
     hostID: { type: String },
     joinCode: { type: String, unique: true },
     isLiveMode: { type: Boolean },
