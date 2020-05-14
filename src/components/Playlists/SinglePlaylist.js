@@ -20,7 +20,7 @@ class SinglePlaylist extends Component {
         this.props.setPlaylist(param);
         this.setState({isRedirect: true});
     };
-    
+   
     render() {
         if(this.state.isRedirect) {
             return <Redirect to={'/playlist/' + this.props.playlistInfo.id}/>
@@ -43,7 +43,7 @@ class SinglePlaylist extends Component {
 }
 
 const mapDispatchToProps = {
-    setPlaylist,
+    setPlaylist
 }
 
 export default connect(null, mapDispatchToProps)(SinglePlaylist);

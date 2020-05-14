@@ -30,7 +30,7 @@ class PlaylistsPage extends Component  {
 //State is entire state tree
 function mapStateToProps(state) {
     return {
-        userId: state.user.data ? state.user.data.id : false
+        userId: state.user.data ? state.user.data.id : false,
     };
 }
 
