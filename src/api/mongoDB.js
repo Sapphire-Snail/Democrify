@@ -11,3 +11,15 @@ export function createSession(playlistURI, hostID) {
         }
     });
 }
+
+export function getSession() {
+    return axios({
+        method: "post",
+        url: "/api/playlistSession/",
+        timeout: 10000,
+        data: {
+            hostID: hostID,
+            playlistURI: playlistURI
+        }
+    });
+}
