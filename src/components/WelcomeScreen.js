@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import {
   Button,
   InputGroup,
@@ -15,17 +16,22 @@ import {
   ButtonGroup,
 } from "reactstrap";
 import "./WelcomeScreen.css";
+import { getSession } from '../redux/actions/thunk';
 //import * as spotify from "../SpotifyFunctions.js";
 
 class WelcomeScreen extends Component {
-  state = {
-    popoverHostOpen: false,
-    popoverCodeOpen: false,
-  };
+  constructor() {
+    super();
+    this.submitCode = this.submitCode.bind(this);
+    this.state = {
+      popoverHostOpen: false,
+      popoverCodeOpen: false,
+      code: '',
+    };
+  }
 
   togglePopover = (event) => {
     const id = event.target.id;
-    console.log(id);
     if (id === "PopoverCode") {
       this.setState({
         popoverCodeOpen: !this.state.popoverCodeOpen,
@@ -37,6 +43,11 @@ class WelcomeScreen extends Component {
     }
   };
 
+  submitCode() {
+    console.log(this.state.code);
+    this.props.getSession(this.state.code);
+  }
+
   render() {
     return (
       <div>
@@ -44,9 +55,9 @@ class WelcomeScreen extends Component {
           <Row xs="1">
             <Col>
               <InputGroup className="inputPartyCode">
-                <Input placeholder="Enter the party code" />
+                <Input placeholder="Enter the party code" onChange={(e) => this.setState({code: e.target.value})}/>
                 <InputGroupAddon addonType="append">
-                  <Button style={{backgroundColor: "#c030ed", borderColor : "#c030ed"}}>Join!</Button>
+                  <Button style={{backgroundColor: "#c030ed", borderColor : "#c030ed"}} onClick={this.submitCode}>Join!</Button>
                   <InputGroupAddon addonType="append">
                     <Button
                       style={{backgroundColor: "black", borderColor : "black"}}
@@ -110,4 +121,8 @@ class WelcomeScreen extends Component {
   }
 }
 
-export default WelcomeScreen;
+const mapDispatchToProps = {
+  getSession
+}
+
+export default connect(null, mapDispatchToProps)(WelcomeScreen);

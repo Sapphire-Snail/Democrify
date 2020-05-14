@@ -14,7 +14,8 @@ const router = express.Router();
  * - Delete an existing playlistSession: DELETE /playlistSession/{id}/
  */
 router.use('/playlistSession', mongooseCrudify({
-    Model: PlaylistSession
+    Model: PlaylistSession,
+    identifyingKey: 'joinCode',
 }));
 
 /**
