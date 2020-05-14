@@ -18,7 +18,7 @@ class PlaylistsPage extends Component  {
         return (
             <div>
                 <Link to='/me'>Back we go bois</Link>
-                <Playlists/>
+                <Playlists title="Top playlists:" col1Name="Name" col2Name="Songs"/>
                 <button className="button button--loginApp-link" onClick={this.createPlaylist}>
                     Create Playlist
                 </button>
