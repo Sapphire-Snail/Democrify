@@ -23,7 +23,6 @@ class Tracks extends Component {
         <div>
           {" "}
           <div className="tableCaptionContainer">
-            <h1 className="caption">{this.props.title}</h1>
           </div>
           <div className="container">
             <table className="table">
