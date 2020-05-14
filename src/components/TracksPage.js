@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { getPlaylistTracks, createPlaylistSession } from '../redux/actions/thunk';
 import Tracks from './Tracks';
 import { Link } from 'react-router-dom';
-import * as spotify from "../SpotifyFunctions.js";
 import SearchPage from './SearchPage';
 import { Button } from 'reactstrap';
 
