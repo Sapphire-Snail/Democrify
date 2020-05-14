@@ -133,9 +133,16 @@ export function updatePlayState(state) {
   }
 }
 
+//TODO: MAKE THESE USE REDUX
 export function createPlaylistSession(playlistURI, hostID) {
   return dispatch => {
     // Then call the API function with the given payload
     Api.createSession(playlistURI, hostID).then(response => console.log(response));
+  }
+}
+
+export function getSession(code) {
+  return dispatch => {
+    Api.getSessionPlaylist(code).then(res => console.log(res));
   }
 }
