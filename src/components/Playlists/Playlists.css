@@ -1,0 +1,35 @@
+.albumImage {
+  max-width: 100px;
+  max-height: 100px;
+}
+
+@media screen and (max-width: 1000px) {
+  .albumImage {
+    max-width: 50px;
+    max-height: 50px;
+  }
+}
+
+.tableCaptionContainer {
+  padding: 2em;
+}
+
+.table {
+  table-layout: auto;
+  width: 100%;
+}
+
+.caption {
+  color: white;
+}
+
+@media screen and (max-width: 1000px) {
+  .albumImage {
+    max-width: 50px;
+    max-height: 50px;
+  }
+}
+
+td {
+  vertical-align: middle !important;
+}

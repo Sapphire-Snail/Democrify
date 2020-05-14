@@ -16,7 +16,6 @@ import UserInfo from "./components/UserInfo";
 import PlaylistsPage from "./components/PlaylistsPage";
 import TracksPage from "./components/TracksPage";
 import WebPlayer from "./components/WebPlayer";
-// import { Container } from "reactstrap";
 import WelcomeScreen from "./components/WelcomeScreen";
 import PlayerControls from "./components/PlayerControls";
 
