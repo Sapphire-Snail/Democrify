@@ -1,21 +1,33 @@
 import express from 'express';
-import addPlaylistRoutes from './playlist';
-import addUserRoutes from './user';
-import { clientId, redirectUri } from "../src/config";
+import { PlaylistSession } from '../src/db/playlistSessionSchema';
+import { Vote } from '../src/db/voteSchema';
+import mongooseCrudify from 'mongoose-crudify';
 
 const router = express.Router();
 
-// Create node/js spotify api 
-const SpotifyWebApi = require('spotify-web-api-node');
-export const spotifyApi = new SpotifyWebApi({
-  clientId,
-  clientSecret: '3fbb80a0fa384eab8e096c6a96582cc6',
-  redirectUri,
-});
+/**
+ * This will create five API endpoints by default:
+ * - Get all playlistSessions: GET /playlistSession/
+ * - Create a new playlistSession: POST /playlistSession/
+ * - Get a single playlistSession by id: GET /playlistSession/{id}/
+ * - Update an existing playlistSession: PUT /playlistSession/{id}/
+ * - Delete an existing playlistSession: DELETE /playlistSession/{id}/
+ */
+router.use('/playlistSession', mongooseCrudify({
+    Model: PlaylistSession,
+    identifyingKey: 'joinCode',
+}));
 
-
-//Import routes from other api files (user, playlist, etc.)
-addPlaylistRoutes(router);
-addUserRoutes(router);
+/**
+ * This will create five API endpoints by default:
+ * - Get all votes: GET /vote/
+ * - Create a new vote: POST /vote/
+ * - Get a single vote by id: GET /vote/{id}/
+ * - Update an existing vote: PUT /vote/{id}/
+ * - Delete an existing vote: DELETE /vote/{id}/
+ */
+router.use('/vote', mongooseCrudify({
+    Model: Vote
+}));
 
 export default router;

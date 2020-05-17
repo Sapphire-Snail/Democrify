@@ -2,6 +2,7 @@ import { loadPlaylistsLoading, loadPlaylistsSuccess, loadPlaylistsError, createP
     getUserLoading, getUserSuccess, getUserError, setLoggedIn, setLoggedOut, setActivePlaylist, getPlaylistTracksLoading, getPlaylistTracksSuccess,
     getPlaylistTracksError, setDeviceId, searchLoading, searchSuccess, searchError, addSongLoading, addSongError, addSongSuccess, setPlayState } from '..';
 import * as spotify from '../../../SpotifyFunctions.js'
+import Api from '../../../api';
 
 export function loadPlaylists() {
   return (dispatch) => {
@@ -129,5 +130,19 @@ export function addSong(activePlaylistID, songURI) {
 export function updatePlayState(state) {
   return dispatch => {  
     dispatch(setPlayState(state));
+  }
+}
+
+//TODO: MAKE THESE USE REDUX
+export function createPlaylistSession(playlistURI, hostID) {
+  return dispatch => {
+    // Then call the API function with the given payload
+    Api.createSession(playlistURI, hostID).then(response => console.log(response));
+  }
+}
+
+export function getSession(code) {
+  return dispatch => {
+    Api.getSessionPlaylist(code).then(res => console.log(res));
   }
 }
