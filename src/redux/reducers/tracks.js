@@ -23,7 +23,7 @@ import {
     }
   }
   
-  /* ------------------------------------------------------GET USER------*/
+  /* ------------------------------------------------------GET TRACKS------*/
   function tracks_getPlaylistTracksLoading(state, action) {
     return {
       ...state,

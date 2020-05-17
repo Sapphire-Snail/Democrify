@@ -3,6 +3,7 @@ import { getUserLoading, getUserSuccess, getUserError, setLoggedIn, setLoggedOut
 import { getPlaylistTracksLoading, getPlaylistTracksSuccess, getPlaylistTracksError } from './tracks';
 import { setDeviceId, setPlayState } from './webplayer';
 import { searchLoading, searchSuccess, searchError, addSongError, addSongLoading, addSongSuccess } from './search';
+import { createSessionLoading, createSessionSuccess, createSessionError, getSessionLoading, getSessionSuccess, getSessionError } from './session';
 
 
 export {
@@ -33,5 +34,12 @@ export {
   addSongError,
   addSongLoading,
   addSongSuccess,
-  setPlayState
+  setPlayState,
+
+  createSessionLoading,
+  createSessionSuccess,
+  createSessionError,
+  getSessionLoading,
+  getSessionSuccess,
+  getSessionError  
 };

@@ -12,14 +12,14 @@ const initialState = {
   playlists: {},
   user: {},
   tracks: {},
-  webplayer: {},
+  webplayer: {}
 };
 
 // Config for redux-persist
 const persistConfig = {
   key: 'root',
   storage,
-  blacklist: ['webplayer'],
+  blacklist: ['webplayer', 'search'],
   stateReconciler: autoMergeLevel2,
 };
 const pReducer = persistReducer(persistConfig, rootReducer);
