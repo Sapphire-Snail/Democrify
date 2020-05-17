@@ -4,6 +4,7 @@ import Loader from "react-loader-spinner";
 import { Redirect } from 'react-router-dom';
 import { logout } from '../redux/actions/thunk';
 import { Container, Row, Col, Button } from "reactstrap";
+import * as spotify from "../SpotifyFunctions.js";
 import "./UserInfo.css"
 class UserInfo extends Component {
 
@@ -15,6 +16,8 @@ class UserInfo extends Component {
   }
   
   logout = () => {
+    //Pause before we log out
+    spotify.pause(this.props.deviceId);
     this.props.logout();
     this.setState({isRedirect: true});
   }
@@ -48,8 +51,8 @@ class UserInfo extends Component {
           <Container>
             <Row>
               <Col>
-                <p style={{ marginBottom: 0, display:'inline' }}> Welcome, {data.display_name} ! </p>
-                <Button onClick={this.logout} style={{ display:'inline', paddingTop:'0'}} color="link">Log out</Button>
+                <p style={{ marginBottom: 0, display:'inline', color:'white' }}> Welcome, {data.display_name}! </p>
+                <Button onClick={this.logout} style={{ display:'inline', paddingTop:'0'}} color="link" className="logoutButton">Log out</Button>
               </Col>
             </Row>
           </Container>
@@ -64,6 +67,7 @@ class UserInfo extends Component {
 function mapStateToProps(state) {
   return {
     userData: state.user,
+    deviceId: state.webplayer.deviceId
   };
 }
 

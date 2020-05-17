@@ -1,6 +1,8 @@
 import { loadPlaylistsLoading, loadPlaylistsSuccess, loadPlaylistsError, createPlaylistLoading, createPlaylistSuccess, createPlaylistError, setActivePlaylist } from './playlists';
 import { getUserLoading, getUserSuccess, getUserError, setLoggedIn, setLoggedOut } from './user';
-import {   getPlaylistTracksLoading, getPlaylistTracksSuccess, getPlaylistTracksError } from './tracks';
+import { getPlaylistTracksLoading, getPlaylistTracksSuccess, getPlaylistTracksError } from './tracks';
+import { setDeviceId, setPlayState } from './webplayer';
+import { searchLoading, searchSuccess, searchError, addSongError, addSongLoading, addSongSuccess } from './search';
 
 
 export {
@@ -20,5 +22,16 @@ export {
 
   getPlaylistTracksLoading,
   getPlaylistTracksSuccess,
-  getPlaylistTracksError
+  getPlaylistTracksError,
+
+  setDeviceId,
+
+  searchLoading,
+  searchError,
+  searchSuccess,
+
+  addSongError,
+  addSongLoading,
+  addSongSuccess,
+  setPlayState
 };

@@ -1,6 +1,8 @@
 import { loadPlaylistsLoading, loadPlaylistsSuccess, loadPlaylistsError, createPlaylistLoading, createPlaylistSuccess, createPlaylistError,
-    getUserLoading, getUserSuccess, getUserError, setLoggedIn, setLoggedOut, setActivePlaylist, getPlaylistTracksLoading, getPlaylistTracksSuccess, getPlaylistTracksError } from '..';
+    getUserLoading, getUserSuccess, getUserError, setLoggedIn, setLoggedOut, setActivePlaylist, getPlaylistTracksLoading, getPlaylistTracksSuccess,
+    getPlaylistTracksError, setDeviceId, searchLoading, searchSuccess, searchError, addSongLoading, addSongError, addSongSuccess, setPlayState } from '..';
 import * as spotify from '../../../SpotifyFunctions.js'
+import Api from '../../../api';
 
 export function loadPlaylists() {
   return (dispatch) => {
@@ -84,5 +86,63 @@ export function getPlaylistTracks(playlistId) {
           dispatch(getPlaylistTracksError(err.error.status + ' ' + err.error.message || 'Unexpected error!'));
         }
       ); 
+  }
+}
+
+export function setDeviceID(deviceId) {
+  return dispatch => {  
+    dispatch(setDeviceId(deviceId));
+  }
+}
+
+export function searchSong(keyword) {
+  return dispatch => {  
+    dispatch(searchLoading());
+    spotify.searchSong(keyword)
+      .then(
+        
+        tracks => dispatch(searchSuccess(tracks)),
+
+        error => {
+          var err = JSON.parse(error.response);
+          dispatch(searchError(err.error.status + ' ' + err.error.message || 'Unexpected error!'));
+        }
+      ); 
+  }
+}
+
+export function addSong(activePlaylistID, songURI) {
+  return dispatch => {  
+    dispatch(addSongLoading());
+    spotify.addSong(activePlaylistID, songURI)
+      .then(
+        
+        () => dispatch(addSongSuccess()),
+
+        error => {
+          var err = JSON.parse(error.response);
+          dispatch(addSongError(err.error.status + ' ' + err.error.message || 'Unexpected error!'));
+        }
+      ); 
+  }
+}
+
+export function updatePlayState(state) {
+  return dispatch => {  
+    dispatch(setPlayState(state));
+  }
+}
+
+//TODO: MAKE THESE USE REDUX
+export function createPlaylistSession(playlistURI, hostID) {
+  return dispatch => {
+    // Then call the API function with the given payload
+    Api.createSession(playlistURI, hostID).then(response => console.log(response));
+  }
+}
+
+export function getSession(code) {
+  return dispatch => {
+    Api.getSessionPlaylist(code).then(res => console.log(res));
   }
 }

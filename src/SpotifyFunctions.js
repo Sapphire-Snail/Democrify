@@ -61,3 +61,26 @@ export function createPlaylist(userId, playlistName) {
 export function getPlaylistTracks(playlistId) {
 	return spotifyApi.getPlaylistTracks(playlistId);
 }
+
+export function play(contextURI, deviceId, startUri) {
+	if(contextURI == null || startUri == null) {
+		return spotifyApi.play({device_id: deviceId});
+	}
+	return spotifyApi.play({context_uri: contextURI, device_id: deviceId, offset: {uri: startUri}});
+}
+
+export function pause(deviceId) {
+	return spotifyApi.pause({device_id: deviceId});
+}
+
+export function searchSong(keyword) {
+	return spotifyApi.searchTracks(keyword);
+}
+
+export function addSong(activePlaylistID, songURI) {
+	return spotifyApi.addTracksToPlaylist(activePlaylistID, [songURI]);
+}
+
+export function skipToNext(deviceId) {
+	return spotifyApi.skipToNext({device_id: deviceId});
+}

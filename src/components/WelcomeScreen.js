@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import {
   Button,
   InputGroup,
@@ -15,27 +16,37 @@ import {
   ButtonGroup,
 } from "reactstrap";
 import "./WelcomeScreen.css";
+import { getSession } from '../redux/actions/thunk';
 //import * as spotify from "../SpotifyFunctions.js";
 
 class WelcomeScreen extends Component {
-  state = {
-    popoverHostOpen: false,
-    popoverCodeOpen: false,
-  };
+  constructor() {
+    super();
+    this.submitCode = this.submitCode.bind(this);
+    this.state = {
+      popoverHostOpen: false,
+      popoverCodeOpen: false,
+      code: '',
+    };
+  }
 
   togglePopover = (event) => {
     const id = event.target.id;
-    console.log(id);
-    if (id == "PopoverCode") {
+    if (id === "PopoverCode") {
       this.setState({
         popoverCodeOpen: !this.state.popoverCodeOpen,
       });
-    } else if (id == "PopoverHost") {
+    } else if (id === "PopoverHost") {
       this.setState({
         popoverHostOpen: !this.state.popoverHostOpen,
       });
     }
   };
+
+  submitCode() {
+    console.log(this.state.code);
+    this.props.getSession(this.state.code);
+  }
 
   render() {
     return (
@@ -44,15 +55,16 @@ class WelcomeScreen extends Component {
           <Row xs="1">
             <Col>
               <InputGroup className="inputPartyCode">
-                <Input placeholder="Enter the party code" />
+                <Input placeholder="Enter the party code" onChange={(e) => this.setState({code: e.target.value})}/>
                 <InputGroupAddon addonType="append">
-                  <Button color="warning">Join!</Button>
+                  <Button style={{backgroundColor: "#c030ed", borderColor : "#c030ed"}} onClick={this.submitCode}>Join!</Button>
                   <InputGroupAddon addonType="append">
                     <Button
-                      color="info"
+                      style={{backgroundColor: "black", borderColor : "black"}}
                       className="informationButton"
                       id="PopoverCode"
                       type="button"
+                      size="sm"
                       onClick={this.togglePopover}
                     >
                       ?
@@ -77,13 +89,14 @@ class WelcomeScreen extends Component {
         <Container className="hostButtonContainer">
           <ButtonGroup>
             <Link to='/playlists'>
-              <Button color="success" size="lg">
+              <Button style={{backgroundColor: "#1ed760", borderColor : "#1ed760"}} size="lg">
                 Host a party
               </Button>
             </Link>
             <Button
-              color="info"
+              style={{backgroundColor: "black", borderColor : "black"}}
               size="sm"
+              className="informationButton"
               id="PopoverHost"
               type="button"
               onClick={this.togglePopover}
@@ -108,4 +121,8 @@ class WelcomeScreen extends Component {
   }
 }
 
-export default WelcomeScreen;
+const mapDispatchToProps = {
+  getSession
+}
+
+export default connect(null, mapDispatchToProps)(WelcomeScreen);
