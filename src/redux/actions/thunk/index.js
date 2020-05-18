@@ -1,6 +1,6 @@
 import { loadPlaylistsLoading, loadPlaylistsSuccess, loadPlaylistsError, createPlaylistLoading, createPlaylistSuccess, createPlaylistError,
     getUserLoading, getUserSuccess, getUserError, setLoggedIn, setLoggedOut, setActivePlaylist, getPlaylistTracksLoading, getPlaylistTracksSuccess,
-    getPlaylistTracksError, setDeviceId, searchLoading, searchSuccess, searchError, addSongLoading, addSongError, addSongSuccess, setPlayState } from '..';
+    getPlaylistTracksError, setDeviceId, searchLoading, searchSuccess, searchError, addSongLoading, addSongError, addSongSuccess, setPlayState, removeSongLoading, removeSongError, removeSongSuccess } from '..';
 import * as spotify from '../../../SpotifyFunctions.js'
 import Api from '../../../api';
 
@@ -122,6 +122,23 @@ export function addSong(activePlaylistID, songURI) {
         error => {
           var err = JSON.parse(error.response);
           dispatch(addSongError(err.error.status + ' ' + err.error.message || 'Unexpected error!'));
+        }
+      ); 
+  }
+}
+
+
+export function removeSong(activePlaylistID, songURI) {
+  return dispatch => {  
+    dispatch(removeSongLoading());
+    spotify.removeSong(activePlaylistID, songURI)
+      .then(
+        
+        () => dispatch(removeSongSuccess()),
+
+        error => {
+          var err = JSON.parse(error.response);
+          dispatch(removeSongError(err.error.status + ' ' + err.error.message || 'Unexpected error!'));
         }
       ); 
   }

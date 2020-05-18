@@ -2,7 +2,7 @@ import { loadPlaylistsLoading, loadPlaylistsSuccess, loadPlaylistsError, createP
 import { getUserLoading, getUserSuccess, getUserError, setLoggedIn, setLoggedOut } from './user';
 import { getPlaylistTracksLoading, getPlaylistTracksSuccess, getPlaylistTracksError } from './tracks';
 import { setDeviceId, setPlayState } from './webplayer';
-import { searchLoading, searchSuccess, searchError, addSongError, addSongLoading, addSongSuccess } from './search';
+import { searchLoading, searchSuccess, searchError, addSongError, addSongLoading, addSongSuccess, removeSongError, removeSongSuccess, removeSongLoading } from './search';
 
 
 export {
@@ -33,5 +33,8 @@ export {
   addSongError,
   addSongLoading,
   addSongSuccess,
-  setPlayState
+  setPlayState,
+  removeSongError,
+  removeSongLoading,
+  removeSongSuccess
 };

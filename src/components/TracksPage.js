@@ -12,10 +12,12 @@ class TracksPage extends Component {
     constructor() {
         super();
         this.state = {
-            searchShowing: false
+            searchShowing: false,
+            removedSong: false
         }
         this.toggleSearch = this.toggleSearch.bind(this);
         this.createSession = this.createSession.bind(this);
+        this.refreshTracklist = this.refreshTracklist.bind(this);
     }
 
     createSession() {
@@ -28,6 +30,10 @@ class TracksPage extends Component {
         this.componentDidMount();
     }
 }
+
+  refreshTracklist(){
+    this.props.getPlaylistTracks(this.props.playlistId);
+  }
 
 componentDidMount() {
     this.props.getPlaylistTracks(this.props.playlistId);
@@ -53,6 +59,7 @@ componentDidMount() {
           <Tracks
             col1Name="Name"
             col2Name="Artist"
+            refreshTracklist={this.refreshTracklist}
           />
         )}
       </div>

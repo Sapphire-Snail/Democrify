@@ -2,8 +2,39 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Loader from "react-loader-spinner";
 import SingleTrack from "./SingleTrack";
+import { Alert } from "reactstrap";
 
 class Tracks extends Component {
+  constructor() {
+    super();
+    this.showAlert = this.showAlert.bind(this);
+    this.state = {
+      showAlert: false,
+      alertText: "",
+    };
+  }
+
+  //Disappears after 2 seconds using a timeout
+  showAlert(songTitle) {
+    this.componentDidMount();
+    this.setState(
+      {
+        showAlert: true,
+        alertText:
+          songTitle + " removed from " + this.props.activePlaylistTitle,
+      },
+      () => {
+        window.clearTimeout(this.timeout);
+        this.timeout = window.setTimeout(() => {
+          this.setState({ showAlert: false });
+        }, 4000);
+      }
+    );
+  }
+
+  componentDidMount() {
+    this.props.refreshTracklist();
+}
   render() {
     const { error, loading, data } = this.props.tracks;
 
@@ -22,8 +53,20 @@ class Tracks extends Component {
       return (
         <div>
           {" "}
-          <div className="tableCaptionContainer">
-          </div>
+          {this.state.showAlert && (
+            <Alert
+              style={{
+                position: "fixed",
+                top: 10,
+                left: "50%",
+                transform: "translate(-50%, 0)",
+              }}
+              color="success"
+            >
+              {this.state.alertText}
+            </Alert>
+          )}
+          <div className="tableCaptionContainer"></div>
           <div className="container">
             <table className="table">
               <thead>
@@ -31,6 +74,7 @@ class Tracks extends Component {
                   <th></th>
                   <th>{this.props.col1Name}</th>
                   <th>{this.props.col2Name}</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
@@ -39,6 +83,8 @@ class Tracks extends Component {
                     <SingleTrack
                       key={item.track.id + index}
                       trackInfo={item.track}
+                       refreshTracklist={this.props.refreshTracklist}
+                      showAlert={this.showAlert}
                     />
                   ))}
               </tbody>
@@ -56,6 +102,7 @@ function mapStateToProps(state) {
   return {
     tracks: state.tracks,
     deviceId: state.webplayer.deviceId,
+    activePlaylistTitle: state.playlists.active_playlist.name,
   };
 }
 
