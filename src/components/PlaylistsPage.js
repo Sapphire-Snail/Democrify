@@ -3,7 +3,7 @@ import { loadPlaylists, createPlaylist } from "../redux/actions/thunk";
 import { connect } from "react-redux";
 import Playlists from "./Playlists/Playlists";
 import { Link } from "react-router-dom";
-import { Collapse, Button, CardBody, Card } from "reactstrap";
+import { Collapse, CardBody, Card } from "reactstrap";
 import "./PopUP.css";
 class PlaylistsPage extends Component {
   componentDidMount() {
@@ -64,7 +64,7 @@ class PlaylistsPage extends Component {
         {/*  {this.state.isOpen ? <PopUp toggle={this.togglePop} /> : null}  */}
 
         <Collapse isOpen={this.state.seen}>
-          <Card className={"card"}>
+          <Card className={"addPlaylistCard"}>
             <CardBody>
               <form onSubmit={this.handleSubmit}>
                 Name of your new playlist

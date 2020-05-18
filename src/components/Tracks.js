@@ -54,6 +54,7 @@ class Tracks extends Component {
 
     //TODO: Some songs return a 403 if they aren't available in, but are still being shown
     if (data) {
+      console.log("From Tracks class" + this.props.isOwnedByTheUser)
       return (
         <div>
           {" "}
@@ -87,8 +88,8 @@ class Tracks extends Component {
                     <SingleTrack
                       key={item.track.id + index}
                       trackInfo={item.track}
-                       refreshTracklist={this.props.refreshTracklist}
                       showAlert={this.showAlert}
+                      isOwnedByTheUser={this.props.isOwnedByTheUser}
                     />
                   ))}
               </tbody>

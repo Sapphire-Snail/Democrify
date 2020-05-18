@@ -19,6 +19,8 @@ class SingleTrack extends Component {
         }
 
     render() {
+        debugger;
+        console.log(this.props.isOwnedByTheUser);
         return(            
             <tr onClick={() => {spotify.play(this.props.activePlaylistUri, this.props.deviceId, this.props.trackInfo.uri)}} key={this.props.trackInfo.id}>
                 <td class="block">
@@ -31,7 +33,8 @@ class SingleTrack extends Component {
                     <span>{this.props.trackInfo.artists[0].name}</span>
                 </td>
                 <td>
-                <Button onClick={(e) => {this.removeSongFromPlaylist(e)}}>X</Button>
+                { this.props.isOwnedByTheUser &&             
+                <Button onClick={(e) => {this.removeSongFromPlaylist(e)}}>X</Button>}
                 </td>
             </tr>
         )
@@ -44,6 +47,7 @@ function mapStateToProps(state) {
         activePlaylistUri: state.playlists.active_playlist.uri,
         deviceId: state.webplayer.deviceId,
         search: state.search,
+        userID: state.user.data.id,
         activePlaylistID: state.playlists.active_playlist.uri.substring(state.playlists.active_playlist.uri.lastIndexOf(":") + 1),
 
     };
