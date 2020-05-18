@@ -3,8 +3,8 @@ import { loadPlaylists, createPlaylist } from "../redux/actions/thunk";
 import { connect } from "react-redux";
 import Playlists from "./Playlists/Playlists";
 import { Link } from "react-router-dom";
-import { Collapse, Button, CardBody, Card } from "reactstrap";
-import Notifications, {notify} from 'react-notify-toast';
+import { Collapse, CardBody, Card } from "reactstrap";
+import { notify } from 'react-notify-toast';
 import "./PopUP.css";
 class PlaylistsPage extends Component {
   constructor(props) {
@@ -33,7 +33,7 @@ class PlaylistsPage extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    if(this.state.listname == '') {
+    if(this.state.listname === '') {
       notify.show('Enter playlist name', 'error');  
     } else {
       this.setState({seen: false, listname: ''});

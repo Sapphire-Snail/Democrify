@@ -1,5 +1,18 @@
-import { GET_PLAYLISTDATA_LOADING, GET_PLAYLISTDATA_SUCCESS, GET_PLAYLISTDATA_ERROR, CREATE_PLAYLIST_LOADING, CREATE_PLAYLIST_SUCCESS, CREATE_PLAYLIST_ERROR, SET_ACTIVE_PLAYLIST,
-  GET_PLAYLIST_LOADING, GET_PLAYLIST_SUCCESS, GET_PLAYLIST_ERROR } from '../actions/action-types';
+import {
+  GET_PLAYLISTDATA_LOADING,
+  GET_PLAYLISTDATA_SUCCESS,
+  GET_PLAYLISTDATA_ERROR,
+  CREATE_PLAYLIST_LOADING,
+  CREATE_PLAYLIST_SUCCESS,
+  CREATE_PLAYLIST_ERROR,
+  SET_ACTIVE_PLAYLIST,
+  GET_PLAYLIST_LOADING,
+  GET_PLAYLIST_SUCCESS,
+  GET_PLAYLIST_ERROR,
+  SET_COLLABORATIVE_LOADING,
+  SET_COLLABORATIVE_SUCCESS,
+  SET_COLLABORATIVE_ERROR,
+} from "../actions/action-types";
 
 /**
  * This function handles modifications to the "playlists" property of the overall state.
@@ -40,10 +53,19 @@ export default function playlists(state = [], action) {
 
     case GET_PLAYLIST_ERROR:
       return playlists_getPlaylistError(state, action);
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    case SET_COLLABORATIVE_LOADING:
+      return playlists_setCollaborativeLoading(state, action);
+
+    case SET_COLLABORATIVE_SUCCESS:
+      return playlists_setCollaborativeSuccess(state, action);
+
+    case SET_COLLABORATIVE_ERROR:
+      return playlists_setCollaborativeError(state, action);
 
     default:
       return state;
-    }
+  }
 }
 
 /**
@@ -69,40 +91,40 @@ function playlists_LoadPlaylistsSuccess(state, action) {
 
 function playlists_LoadPlaylistsError(state, action) {
   return {
-      ...state,
-      loading: false,
-      error: action.err
+    ...state,
+    loading: false,
+    error: action.err,
   };
 }
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 function playlists_CreatePlaylistLoading(state, action) {
-    return {
-        ...state,
-        loading: true,
-        error: null
-      };
+  return {
+    ...state,
+    loading: true,
+    error: null,
+  };
 }
 
-//Get new playlist returned by server and return existing playlists PLUS the new one we just made 
+//Get new playlist returned by server and return existing playlists PLUS the new one we just made
 function playlists_CreatePlaylistSuccess(state, action) {
-    //Add new playlist to our array
-    state.data.items.unshift(action.playlist);
-    console.log('Successfully created playlist');
-    return {
-        ...state,
-        loading: false,
-        error: null
-      };
+  //Add new playlist to our array
+  state.data.items.unshift(action.playlist);
+  console.log("Successfully created playlist");
+  return {
+    ...state,
+    loading: false,
+    error: null,
+  };
 }
 
-function playlists_CreatePlaylistError(state, action) {    
-    return {
-        ...state,
-        loading: false,
-        error: action.err
-      };
+function playlists_CreatePlaylistError(state, action) {
+  return {
+    ...state,
+    loading: false,
+    error: action.err,
+  };
 }
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -110,7 +132,7 @@ function playlists_CreatePlaylistError(state, action) {
 function playlist_SetActivePlaylist(state, action) {
   return {
     ...state,
-    active_playlist: action.playlist
+    active_playlist: action.playlist,
   };
 }
 
@@ -118,25 +140,51 @@ function playlist_SetActivePlaylist(state, action) {
 
 function playlists_getPlaylistLoading(state, action) {
   return {
-      ...state,
-      loading: true,
-      error: null
-    };
+    ...state,
+    loading: true,
+    error: null,
+  };
 }
 
 function playlists_getPlaylistSuccess(state, action) {
   return {
-      ...state,
-      loading: false,
-      error: null,
-      active_playlist: action.playlist //This is a bit of a hack to avoid having to call set active playlist later, just note getPlaylist stores it in active_playlist
+    ...state,
+    loading: false,
+    error: null,
+    active_playlist: action.playlist, //This is a bit of a hack to avoid having to call set active playlist later, just note getPlaylist stores it in active_playlist
+  };
+}
+
+function playlists_getPlaylistError(state, action) {
+  return {
+    ...state,
+    loading: false,
+    error: action.err,
+  };
+}
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+function playlists_setCollaborativeLoading(state, action) {
+  return {
+    ...state,
+    loading: true,
+    error: null,
+  };
+}
+
+function playlists_setCollaborativeSuccess(state, action) {
+  return {
+    ...state,
+    loading: false,
+    error: null,
     };
 }
 
-function playlists_getPlaylistError(state, action) {    
+function playlists_setCollaborativeError(state, action) {
   return {
-      ...state,
-      loading: false,
-      error: action.err
-    };
+    ...state,
+    loading: false,
+    error: action.err,
+  };
 }

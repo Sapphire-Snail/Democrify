@@ -1,6 +1,6 @@
 import { GET_PLAYLISTDATA_LOADING, GET_PLAYLISTDATA_SUCCESS, GET_PLAYLISTDATA_ERROR, 
     CREATE_PLAYLIST_LOADING, CREATE_PLAYLIST_SUCCESS, CREATE_PLAYLIST_ERROR, SET_ACTIVE_PLAYLIST, 
-    GET_PLAYLIST_LOADING, GET_PLAYLIST_SUCCESS, GET_PLAYLIST_ERROR } from './action-types';
+    GET_PLAYLIST_LOADING, GET_PLAYLIST_SUCCESS, GET_PLAYLIST_ERROR, SET_COLLABORATIVE_LOADING, SET_COLLABORATIVE_SUCCESS, SET_COLLABORATIVE_ERROR } from './action-types';
 
 export function loadPlaylistsLoading() {
   return {
@@ -74,6 +74,28 @@ export function getPlaylistSuccess(playlist) {
 export function getPlaylistError(err) {
     return {
         type: GET_PLAYLIST_ERROR,
+        err
+    }
+}
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+export function setCollaborativeLoading() {
+    return {
+        type: SET_COLLABORATIVE_LOADING
+    }
+}
+
+//playlist is the new playlist returned by spotify api
+export function setCollaborativeSuccess() {
+    return {
+        type: SET_COLLABORATIVE_SUCCESS,
+    }
+}
+
+export function setCollaborativeError(err) {
+    return {
+        type: SET_COLLABORATIVE_ERROR,
         err
     }
 }
