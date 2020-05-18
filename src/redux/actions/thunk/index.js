@@ -174,6 +174,8 @@ export function getSession(code) {
             playlist => {
               dispatch(getPlaylistSuccess(playlist));
               dispatch(getSessionSuccess(session));
+              //Start loading get playlist tracks while rest of page loads
+              getPlaylistTracks(playlist.id);
             },
 
             error => {

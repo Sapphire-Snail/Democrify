@@ -6,7 +6,7 @@ class SingleTrack extends Component {
     render() {
         return(            
             <tr onClick={() => {spotify.play(this.props.activePlaylistUri, this.props.deviceId, this.props.trackInfo.uri)}} key={this.props.trackInfo.id}>
-                <td class="block">
+                <td className="block">
                     <img src={this.props.trackInfo.album.images[0] ? this.props.trackInfo.album.images[0].url : 'https://f4.bcbits.com/img/a4139357031_10.jpg'} alt="track" className="albumImage"/>
                 </td>
                 <td>
