@@ -6,7 +6,11 @@ import { loadPlaylistsLoading, loadPlaylistsSuccess, loadPlaylistsError, createP
     createSessionError,
     getSessionLoading,
     getSessionSuccess,
-    getSessionError  } from '..';
+    getSessionError,
+    getPlaylistLoading,
+    getPlaylistSuccess,
+    getPlaylistError,
+    } from '..';
 import * as spotify from '../../../SpotifyFunctions.js'
 import Api from '../../../api';
 
@@ -155,16 +159,31 @@ export function createPlaylistSession(playlistURI, hostID) {
   }
 }
 
+//Get session from db, then corresponding playlist object from spotify
 export function getSession(code) {
   return dispatch => {
     dispatch(getSessionLoading());
     // Then call the API function with the given payload
     Api.getSessionPlaylist(code)
       .then(
-        session => dispatch(getSessionSuccess(session)),
+        session => {
+          dispatch(getPlaylistLoading());
+          // Then call the API function with the given payload
+          spotify.getPlaylist(session.data.playlistURI)
+          .then(
+            playlist => {
+              dispatch(getPlaylistSuccess(playlist));
+              dispatch(getSessionSuccess(session));
+            },
+
+            error => {
+              var err = JSON.parse(error.response);
+              dispatch(getPlaylistError(err.error.status + ' ' + err.error.message || 'Unexpected error!'));
+            }
+          );
+        },
 
         error => {
-          console.log(code);
           var err = JSON.parse(error.response);
           dispatch(getSessionError(err.error.status + ' ' + err.error.message || 'Unexpected error!'));
         }

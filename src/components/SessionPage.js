@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Loader from "react-loader-spinner";
-import "./TrackPage.css";
+import TracksPage from './TracksPage';
 
 class SessionPage extends Component {
   render() {
@@ -19,7 +19,9 @@ class SessionPage extends Component {
 
     if(connected_session.data) {
         return (
-            <div> {connected_session.data.playlistURI} </div>
+            <div> 
+                <TracksPage/>
+            </div>
         );
     }
 

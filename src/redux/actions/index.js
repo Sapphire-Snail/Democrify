@@ -1,4 +1,4 @@
-import { loadPlaylistsLoading, loadPlaylistsSuccess, loadPlaylistsError, createPlaylistLoading, createPlaylistSuccess, createPlaylistError, setActivePlaylist } from './playlists';
+import { loadPlaylistsLoading, loadPlaylistsSuccess, loadPlaylistsError, createPlaylistLoading, createPlaylistSuccess, createPlaylistError, setActivePlaylist, getPlaylistLoading, getPlaylistSuccess, getPlaylistError } from './playlists';
 import { getUserLoading, getUserSuccess, getUserError, setLoggedIn, setLoggedOut } from './user';
 import { getPlaylistTracksLoading, getPlaylistTracksSuccess, getPlaylistTracksError } from './tracks';
 import { setDeviceId, setPlayState } from './webplayer';
@@ -14,6 +14,9 @@ export {
   createPlaylistSuccess,
   createPlaylistError,
   setActivePlaylist,
+  getPlaylistLoading,
+  getPlaylistSuccess,
+  getPlaylistError,
 
   getUserLoading,
   getUserSuccess,
