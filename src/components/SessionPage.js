@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Loader from "react-loader-spinner";
+import { getPlaylistTracks } from '../redux/actions/thunk';
 import { Button } from "reactstrap";
 import { Link } from 'react-router-dom';
 import SearchPage from "./SearchPage";
@@ -16,10 +17,14 @@ class SessionPage extends Component {
         this.toggleSearch = this.toggleSearch.bind(this);
     }
 
+    componentDidMount() {
+        
+    }
     toggleSearch() {
         this.setState({searchShowing:!this.state.searchShowing});
         if(this.state.searchShowing) {
             this.componentDidMount();
+            this.props.getPlaylistTracks(this.props.session.connected_session.data.playlistURI);
         }
     }
 
@@ -73,4 +78,8 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps)(SessionPage);
+const mapDispatchToProps = {
+    getPlaylistTracks,
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SessionPage);
