@@ -18,6 +18,7 @@ import TracksPage from "./components/TracksPage";
 import WebPlayer from "./components/WebPlayer";
 import WelcomeScreen from "./components/WelcomeScreen";
 import PlayerControls from "./components/PlayerControls";
+import SessionPage from "./components/SessionPage";
 
 window.onSpotifyWebPlaybackSDKReady = () => {};
 
@@ -76,6 +77,10 @@ class App extends Component {
                 <Route path="/playlist">
                   <UserInfo />
                   <TracksPage />
+                </Route>
+                <Route path="/session">
+                  <UserInfo />
+                  <SessionPage />
                 </Route>
                 <Route path="*">
                   <p>404 Not Found!!</p>

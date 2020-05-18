@@ -1,4 +1,5 @@
-import { GET_PLAYLISTDATA_LOADING, GET_PLAYLISTDATA_SUCCESS, GET_PLAYLISTDATA_ERROR, CREATE_PLAYLIST_LOADING, CREATE_PLAYLIST_SUCCESS, CREATE_PLAYLIST_ERROR, SET_ACTIVE_PLAYLIST } from '../actions/action-types';
+import { GET_PLAYLISTDATA_LOADING, GET_PLAYLISTDATA_SUCCESS, GET_PLAYLISTDATA_ERROR, CREATE_PLAYLIST_LOADING, CREATE_PLAYLIST_SUCCESS, CREATE_PLAYLIST_ERROR, SET_ACTIVE_PLAYLIST,
+  GET_PLAYLIST_LOADING, GET_PLAYLIST_SUCCESS, GET_PLAYLIST_ERROR } from '../actions/action-types';
 
 /**
  * This function handles modifications to the "playlists" property of the overall state.
@@ -27,9 +28,18 @@ export default function playlists(state = [], action) {
 
     case CREATE_PLAYLIST_ERROR:
       return playlists_CreatePlaylistError(state, action);
-
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     case SET_ACTIVE_PLAYLIST:
       return playlist_SetActivePlaylist(state, action);
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    case GET_PLAYLIST_LOADING:
+      return playlists_getPlaylistLoading(state, action);
+
+    case GET_PLAYLIST_SUCCESS:
+      return playlists_getPlaylistSuccess(state, action);
+
+    case GET_PLAYLIST_ERROR:
+      return playlists_getPlaylistError(state, action);
 
     default:
       return state;
@@ -102,4 +112,31 @@ function playlist_SetActivePlaylist(state, action) {
     ...state,
     active_playlist: action.playlist
   };
+}
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+function playlists_getPlaylistLoading(state, action) {
+  return {
+      ...state,
+      loading: true,
+      error: null
+    };
+}
+
+function playlists_getPlaylistSuccess(state, action) {
+  return {
+      ...state,
+      loading: false,
+      error: null,
+      active_playlist: action.playlist //This is a bit of a hack to avoid having to call set active playlist later, just note getPlaylist stores it in active_playlist
+    };
+}
+
+function playlists_getPlaylistError(state, action) {    
+  return {
+      ...state,
+      loading: false,
+      error: action.err
+    };
 }

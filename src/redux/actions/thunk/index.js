@@ -1,6 +1,16 @@
 import { loadPlaylistsLoading, loadPlaylistsSuccess, loadPlaylistsError, createPlaylistLoading, createPlaylistSuccess, createPlaylistError,
     getUserLoading, getUserSuccess, getUserError, setLoggedIn, setLoggedOut, setActivePlaylist, getPlaylistTracksLoading, getPlaylistTracksSuccess,
-    getPlaylistTracksError, setDeviceId, searchLoading, searchSuccess, searchError, addSongLoading, addSongError, addSongSuccess, setPlayState } from '..';
+    getPlaylistTracksError, setDeviceId, searchLoading, searchSuccess, searchError, addSongLoading, addSongError, addSongSuccess, setPlayState, 
+    createSessionLoading,
+    createSessionSuccess,
+    createSessionError,
+    getSessionLoading,
+    getSessionSuccess,
+    getSessionError,
+    getPlaylistLoading,
+    getPlaylistSuccess,
+    getPlaylistError,
+    } from '..';
 import * as spotify from '../../../SpotifyFunctions.js'
 import Api from '../../../api';
 
@@ -133,16 +143,52 @@ export function updatePlayState(state) {
   }
 }
 
-//TODO: MAKE THESE USE REDUX
 export function createPlaylistSession(playlistURI, hostID) {
   return dispatch => {
+    dispatch(createSessionLoading());
     // Then call the API function with the given payload
-    Api.createSession(playlistURI, hostID).then(response => console.log(response));
+    Api.createSession(playlistURI, hostID)
+      .then(
+        session => dispatch(createSessionSuccess(session)),
+
+        error => {
+          var err = JSON.parse(error.response);
+          dispatch(createSessionError(err.error.status + ' ' + err.error.message || 'Unexpected error!'));
+        }
+      );
   }
 }
 
+//Get session from db, then corresponding playlist object from spotify
 export function getSession(code) {
   return dispatch => {
-    Api.getSessionPlaylist(code).then(res => console.log(res));
+    dispatch(getSessionLoading());
+    // Then call the API function with the given payload
+    Api.getSessionPlaylist(code)
+      .then(
+        session => {
+          dispatch(getPlaylistLoading());
+          // Then call the API function with the given payload
+          spotify.getPlaylist(session.data.playlistURI)
+          .then(
+            playlist => {
+              dispatch(getPlaylistSuccess(playlist));
+              dispatch(getSessionSuccess(session));
+              //Start loading get playlist tracks while rest of page loads
+              getPlaylistTracks(playlist.id);
+            },
+
+            error => {
+              var err = JSON.parse(error.response);
+              dispatch(getPlaylistError(err.error.status + ' ' + err.error.message || 'Unexpected error!'));
+            }
+          );
+        },
+
+        error => {
+          var err = JSON.parse(error.response);
+          dispatch(getSessionError(err.error.status + ' ' + err.error.message || 'Unexpected error!'));
+        }
+      );
   }
 }

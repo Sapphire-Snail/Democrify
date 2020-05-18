@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { getPlaylistTracks, createPlaylistSession } from '../redux/actions/thunk';
 import Tracks from './Tracks';
 import { Link } from 'react-router-dom';
-import * as spotify from "../SpotifyFunctions.js";
 import SearchPage from "./SearchPage";
 import { Button } from "reactstrap";
 import "./TrackPage.css";
@@ -19,7 +18,7 @@ class TracksPage extends Component {
     }
 
     createSession() {
-        this.props.createPlaylistSession(this.props.activePlaylist.id,this.props.userID)
+        this.props.createPlaylistSession(this.props.activePlaylist.id, this.props.userID)
     }
   
   toggleSearch() {
