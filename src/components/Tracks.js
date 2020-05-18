@@ -2,8 +2,13 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Loader from "react-loader-spinner";
 import SingleTrack from "./SingleTrack";
+import { getPlaylistTracks } from '../redux/actions/thunk';
 
 class Tracks extends Component {
+  componentDidMount() {
+    this.props.getPlaylistTracks(this.props.active_playlist.id);
+  }
+
   render() {
     const { error, loading, data } = this.props.tracks;
 
@@ -17,7 +22,7 @@ class Tracks extends Component {
       );
     }
 
-    //TODO: Some songs return a 403 if they aren't available in, but are still being shown
+    //TODO: Some songs return a 403 if they aren't available in this region, but are still being shown
     if (data) {
       return (
         <div>
@@ -56,7 +61,13 @@ function mapStateToProps(state) {
   return {
     tracks: state.tracks,
     deviceId: state.webplayer.deviceId,
+    active_playlist: state.playlists.active_playlist //The tracks retrieved will be those from the active playlist, which must always be kept up to date
   };
 }
 
-export default connect(mapStateToProps)(Tracks);
+const mapDispatchToProps = {
+  getPlaylistTracks,
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Tracks);
