@@ -164,6 +164,7 @@ export function getSession(code) {
         session => dispatch(getSessionSuccess(session)),
 
         error => {
+          console.log(code);
           var err = JSON.parse(error.response);
           dispatch(getSessionError(err.error.status + ' ' + err.error.message || 'Unexpected error!'));
         }

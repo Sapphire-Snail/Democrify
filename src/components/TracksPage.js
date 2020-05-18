@@ -19,7 +19,7 @@ class TracksPage extends Component {
     }
 
     createSession() {
-        this.props.createPlaylistSession(this.props.activePlaylist.id,this.props.userID)
+        this.props.createPlaylistSession(this.props.activePlaylist.id, this.props.userID)
     }
   
   toggleSearch() {

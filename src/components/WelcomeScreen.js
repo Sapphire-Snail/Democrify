@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import {
   Button,
   InputGroup,
@@ -17,7 +18,6 @@ import {
 } from "reactstrap";
 import "./WelcomeScreen.css";
 import { getSession } from '../redux/actions/thunk';
-//import * as spotify from "../SpotifyFunctions.js";
 
 class WelcomeScreen extends Component {
   constructor() {
@@ -27,6 +27,7 @@ class WelcomeScreen extends Component {
       popoverHostOpen: false,
       popoverCodeOpen: false,
       code: '',
+      isRedirect: false,
     };
   }
 
@@ -44,11 +45,17 @@ class WelcomeScreen extends Component {
   };
 
   submitCode() {
-    console.log(this.state.code);
+    //console.log(this.state.code);
     this.props.getSession(this.state.code);
+    this.setState({isRedirect: true});
   }
 
   render() {
+    //Redirect user to sessions if they've entered a code
+    if(this.state.isRedirect) {
+      return <Redirect to={'/session/' + this.state.code}/>
+    } 
+
     return (
       <div>
         <Container className="inputContainer">
