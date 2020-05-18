@@ -16,9 +16,6 @@ class SingleTrack extends Component {
         removeSongFromPlaylist (e) {
             this.props.removeSong(this.props.activePlaylistID, this.props.trackInfo.uri);
             this.props.showAlert(this.props.trackInfo.name);
-
-            e.stopPropagation();
-
         }
 
     render() {

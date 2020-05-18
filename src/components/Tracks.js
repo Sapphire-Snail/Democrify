@@ -14,17 +14,24 @@ class Tracks extends Component {
     };
   }
 
-  //Disappears after 2 seconds using a timeout
   showAlert(songTitle) {
-    this.componentDidMount();
     this.setState(
-      {
+
+      // This is a very roundabout way to delay refreshing the playlist. Could not think of a better one
+      // Also probably not the best place for this code. But it works!
+      () => {
+        this.timeout = window.setTimeout(() => {
+      this.props.refreshTracklist();
+      this.setState({
         showAlert: true,
         alertText:
           songTitle + " removed from " + this.props.activePlaylistTitle,
+      });
+        }, 500);
       },
+      
+      //Disappears after 2 seconds using a timeout
       () => {
-        window.clearTimeout(this.timeout);
         this.timeout = window.setTimeout(() => {
           this.setState({ showAlert: false });
         }, 4000);
@@ -32,9 +39,6 @@ class Tracks extends Component {
     );
   }
 
-  componentDidMount() {
-    this.props.refreshTracklist();
-}
   render() {
     const { error, loading, data } = this.props.tracks;
 

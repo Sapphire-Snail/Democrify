@@ -13,6 +13,7 @@ class TracksPage extends Component {
         super();
         this.state = {
             searchShowing: false,
+            refreshList: false,
             removedSong: false
         }
         this.toggleSearch = this.toggleSearch.bind(this);
@@ -33,6 +34,7 @@ class TracksPage extends Component {
 
   refreshTracklist(){
     this.props.getPlaylistTracks(this.props.playlistId);
+
   }
 
 componentDidMount() {
