@@ -16,14 +16,10 @@ class SessionPage extends Component {
         }
         this.toggleSearch = this.toggleSearch.bind(this);
     }
-
-    componentDidMount() {
-        
-    }
+ 
     toggleSearch() {
         this.setState({searchShowing:!this.state.searchShowing});
         if(this.state.searchShowing) {
-            this.componentDidMount();
             this.props.getPlaylistTracks(this.props.session.connected_session.data.playlistURI);
         }
     }
