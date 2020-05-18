@@ -78,6 +78,7 @@ class PlaylistsPage extends Component {
                 </label>
                 <br />
                 <input type="submit" value="Submit" />
+                <input type="button" value="Cancel" onClick={this.togglePop}/>
               </form>
             </CardBody>
           </Card>
