@@ -18,7 +18,6 @@ class SessionPage extends Component {
   }
 
   componentDidMount() {
-    //console.log(this.props.active_playlist.id);
     this.props.getSession(this.props.code);
   }
 
@@ -81,7 +80,7 @@ function mapStateToProps(state) {
     code: window.location.pathname.split("/").pop(), //Grab playlist ID from URL
     can_add:
       state.playlists.active_playlist.collaborative ||
-      state.playlists.active_playlist.owner.id == state.user.data.id, //Only let them add songs if playlist is collab or theirs
+      state.playlists.active_playlist.owner.id === state.user.data.id, //Only let them add songs if playlist is collab or theirs
     session: state.session,
     active_playlist: state.playlists.active_playlist,
   };

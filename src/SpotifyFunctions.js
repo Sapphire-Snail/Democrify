@@ -90,5 +90,5 @@ export function getPlaylist(playlist_id) {
 }
 
 export function makeCollaborative(bool, playlist_id) {
-	return spotifyApi.changePlaylistDetails(playlist_id, {private: true, collaborative: bool})
+	return spotifyApi.changePlaylistDetails(playlist_id, {public: false, collaborative: bool})
 }

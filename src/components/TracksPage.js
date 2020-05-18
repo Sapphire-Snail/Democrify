@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import {
   getPlaylistTracks,
   createPlaylistSession,
+  setCollaborative,
 } from "../redux/actions/thunk";
 import Tracks from "./Tracks";
 import { Link } from "react-router-dom";
@@ -26,6 +27,9 @@ class TracksPage extends Component {
       this.props.userID
     );
     //If the playlist is the owners, make it collaborative then create the session
+    if (this.props.activePlaylist.owner.id === this.props.userID && !this.props.activePlaylist.collaborative) {
+      this.props.setCollaborative(true, this.props.activePlaylist.id);
+    }
   }
 
   toggleSearch() {
@@ -74,7 +78,7 @@ function mapStateToProps(state) {
     activePlaylist: state.playlists.active_playlist,
     can_add:
       state.playlists.active_playlist.collaborative ||
-      state.playlists.active_playlist.owner.id == state.user.data.id, //Only let them add songs if playlist is collab or theirs
+      state.playlists.active_playlist.owner.id === state.user.data.id, //Only let them add songs if playlist is collab or theirs
     playlistId: window.location.pathname.split("/").pop(), //Grab playlist ID from URL
     deviceId: state.webplayer.deviceId,
     userID: state.user.data.id,
@@ -84,6 +88,7 @@ function mapStateToProps(state) {
 const mapDispatchToProps = {
   getPlaylistTracks,
   createPlaylistSession,
+  setCollaborative,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TracksPage);

@@ -252,6 +252,7 @@ export function setCollaborative(bool, playlist_id) {
 
       (error) => {
         var err = JSON.parse(error.response);
+        console.log(err);
         dispatch(
           setCollaborativeError(
             err.error.status + " " + err.error.message || "Unexpected error!"
