@@ -51,11 +51,11 @@ export function getUserInfo() {
 
 //If no user id is supplied, it uses the id of the user who authenticated
 export function getUserPlaylists() {
-    return spotifyApi.getUserPlaylists({limit: 30});
+    return spotifyApi.getUserPlaylists();
 }
 
 export function createPlaylist(userId, playlistName) {
-    return spotifyApi.createPlaylist(userId, {name: playlistName, public: false, collaborative: true, description: 'Made with Democrify'});
+    return spotifyApi.createPlaylist(userId, {name: playlistName});
 }
 
 export function getPlaylistTracks(playlistId) {
@@ -81,9 +81,6 @@ export function addSong(activePlaylistID, songURI) {
 	return spotifyApi.addTracksToPlaylist(activePlaylistID, [songURI]);
 }
 
-export function removeSong(activePlaylistID, songURI){
-	return spotifyApi.removeTracksFromPlaylist(activePlaylistID, [songURI]);
-}
 export function skipToNext(deviceId) {
 	return spotifyApi.skipToNext({device_id: deviceId});
 }
@@ -95,8 +92,4 @@ export function seek(deviceId) {
 }
 export function getPlaylist(playlist_id) {
 	return spotifyApi.getPlaylist(playlist_id);
-}
-
-export function makeCollaborative(bool, playlist_id) {
-	return spotifyApi.changePlaylistDetails(playlist_id, {public: false, collaborative: bool})
 }

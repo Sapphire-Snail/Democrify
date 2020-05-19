@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as spotify from "../SpotifyFunctions.js";
-import { Button } from 'reactstrap';
+import { Button, Alert } from 'reactstrap';
 import { addSong } from '../redux/actions/thunk';
 import "./Playlists/Playlists.css"
 

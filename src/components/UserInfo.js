@@ -1,30 +1,31 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Loader from "react-loader-spinner";
-import { Redirect } from "react-router-dom";
-import { logout } from "../redux/actions/thunk";
+import { Redirect } from 'react-router-dom';
+import { logout } from '../redux/actions/thunk';
 import { Container, Row, Col, Button } from "reactstrap";
 import * as spotify from "../SpotifyFunctions.js";
-import "./UserInfo.css";
+import "./UserInfo.css"
 class UserInfo extends Component {
+
   constructor(props) {
     super(props);
     this.state = {
-      isRedirect: false,
+        isRedirect: false
     };
   }
-
+  
   logout = () => {
     //Pause before we log out
     spotify.pause(this.props.deviceId);
     this.props.logout();
-    this.setState({ isRedirect: true });
-  };
-
+    this.setState({isRedirect: true});
+  }
+  
   render() {
     //Not sure if this is the best way to do a redirect but hey
-    if (this.state.isRedirect) {
-      return <Redirect to={"/login/"} />;
+    if(this.state.isRedirect) {
+      return <Redirect to={'/login/'}/>
     }
 
     //Otherwise get the data and display it
@@ -50,20 +51,8 @@ class UserInfo extends Component {
           <Container>
             <Row>
               <Col>
-                <p
-                  style={{ marginBottom: 0, display: "inline", color: "white" }}
-                >
-                  {" "}
-                  Welcome, {data.display_name}!{" "}
-                </p>
-                <Button
-                  onClick={this.logout}
-                  style={{ display: "inline", paddingTop: "0" }}
-                  color="link"
-                  className="logoutButton"
-                >
-                  Log out
-                </Button>
+                <p style={{ marginBottom: 0, display:'inline', color:'white' }}> Welcome, {data.display_name}! </p>
+                <Button onClick={this.logout} style={{ display:'inline', paddingTop:'0'}} color="link" className="logoutButton">Log out</Button>
               </Col>
             </Row>
           </Container>
@@ -78,13 +67,13 @@ class UserInfo extends Component {
 function mapStateToProps(state) {
   return {
     userData: state.user,
-    deviceId: state.webplayer.deviceId,
+    deviceId: state.webplayer.deviceId
   };
 }
 
 const mapDispatchToProps = {
   logout,
-};
+}
 
 // Connect to redux store
 export default connect(mapStateToProps, mapDispatchToProps)(UserInfo);

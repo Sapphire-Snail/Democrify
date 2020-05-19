@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Loader from "react-loader-spinner";
 import SinglePlaylist from "./SinglePlaylist";
+import { Table } from "reactstrap";
 import "./Playlists.css";
 class Playlists extends Component {
   render() {

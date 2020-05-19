@@ -46,7 +46,7 @@ class WelcomeScreen extends Component {
 
   submitCode() {
     //console.log(this.state.code);
-    //this.props.getSession(this.state.code);
+    this.props.getSession(this.state.code);
     this.setState({isRedirect: true});
   }
 
