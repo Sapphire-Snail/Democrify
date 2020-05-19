@@ -36,7 +36,7 @@ class Tracks extends Component {
       () => {
         this.timeout = window.setTimeout(() => {
           this.setState({ showAlert: false });
-        }, 4000);
+        }, 2000);
       }
     );
   }
@@ -109,6 +109,7 @@ function mapStateToProps(state) {
   return {
     tracks: state.tracks,
     deviceId: state.webplayer.deviceId,
+    activePlaylistTitle: state.playlists.active_playlist.name,
     active_playlist: state.playlists.active_playlist, //The tracks retrieved will be those from the active playlist, which must always be kept up to date
   };
 }
