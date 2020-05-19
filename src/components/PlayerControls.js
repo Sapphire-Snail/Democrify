@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./PlayerControls.scss";
 import * as spotify from "../SpotifyFunctions.js";
-import { FiSkipForward,FiSkipBack } from 'react-icons/fi';
+import { FiSkipForward } from 'react-icons/fi';
 
 
 class PlayerControls extends Component { 
@@ -18,11 +18,7 @@ class PlayerControls extends Component {
      skip = () => {
          spotify.skipToNext(this.props.deviceId);
      }
-     skipBack = () => {
-        
-        spotify.skipToPrevious(this.props.deviceId);
-        spotify.seek(this.props.deviceId);
-    }
+
     render() {
         if(!this.props.nowPlaying || !this.props.loggedIn) {
             return <div/>
@@ -38,18 +34,11 @@ class PlayerControls extends Component {
                 </div>
                 <div onClick={this.togglePlay}>
                     <div className='pcontainer'>
-
-                    
-                    
-        <div className={this.props.isPaused ? 'pbtn play' : 'pbtn pause'}>
-{/* <div className={"pbtn play"}> */}
+                        <div className={this.props.isPaused ? 'pbtn play' : 'pbtn pause'}>
+                        {/* <div className={"pbtn play"}> */}
                             <span className="bar bar-1"></span>
                             <span className="bar bar-2"></span>				
-                        </div> 
-                        <FiSkipBack size={25} onClick={this.skipBack} className='skipBtn'/>
-
-
-
+                        </div>
                         <FiSkipForward size={25} onClick={this.skip} className='skipBtn'/>
                     </div>
                 </div>
