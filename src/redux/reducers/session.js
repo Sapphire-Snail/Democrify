@@ -75,6 +75,7 @@ import {
     return {
       ...state,
       loading: false,
+      error: null,
       connected_session: action.session,
     };
   }

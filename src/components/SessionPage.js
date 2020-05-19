@@ -17,10 +17,6 @@ class SessionPage extends Component {
     this.toggleSearch = this.toggleSearch.bind(this);
   }
 
-  componentDidMount() {
-    this.props.getSession(this.props.code);
-  }
-
   toggleSearch() {
     this.setState({ searchShowing: !this.state.searchShowing });
     if (this.state.searchShowing) {
