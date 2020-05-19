@@ -59,12 +59,6 @@ class PlaylistsPage extends Component  {
                 <Playlists title="Top playlists" col1Name="Name" col2Name="Songs"/>
                 <div><Collapse isOpen={!this.state.seen}>
                 <button className="button button--loginApp-link" onClick={this.togglePop}>
-
-
-                
-        
-
-
                     Create Playlist
                 </button>
           </Collapse>
@@ -73,7 +67,7 @@ class PlaylistsPage extends Component  {
 
                 
               <Collapse isOpen={this.state.seen}>
-            <Card className={"card"}> 
+            <Card className={"listnamecard"}> 
               <CardBody>
               <form onSubmit={this.handleSubmit}>
             Name of your new playlist
