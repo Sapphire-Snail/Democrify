@@ -21,6 +21,9 @@ import {
   addSongLoading,
   addSongError,
   addSongSuccess,
+  removeSongLoading,
+  removeSongError,
+  removeSongSuccess,
   setPlayState,
   createSessionLoading,
   createSessionSuccess,
@@ -171,6 +174,24 @@ export function addSong(activePlaylistID, songURI) {
         var err = JSON.parse(error.response);
         dispatch(
           addSongError(
+            err.error.status + " " + err.error.message || "Unexpected error!"
+          )
+        );
+      }
+    );
+  };
+}
+
+export function removeSong(activePlaylistID, songURI) {
+  return (dispatch) => {
+    dispatch(removeSongLoading());
+    spotify.removeSong(activePlaylistID, songURI).then(
+      () => dispatch(removeSongSuccess()),
+
+      (error) => {
+        var err = JSON.parse(error.response);
+        dispatch(
+          removeSongError(
             err.error.status + " " + err.error.message || "Unexpected error!"
           )
         );

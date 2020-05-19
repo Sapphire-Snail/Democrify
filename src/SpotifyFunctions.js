@@ -81,6 +81,9 @@ export function addSong(activePlaylistID, songURI) {
 	return spotifyApi.addTracksToPlaylist(activePlaylistID, [songURI]);
 }
 
+export function removeSong(activePlaylistID, songURI){
+	return spotifyApi.removeTracksFromPlaylist(activePlaylistID, [songURI]);
+}
 export function skipToNext(deviceId) {
 	return spotifyApi.skipToNext({device_id: deviceId});
 }

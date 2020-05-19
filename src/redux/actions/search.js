@@ -4,7 +4,10 @@ import {
     SEARCH_ERROR,
     ADD_SONG_ERROR,
     ADD_SONG_SUCCESS,
-    ADD_SONG_LOADING
+    ADD_SONG_LOADING,
+    REMOVE_SONG_ERROR,
+    REMOVE_SONG_SUCCESS,
+    REMOVE_SONG_LOADING
   } from './action-types';
 
 export function searchLoading() {
@@ -45,5 +48,26 @@ export function addSongError(err) {
         err
     };
 }
+
+export function removeSongLoading() {
+    return {
+        type: REMOVE_SONG_LOADING
+    };
+}
+
+export function removeSongSuccess() {
+    return {
+        type: REMOVE_SONG_SUCCESS,
+        removed: true
+    };
+}
+
+export function removeSongError(err) {
+    return {
+        type: REMOVE_SONG_ERROR,
+        err
+    };
+}
+
 
 
