@@ -19,8 +19,6 @@ class SingleTrack extends Component {
         }
 
     render() {
-        debugger;
-        console.log(this.props.isOwnedByTheUser);
         return(            
             <tr onClick={() => {spotify.play(this.props.activePlaylistUri, this.props.deviceId, this.props.trackInfo.uri)}} key={this.props.trackInfo.id}>
                 <td className="block">
@@ -33,7 +31,7 @@ class SingleTrack extends Component {
                     <span>{this.props.trackInfo.artists[0].name}</span>
                 </td>
                 <td>
-                { this.props.isOwnedByTheUser &&             
+                { this.props.can_delete &&             
                 <Button onClick={(e) => {this.removeSongFromPlaylist(e)}}>X</Button>}
                 </td>
             </tr>
@@ -49,6 +47,9 @@ function mapStateToProps(state) {
         search: state.search,
         userID: state.user.data.id,
         activePlaylistID: state.playlists.active_playlist.uri.substring(state.playlists.active_playlist.uri.lastIndexOf(":") + 1),
+        can_delete:
+        state.playlists.active_playlist.collaborative ||
+        state.playlists.active_playlist.owner.id === state.user.data.id, //Only let them delete songs if playlist is collab or theirs
 
     };
 }

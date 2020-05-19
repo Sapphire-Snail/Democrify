@@ -91,7 +91,6 @@ class Tracks extends Component {
                       key={item.track.id + index}
                       trackInfo={item.track}
                       showAlert={this.showAlert}
-                      isOwnedByTheUser={this.props.isOwnedByTheUser}
                     />
                   ))}
               </tbody>

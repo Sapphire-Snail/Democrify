@@ -18,20 +18,10 @@ class TracksPage extends Component {
       searchShowing: false,
       refreshList: false,
       removedSong: false,
-      isOwnedByTheUser: false,
     };
     this.toggleSearch = this.toggleSearch.bind(this);
     this.createSession = this.createSession.bind(this);
-    this.refreshTracklist = this.refreshTracklist.bind(this);
   }
-
-  checkIfOwned(){
-    if(this.props.playlistOwnerID === this.props.userID ){
-        this.setState({
-            isOwnedByTheUser: true
-        })
-    }
-}
 
   createSession() {
     this.props.createPlaylistSession(
@@ -51,13 +41,9 @@ class TracksPage extends Component {
     }
   }
 
-  refreshTracklist() {
-    this.props.getPlaylistTracks(this.props.playlistId);
-  }
 
   componentDidMount() {
     this.props.getPlaylistTracks(this.props.playlistId);
-    this.checkIfOwned();
   }
 
   render() {
@@ -86,8 +72,6 @@ class TracksPage extends Component {
           <Tracks
             col1Name="Name"
             col2Name="Artist"
-            refreshTracklist={this.refrseshTracklist}
-            isOwnedByTheUser={this.state.isOwnedByTheUser}
           />
         )}
       </div>
@@ -98,7 +82,6 @@ class TracksPage extends Component {
 function mapStateToProps(state) {
   return {
     activePlaylist: state.playlists.active_playlist,
-    playlistOwnerID: state.playlists.active_playlist.owner.id,
     can_add:
       state.playlists.active_playlist.collaborative ||
       state.playlists.active_playlist.owner.id === state.user.data.id, //Only let them add songs if playlist is collab or theirs
