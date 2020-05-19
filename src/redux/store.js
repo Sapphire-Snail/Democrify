@@ -19,7 +19,7 @@ const initialState = {
 const persistConfig = {
   key: 'root',
   storage,
-  blacklist: ['webplayer', 'search'],
+  blacklist: ['webplayer', 'search', 'session'],
   stateReconciler: autoMergeLevel2,
 };
 const pReducer = persistReducer(persistConfig, rootReducer);

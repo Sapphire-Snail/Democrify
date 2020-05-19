@@ -253,12 +253,7 @@ export function getSession(code) {
       },
 
       (error) => {
-        var err = JSON.parse(error.response);
-        dispatch(
-          getSessionError(
-            err.error.status + " " + err.error.message || "Unexpected error!"
-          )
-        );
+        dispatch(getSessionError("Could not find code! " + error));
       }
     );
   };

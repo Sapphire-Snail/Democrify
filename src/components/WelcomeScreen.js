@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
+import { notify } from "react-notify-toast";
 import {
   Button,
   InputGroup,
@@ -17,7 +18,7 @@ import {
   ButtonGroup,
 } from "reactstrap";
 import "./WelcomeScreen.css";
-import { getSession } from '../redux/actions/thunk';
+import { getSession } from "../redux/actions/thunk";
 
 class WelcomeScreen extends Component {
   constructor() {
@@ -26,7 +27,7 @@ class WelcomeScreen extends Component {
     this.state = {
       popoverHostOpen: false,
       popoverCodeOpen: false,
-      code: '',
+      code: "",
       isRedirect: false,
     };
   }
@@ -46,15 +47,22 @@ class WelcomeScreen extends Component {
 
   submitCode() {
     //console.log(this.state.code);
-    //this.props.getSession(this.state.code);
-    this.setState({isRedirect: true});
+    this.props.getSession(this.state.code);
+    this.setState({ isRedirect: true });
   }
+  
 
   render() {
     //Redirect user to sessions if they've entered a code
-    if(this.state.isRedirect) {
-      return <Redirect to={'/session/' + this.state.code}/>
-    } 
+    if (this.state.isRedirect) {
+      const { error, loading } = this.props.session;
+
+      if (error) {
+        notify.show("Cannot find session!", "error"); //This causes warning for some reason, will fix in future
+      } else if (!loading) {
+        return <Redirect to={"/session/" + this.state.code} />;
+      }
+    }
 
     return (
       <div>
@@ -62,12 +70,23 @@ class WelcomeScreen extends Component {
           <Row xs="1">
             <Col>
               <InputGroup className="inputPartyCode">
-                <Input placeholder="Enter the party code" onChange={(e) => this.setState({code: e.target.value})}/>
+                <Input
+                  placeholder="Enter the party code"
+                  onChange={(e) => this.setState({ code: e.target.value })}
+                />
                 <InputGroupAddon addonType="append">
-                  <Button style={{backgroundColor: "#c030ed", borderColor : "#c030ed"}} onClick={this.submitCode}>Join!</Button>
+                  <Button
+                    style={{
+                      backgroundColor: "#c030ed",
+                      borderColor: "#c030ed",
+                    }}
+                    onClick={this.submitCode}
+                  >
+                    Join!
+                  </Button>
                   <InputGroupAddon addonType="append">
                     <Button
-                      style={{backgroundColor: "black", borderColor : "black"}}
+                      style={{ backgroundColor: "black", borderColor: "black" }}
                       className="informationButton"
                       id="PopoverCode"
                       type="button"
@@ -95,13 +114,16 @@ class WelcomeScreen extends Component {
         </Container>
         <Container className="hostButtonContainer">
           <ButtonGroup>
-            <Link to='/playlists'>
-              <Button style={{backgroundColor: "#1ed760", borderColor : "#1ed760"}} size="lg">
+            <Link to="/playlists">
+              <Button
+                style={{ backgroundColor: "#1ed760", borderColor: "#1ed760" }}
+                size="lg"
+              >
                 Host a party
               </Button>
             </Link>
             <Button
-              style={{backgroundColor: "black", borderColor : "black"}}
+              style={{ backgroundColor: "black", borderColor: "black" }}
               size="sm"
               className="informationButton"
               id="PopoverHost"
@@ -128,8 +150,15 @@ class WelcomeScreen extends Component {
   }
 }
 
-const mapDispatchToProps = {
-  getSession
+//State is entire state tree
+function mapStateToProps(state) {
+  return {
+    session: state.session,
+  };
 }
 
-export default connect(null, mapDispatchToProps)(WelcomeScreen);
+const mapDispatchToProps = {
+  getSession,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(WelcomeScreen);
