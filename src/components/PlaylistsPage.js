@@ -4,16 +4,22 @@ import { connect } from "react-redux";
 import Playlists from "./Playlists/Playlists";
 import { Link } from "react-router-dom";
 import { Collapse, CardBody, Card } from "reactstrap";
+import { notify } from 'react-notify-toast';
 import "./PopUP.css";
 class PlaylistsPage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      listname: '',
+      seen: false,
+    };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
   componentDidMount() {
     this.props.loadPlaylists();
   }
-
-  state = {
-    seen: false,
-    listname: "",
-  };
 
   togglePop = () => {
     this.setState({
@@ -21,29 +27,21 @@ class PlaylistsPage extends Component {
     });
   };
 
-  constructor(props) {
-    super(props);
-    this.state = { listname: "" };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
   handleChange(event) {
     this.setState({ listname: event.target.value });
-    console.log(this.state.listname);
   }
 
-  handleSubmit(event) {
-    console.log(this.state.listname + "final answer");
-    alert("A playlist was submitted: " + this.state.listname);
-
-    this.props.createPlaylist(this.props.userId, this.state.listname);
+  handleSubmit(e) {
+    e.preventDefault();
+    if(this.state.listname === '') {
+      notify.show('Enter playlist name', 'error');  
+    } else {
+      this.setState({seen: false, listname: ''});
+      this.props.createPlaylist(this.props.userId, this.state.listname);
+      notify.show('Successfully created playlist', 'success');
+      console.log('here');
+    }
   }
-  createPlaylist = () => {
-    //This notation allows us to keep reference to this
-
-    this.props.createPlaylist(this.props.userId, "this.props.state.value"); //All playlists called this until UI updated to let user enter name
-  };
 
   render() {
     return (
@@ -61,13 +59,11 @@ class PlaylistsPage extends Component {
             </button>
           </Collapse>
         </div>
-        {/*  {this.state.isOpen ? <PopUp toggle={this.togglePop} /> : null}  */}
-
         <Collapse isOpen={this.state.seen}>
-          <Card className={"addPlaylistCard"}>
+          <Card className={"card"}>
             <CardBody>
               <form onSubmit={this.handleSubmit}>
-                Name of your new playlist
+                Playlist name
                 <br />
                 <label>
                   <input
@@ -78,8 +74,8 @@ class PlaylistsPage extends Component {
                 </label>
                 <br />
                 <input type="submit" value="Submit" />
-                <input type="button" value="Cancel" onClick={this.togglePop}/>
               </form>
+              <button onClick={this.togglePop}>Close</button>
             </CardBody>
           </Card>
         </Collapse>

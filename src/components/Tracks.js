@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import Loader from "react-loader-spinner";
 import SingleTrack from "./SingleTrack";
 import { Alert } from "reactstrap";
+import { getPlaylistTracks } from "../redux/actions/thunk";
 
 class Tracks extends Component {
   constructor() {
@@ -13,23 +14,24 @@ class Tracks extends Component {
       alertText: "",
     };
   }
-
+  componentDidMount() {
+    this.props.getPlaylistTracks(this.props.active_playlist.id);
+  }
   showAlert(songTitle) {
     this.setState(
-
       // This is a very roundabout way to delay refreshing the playlist. Could not think of a better one
       // Also probably not the best place for this code. But it works!
       () => {
         this.timeout = window.setTimeout(() => {
-      this.props.refreshTracklist();
-      this.setState({
-        showAlert: true,
-        alertText:
-          songTitle + " removed from " + this.props.activePlaylistTitle,
-      });
+          this.props.getPlaylistTracks(this.props.active_playlist.id);
+          this.setState({
+            showAlert: true,
+            alertText:
+              songTitle + " removed from " + this.props.activePlaylistTitle,
+          });
         }, 500);
       },
-      
+
       //Disappears after 2 seconds using a timeout
       () => {
         this.timeout = window.setTimeout(() => {
@@ -52,9 +54,9 @@ class Tracks extends Component {
       );
     }
 
-    //TODO: Some songs return a 403 if they aren't available in, but are still being shown
+    //TODO: Some songs return a 403 if they aren't available in this region, but are still being shown
     if (data) {
-      console.log("From Tracks class" + this.props.isOwnedByTheUser)
+      console.log("From Tracks class" + this.props.isOwnedByTheUser);
       return (
         <div>
           {" "}
@@ -107,8 +109,12 @@ function mapStateToProps(state) {
   return {
     tracks: state.tracks,
     deviceId: state.webplayer.deviceId,
-    activePlaylistTitle: state.playlists.active_playlist.name,
+    active_playlist: state.playlists.active_playlist, //The tracks retrieved will be those from the active playlist, which must always be kept up to date
   };
 }
 
-export default connect(mapStateToProps)(Tracks);
+const mapDispatchToProps = {
+  getPlaylistTracks,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Tracks);
