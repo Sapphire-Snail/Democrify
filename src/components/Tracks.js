@@ -54,9 +54,7 @@ class Tracks extends Component {
       );
     }
 
-    //TODO: Some songs return a 403 if they aren't available in this region, but are still being shown
     if (data) {
-      console.log("From Tracks class" + this.props.isOwnedByTheUser);
       return (
         <div>
           {" "}
