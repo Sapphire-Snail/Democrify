@@ -73,7 +73,7 @@ class PlaylistsPage extends Component  {
 
                 
               <Collapse isOpen={this.state.seen}>
-            <Card className={"inputListnameCard"}> 
+            <Card className={"card"}> 
               <CardBody>
               <form onSubmit={this.handleSubmit}>
             Name of your new playlist
