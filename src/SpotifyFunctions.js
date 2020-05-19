@@ -84,7 +84,12 @@ export function addSong(activePlaylistID, songURI) {
 export function skipToNext(deviceId) {
 	return spotifyApi.skipToNext({device_id: deviceId});
 }
-
+export function skipToPrevious(deviceId) {
+	return spotifyApi.skipToPrevious({device_id: deviceId});
+}
+export function seek(deviceId) {
+	return spotifyApi.seek(0,{device_id: deviceId});
+}
 export function getPlaylist(playlist_id) {
 	return spotifyApi.getPlaylist(playlist_id);
 }
