@@ -1,5 +1,6 @@
 import Spotify from "spotify-web-api-js";
 import { scopes, redirectUri, clientId } from '../src/config';
+import { notify } from 'react-notify-toast';
 
 const spotifyApi = new Spotify();
 
@@ -51,11 +52,11 @@ export function getUserInfo() {
 
 //If no user id is supplied, it uses the id of the user who authenticated
 export function getUserPlaylists() {
-    return spotifyApi.getUserPlaylists();
+    return spotifyApi.getUserPlaylists({limit: 30});
 }
 
 export function createPlaylist(userId, playlistName) {
-    return spotifyApi.createPlaylist(userId, {name: playlistName});
+    return spotifyApi.createPlaylist(userId, {name: playlistName, public: false, collaborative: true, description: 'Made with Democrify'});
 }
 
 export function getPlaylistTracks(playlistId) {
@@ -66,7 +67,7 @@ export function play(contextURI, deviceId, startUri) {
 	if(contextURI == null || startUri == null) {
 		return spotifyApi.play({device_id: deviceId});
 	}
-	return spotifyApi.play({context_uri: contextURI, device_id: deviceId, offset: {uri: startUri}});
+	return spotifyApi.play({context_uri: contextURI, device_id: deviceId, offset: {uri: startUri}}).catch((e) => notify.show('Cannot play song', 'error'));
 }
 
 export function pause(deviceId) {
@@ -80,16 +81,27 @@ export function searchSong(keyword) {
 export function addSong(activePlaylistID, songURI) {
 	return spotifyApi.addTracksToPlaylist(activePlaylistID, [songURI]);
 }
-export function skipToPrevious(deviceId) {	
-	return spotifyApi.skipToPrevious({device_id: deviceId});	
-}	
-export function seek(deviceId) {	
-	return spotifyApi.seek(0,{device_id: deviceId});	
+
+export function removeSong(activePlaylistID, songURI){
+	return spotifyApi.removeTracksFromPlaylist(activePlaylistID, [songURI]);
 }
+
 export function skipToNext(deviceId) {
 	return spotifyApi.skipToNext({device_id: deviceId});
 }
 
+export function seek(deviceId) {	
+	return spotifyApi.seek(0, {device_id: deviceId});	
+}
+
+export function skipToPrevious(deviceId) {	
+	return spotifyApi.skipToPrevious({device_id: deviceId});	
+}
+
 export function getPlaylist(playlist_id) {
 	return spotifyApi.getPlaylist(playlist_id);
+}
+
+export function makeCollaborative(bool, playlist_id) {
+	return spotifyApi.changePlaylistDetails(playlist_id, {public: false, collaborative: bool})
 }

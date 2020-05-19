@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { nanoid } from 'nanoid';
-import { PlaylistSession } from '../db/playlistSessionSchema.js';
 
 export function createSession(playlistURI, hostID) {
     return axios({
