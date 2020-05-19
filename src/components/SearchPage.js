@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { searchSong } from '../redux/actions/thunk';
 import Search from './Search';
-import { Link } from 'react-router-dom';
 import { Input } from 'reactstrap';
 
 class SearchPage extends Component  {
@@ -17,7 +16,7 @@ class SearchPage extends Component  {
     
     search(e) {
         this.setState({searchString:e.target.value});
-        if (this.state.searchString != "") {
+        if (this.state.searchString !== "") {
             this.props.searchSong(this.state.searchString);
         }
     }
