@@ -35,4 +35,9 @@ router.post("/getSessionFromPlaylist", async (req, res) => {
     res.json(await query);
 });
 
+router.post("/getAllUserSessions", async (req, res) => {
+    const query = PlaylistSession.find({hostID: req.body.hostID});
+    res.json(await query);
+});
+
 export default router

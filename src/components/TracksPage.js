@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import {
-  getSessionFromPlaylist,
   createPlaylistSession,
   setCollaborative,
 } from "../redux/actions/thunk";
@@ -91,7 +90,6 @@ function mapStateToProps(state) {
 const mapDispatchToProps = {
   createPlaylistSession,
   setCollaborative,
-  getSessionFromPlaylist
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TracksPage);

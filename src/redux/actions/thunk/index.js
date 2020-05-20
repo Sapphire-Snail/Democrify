@@ -279,6 +279,15 @@ export function setCollaborative(bool, playlist_id) {
   };
 }
 
+export function getUserSessions(hostID) {
+  return (dispatch) => {
+    Api.getAllUserSessions(hostID).then(
+      res => console.log(res)
+    )
+  }
+}
+
+//Not currently in use
 export function getSessionFromPlaylist(hostID, playlistID) {
   return (dispatch) => {
     Api.getCodeFromPlaylist(hostID, playlistID).then(
