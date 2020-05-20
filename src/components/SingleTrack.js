@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as spotify from "../SpotifyFunctions.js";
 import { Button } from "reactstrap";
-import { removeSong } from "../redux/actions/thunk";
+import { removeSong, getPlaylistTracks } from "../redux/actions/thunk";
 import "./Playlists/Playlists.css";
+import { notify } from "react-notify-toast";
 
 class SingleTrack extends Component {
   constructor() {
@@ -17,16 +18,17 @@ class SingleTrack extends Component {
       this.props.activePlaylistID,
       this.props.trackInfo.uri
     );
-    this.props.showAlert(this.props.trackInfo.name);
+    notify.show("Removed song " + this.props.trackInfo.name, "success", 2000);
+    this.props.getPlaylistTracks(this.props.activePlaylistID);
   }
 
   playTrack = () => {
-      spotify.play(
-        this.props.activePlaylistUri,
-        this.props.deviceId,
-        this.props.trackInfo.uri
-      );
-  }
+    spotify.play(
+      this.props.activePlaylistUri,
+      this.props.deviceId,
+      this.props.trackInfo.uri
+    );
+  };
 
   render() {
     return (
@@ -84,5 +86,6 @@ function mapStateToProps(state) {
 }
 const mapDispatchToProps = {
   removeSong,
+  getPlaylistTracks,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(SingleTrack);
