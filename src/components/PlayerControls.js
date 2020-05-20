@@ -4,6 +4,7 @@ import "./PlayerControls.scss";
 import * as spotify from "../SpotifyFunctions.js";
 import { FiSkipForward, FiSkipBack } from "react-icons/fi";
 
+
 class PlayerControls extends Component {
   togglePlay = () => {
     if (this.props.isPaused) {
@@ -19,6 +20,8 @@ class PlayerControls extends Component {
 
   skipBack = () => {
     spotify.skipToPrevious(this.props.deviceId);
+     spotify.seek(this.props.deviceId); /*not using this is fine, but if you click previous button when
+    palying the first song, it only pause and play, instead of go to the start of the song */
   };
 
   render() {
@@ -37,7 +40,8 @@ class PlayerControls extends Component {
           )}
         </div>
         <div className="trackInfo">
-          <p>{this.props.nowPlaying.name}</p>
+        <marquee  scrolldelay="200" >
+          <p>{this.props.nowPlaying.name}</p></marquee>
           <p>{this.props.nowPlaying.artists[0].name}</p>
         </div>
         <div onClick={this.togglePlay}>
