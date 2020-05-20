@@ -2,28 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Loader from 'react-loader-spinner';
 import SingleSearchItem from './SingleSearchItem';
-import { Alert } from 'reactstrap';
 import "./Playlists/Playlists.css"
 
 class Search extends Component {
-    constructor() {
-        super();
-        this.showAlert = this.showAlert.bind(this);
-        this.state = {
-            showAlert : false,
-            alertText : ""
-        }
-    }
-
-    //Disappears after 2 seconds using a timeout
-    showAlert(songTitle) {  
-        this.setState({
-            showAlert:true,
-            alertText: songTitle + " added to " + this.props.activePlaylistTitle,
-        },
-            ()=> {window.clearTimeout(this.timeout); this.timeout = window.setTimeout(()=>{this.setState({showAlert:false})},4000)});
-    }
-
     render() {
         const { error, loading, data } = this.props.tracks;
 
@@ -38,7 +19,6 @@ class Search extends Component {
         if(data) {
             return(
                 <div>
-                    {this.state.showAlert && <Alert style={{position:'fixed', top:10, left: '50%', transform: 'translate(-50%, 0)'}}color="success">{this.state.alertText}</Alert>}
                     <div className="container tableContainer">>
                     <table className="table">
                     <thead>

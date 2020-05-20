@@ -16,7 +16,9 @@ class UserInfo extends Component {
 
   logout = () => {
     //Pause before we log out
-    spotify.pause(this.props.deviceId);
+    if (!this.props.isPaused) {
+      spotify.pause(this.props.deviceId);
+    }
     this.props.logout();
     this.setState({ isRedirect: true });
   };
@@ -79,6 +81,9 @@ function mapStateToProps(state) {
   return {
     userData: state.user,
     deviceId: state.webplayer.deviceId,
+    isPaused: state.webplayer.playState
+      ? state.webplayer.playState.paused
+      : true,
   };
 }
 
