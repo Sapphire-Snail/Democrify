@@ -45,7 +45,7 @@ class PlaylistsPage extends Component {
   render() {
     return (
       <div>
-        <Link to="/me">Back we go bois</Link>
+        <Button color='primary' tag={Link} to='/me'> Back </Button>
 
         <Playlists title="Top playlists" col1Name="Name" col2Name="Songs" />
         <div>

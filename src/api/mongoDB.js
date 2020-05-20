@@ -21,3 +21,15 @@ export async function getSessionPlaylist(sessionCode) {
         timeout: 10000
     });
 }
+
+export function getCodeFromPlaylist(hostID, playlistID) {
+    return axios({
+        method: "post",
+        url: "/api/getSessionFromPlaylist/",
+        data: {
+            hostID: hostID,
+            playlistID: playlistID,
+        },
+        timeout: 10000
+    });
+}

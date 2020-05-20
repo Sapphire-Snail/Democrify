@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import {
-  getPlaylistTracks,
+  getSessionFromPlaylist,
   createPlaylistSession,
   setCollaborative,
 } from "../redux/actions/thunk";
@@ -23,7 +23,7 @@ class TracksPage extends Component {
     this.createSession = this.createSession.bind(this);
   }
 
-  createSession() {
+  createSession = () => {
     this.props.createPlaylistSession(
       this.props.activePlaylist.id,
       this.props.userID
@@ -34,6 +34,10 @@ class TracksPage extends Component {
     }
   }
 
+  getSession = () => {
+    this.props.getSessionFromPlaylist(this.props.userID, this.props.activePlaylist.id)
+  }
+
   toggleSearch() {
     this.setState({ searchShowing: !this.state.searchShowing });
   }
@@ -41,8 +45,8 @@ class TracksPage extends Component {
   render() {
     return (
       <div>
-        <button onClick={this.createSession}>Create Session!</button>
-        <Link to="/playlists">Back we go bois</Link>
+        <Button color='primary' tag={Link} to='/playlists'> Back </Button>
+        <Button color='primary' style={{ marginLeft: 10}} onClick={this.createSession}>Create Session!</Button>
         <div className="stickyContainer">
           <h1 className="playlistTitle">{this.props.activePlaylist.name}</h1>
           <Button
@@ -57,6 +61,7 @@ class TracksPage extends Component {
                 : "Add track"
               : "Cannot add track"}
           </Button>
+          <Button color='primary' className="addButton" onClick={this.getSession}>Get Session</Button>
         </div>
         {this.state.searchShowing ? (
           <SearchPage />
@@ -86,6 +91,7 @@ function mapStateToProps(state) {
 const mapDispatchToProps = {
   createPlaylistSession,
   setCollaborative,
+  getSessionFromPlaylist
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TracksPage);

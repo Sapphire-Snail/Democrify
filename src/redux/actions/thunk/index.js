@@ -278,3 +278,11 @@ export function setCollaborative(bool, playlist_id) {
     );
   };
 }
+
+export function getSessionFromPlaylist(hostID, playlistID) {
+  return (dispatch) => {
+    Api.getCodeFromPlaylist(hostID, playlistID).then(
+      res => console.log(res)
+    )
+  }
+}
