@@ -36,14 +36,6 @@ class TracksPage extends Component {
 
   toggleSearch() {
     this.setState({ searchShowing: !this.state.searchShowing });
-    if (this.state.searchShowing) {
-      this.componentDidMount();
-    }
-  }
-
-
-  componentDidMount() {
-    this.props.getPlaylistTracks(this.props.playlistId);
   }
 
   render() {
@@ -92,7 +84,6 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = {
-  getPlaylistTracks,
   createPlaylistSession,
   setCollaborative,
 };
