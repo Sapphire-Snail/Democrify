@@ -223,7 +223,9 @@ export function createPlaylistSession(playlistURI, hostID) {
     dispatch(createSessionLoading());
     // Then call the API function with the given payload
     Api.createSession(playlistURI, hostID).then(
-      (session) => dispatch(createSessionSuccess(session)),
+      (session) => {
+        dispatch(createSessionSuccess(session));
+      },
 
       (error) => {
         var err = JSON.parse(error.response);

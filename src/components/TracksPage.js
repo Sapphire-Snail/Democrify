@@ -38,7 +38,6 @@ class TracksPage extends Component {
   }
 
   render() {
-    console.log(this.props.session_code);
     return (
       <div>
         <Button color='primary' tag={Link} to='/playlists'> Back </Button>
@@ -58,6 +57,8 @@ class TracksPage extends Component {
               : "Cannot add track"}
           </Button>
           {this.props.session_code && <h1>Code: <Badge color="secondary">{this.props.session_code}</Badge></h1>}
+          {/* I regret this line of code */}
+          {(this.props.hosted_session && (this.props.playlistId === this.props.hosted_session.playlistURI)) && !this.props.session_code &&<h1>Code: <Badge color="secondary">{this.props.hosted_session.joinCode}</Badge></h1>}
         </div>
         {this.state.searchShowing ? (
           <SearchPage />
@@ -74,6 +75,7 @@ class TracksPage extends Component {
 //State is entire state tree
 function mapStateToProps(state) {
   return {
+    hosted_session: state.session.hosted_session ? state.session.hosted_session.data : null,
     session_code: state.playlists.active_playlist.session ? state.playlists.active_playlist.session.joinCode : '',
     activePlaylist: state.playlists.active_playlist,
     can_add:
