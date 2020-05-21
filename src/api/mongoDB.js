@@ -35,7 +35,6 @@ export function getCodeFromPlaylist(hostID, playlistID) {
 }
 
 export function getAllUserSessions(hostID) {
-  console.log(hostID);
   return axios({
     method: "post",
     url: "/api/getAllUserSessions/",

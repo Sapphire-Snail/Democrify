@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { Collapse, CardBody, Card, Button } from "reactstrap";
 import { notify } from "react-notify-toast";
 import "./PopUP.css";
+
 class PlaylistsPage extends Component {
   constructor(props) {
     super(props);

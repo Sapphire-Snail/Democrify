@@ -36,7 +36,7 @@ class Playlists extends Component {
               <tbody>
                 {data.items &&
                   data.items.map((item) => (
-                    <SinglePlaylist key={item.id} playlistInfo={item} />
+                    <SinglePlaylist isSession={item.session} key={item.id} playlistInfo={item} />
                   ))}
               </tbody>
             </table>
