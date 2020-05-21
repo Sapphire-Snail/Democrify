@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { Collapse, CardBody, Card, Button } from "reactstrap";
 import { notify } from "react-notify-toast";
 import "./PopUP.css";
+
 class PlaylistsPage extends Component {
   constructor(props) {
     super(props);
@@ -18,7 +19,7 @@ class PlaylistsPage extends Component {
   }
 
   componentDidMount() {
-    this.props.loadPlaylists();
+    this.props.loadPlaylists(this.props.userId);
   }
 
   togglePop = () => {
@@ -45,7 +46,7 @@ class PlaylistsPage extends Component {
   render() {
     return (
       <div>
-        <Link to="/me">Back we go bois</Link>
+        <Button color='primary' tag={Link} to='/me'> Back </Button>
 
         <Playlists title="Top playlists" col1Name="Name" col2Name="Songs" />
         <div>

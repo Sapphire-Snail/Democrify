@@ -1,4 +1,4 @@
-import { loadPlaylistsLoading, loadPlaylistsSuccess, loadPlaylistsError, createPlaylistLoading, createPlaylistSuccess, createPlaylistError, setActivePlaylist, getPlaylistLoading, getPlaylistSuccess, getPlaylistError, setCollaborativeLoading, setCollaborativeSuccess, setCollaborativeError } from './playlists';
+import { loadPlaylistsLoading, loadPlaylistsSuccess, loadPlaylistsError, createPlaylistLoading, createPlaylistSuccess, createPlaylistError, setActivePlaylist, getPlaylistLoading, getPlaylistSuccess, getPlaylistError, setCollaborativeLoading, setCollaborativeSuccess, setCollaborativeError, getAllSessions } from './playlists';
 import { getUserLoading, getUserSuccess, getUserError, setLoggedIn, setLoggedOut } from './user';
 import { getPlaylistTracksLoading, getPlaylistTracksSuccess, getPlaylistTracksError } from './tracks';
 import { setDeviceId, setPlayState } from './webplayer';
@@ -20,6 +20,7 @@ export {
   setCollaborativeLoading,
   setCollaborativeSuccess,
   setCollaborativeError,
+  getAllSessions,
 
   getUserLoading,
   getUserSuccess,
@@ -50,5 +51,5 @@ export {
   createSessionError,
   getSessionLoading,
   getSessionSuccess,
-  getSessionError  
+  getSessionError
 };

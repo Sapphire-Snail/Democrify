@@ -1,14 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import {
-  getPlaylistTracks,
   createPlaylistSession,
   setCollaborative,
 } from "../redux/actions/thunk";
 import Tracks from "./Tracks";
 import { Link } from "react-router-dom";
 import SearchPage from "./SearchPage";
-import { Button } from "reactstrap";
+import { Button, Badge } from "reactstrap";
 import "./TrackPage.css";
 
 class TracksPage extends Component {
@@ -23,7 +22,7 @@ class TracksPage extends Component {
     this.createSession = this.createSession.bind(this);
   }
 
-  createSession() {
+  createSession = () => {
     this.props.createPlaylistSession(
       this.props.activePlaylist.id,
       this.props.userID
@@ -39,10 +38,11 @@ class TracksPage extends Component {
   }
 
   render() {
+    console.log(this.props.session_code);
     return (
       <div>
-        <button onClick={this.createSession}>Create Session!</button>
-        <Link to="/playlists">Back we go bois</Link>
+        <Button color='primary' tag={Link} to='/playlists'> Back </Button>
+        <Button color='primary' style={{ marginLeft: 10}} onClick={this.createSession}>Create Session!</Button>
         <div className="stickyContainer">
           <h1 className="playlistTitle">{this.props.activePlaylist.name}</h1>
           <Button
@@ -57,6 +57,7 @@ class TracksPage extends Component {
                 : "Add track"
               : "Cannot add track"}
           </Button>
+          {this.props.session_code && <h1>Code: <Badge color="secondary">{this.props.session_code}</Badge></h1>}
         </div>
         {this.state.searchShowing ? (
           <SearchPage />
@@ -73,6 +74,7 @@ class TracksPage extends Component {
 //State is entire state tree
 function mapStateToProps(state) {
   return {
+    session_code: state.playlists.active_playlist.session ? state.playlists.active_playlist.session.joinCode : '',
     activePlaylist: state.playlists.active_playlist,
     can_add:
       state.playlists.active_playlist.collaborative ||
