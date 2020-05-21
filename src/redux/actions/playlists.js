@@ -1,6 +1,6 @@
 import { GET_PLAYLISTDATA_LOADING, GET_PLAYLISTDATA_SUCCESS, GET_PLAYLISTDATA_ERROR, 
     CREATE_PLAYLIST_LOADING, CREATE_PLAYLIST_SUCCESS, CREATE_PLAYLIST_ERROR, SET_ACTIVE_PLAYLIST, 
-    GET_PLAYLIST_LOADING, GET_PLAYLIST_SUCCESS, GET_PLAYLIST_ERROR, SET_COLLABORATIVE_LOADING, SET_COLLABORATIVE_SUCCESS, SET_COLLABORATIVE_ERROR } from './action-types';
+    GET_PLAYLIST_LOADING, GET_PLAYLIST_SUCCESS, GET_PLAYLIST_ERROR, SET_COLLABORATIVE_LOADING, SET_COLLABORATIVE_SUCCESS, SET_COLLABORATIVE_ERROR, GET_ALLSESSIONS } from './action-types';
 
 export function loadPlaylistsLoading() {
   return {
@@ -98,4 +98,12 @@ export function setCollaborativeError(err) {
         type: SET_COLLABORATIVE_ERROR,
         err
     }
+}
+
+export function getAllSessions(state, sessions) {
+    return {
+        type: GET_ALLSESSIONS,
+        state: state,
+        sessions: sessions
+    };
 }

@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom';
 import { setPlaylist } from '../../redux/actions/thunk';
 import { connect } from 'react-redux';
 import "./Playlists.css"
-
+import { RiRadioButtonLine} from 'react-icons/ri'
 
 class SinglePlaylist extends Component {
 
@@ -36,6 +36,7 @@ class SinglePlaylist extends Component {
                 </td>
                 <td>
                     <span style={{cursor:'pointer'}}>{this.props.playlistInfo.tracks.total}</span>
+                    {this.props.isSession && <RiRadioButtonLine size={25} style={{color: '#00ab25'}} />}
                 </td>
             </tr>
         );
