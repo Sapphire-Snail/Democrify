@@ -18,7 +18,7 @@ class PlaylistsPage extends Component {
   }
 
   componentDidMount() {
-    this.props.loadPlaylists();
+    this.props.loadPlaylists(this.props.userId);
   }
 
   togglePop = () => {

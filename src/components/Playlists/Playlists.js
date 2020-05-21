@@ -5,11 +5,6 @@ import SinglePlaylist from "./SinglePlaylist";
 import { getUserSessions } from "../../redux/actions/thunk";
 import "./Playlists.css";
 class Playlists extends Component {
-  componentDidMount() {
-    //Get all sessions from database
-    this.props.getUserSessions(this.props.userID);
-  }
-
   render() {
     const { error, loading, data } = this.props.playlists;
 
