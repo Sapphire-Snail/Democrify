@@ -43,18 +43,19 @@ class PlayerControls extends Component {
         <marquee  scrolldelay="200" >
           <p>{this.props.nowPlaying.name}</p></marquee>
           <p>{this.props.nowPlaying.artists[0].name}</p>
-        </div>
-        <div onClick={this.togglePlay}>
+          <div onClick={this.togglePlay}>
           <div className="pcontainer">
+          <div>  <FiSkipBack size={25} onClick={this.skipBack} className="skipBtn" /></div>
             <div className={this.props.isPaused ? "pbtn play" : "pbtn pause"}>
               {/* <div className={"pbtn play"}> */}
               <span className="bar bar-1"></span>
               <span className="bar bar-2"></span>
             </div>
-            <FiSkipBack size={25} onClick={this.skipBack} className="skipBtn" />
-            <FiSkipForward size={25} onClick={this.skip} className="skipBtn" />
+            <div> <FiSkipForward size={25} onClick={this.skip} className="skipBtn" /></div>
           </div>
         </div>
+        </div>
+        
       </div>
     );
   }
