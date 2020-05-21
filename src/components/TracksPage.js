@@ -7,7 +7,7 @@ import {
 import Tracks from "./Tracks";
 import { Link } from "react-router-dom";
 import SearchPage from "./SearchPage";
-import { Button } from "reactstrap";
+import { Button, Badge } from "reactstrap";
 import "./TrackPage.css";
 
 class TracksPage extends Component {
@@ -33,15 +33,12 @@ class TracksPage extends Component {
     }
   }
 
-  getSession = () => {
-    this.props.getSessionFromPlaylist(this.props.userID, this.props.activePlaylist.id)
-  }
-
   toggleSearch() {
     this.setState({ searchShowing: !this.state.searchShowing });
   }
 
   render() {
+    console.log(this.props.session_code);
     return (
       <div>
         <Button color='primary' tag={Link} to='/playlists'> Back </Button>
@@ -60,7 +57,7 @@ class TracksPage extends Component {
                 : "Add track"
               : "Cannot add track"}
           </Button>
-          <Button color='primary' className="addButton" onClick={this.getSession}>Get Session</Button>
+          {this.props.session_code && <h1>Code: <Badge color="secondary">{this.props.session_code}</Badge></h1>}
         </div>
         {this.state.searchShowing ? (
           <SearchPage />
@@ -77,6 +74,7 @@ class TracksPage extends Component {
 //State is entire state tree
 function mapStateToProps(state) {
   return {
+    session_code: state.playlists.active_playlist.session ? state.playlists.active_playlist.session.joinCode : '',
     activePlaylist: state.playlists.active_playlist,
     can_add:
       state.playlists.active_playlist.collaborative ||

@@ -202,7 +202,7 @@ function playlist_allSessions(state, action) {
     const sesh = sessions.find((inc) => inc.playlistURI === playlist.id);
     if(sesh) {
       const play = playlists.find((inc) => inc.id === sesh.playlistURI);
-      play["sesion"] = sesh;
+      play["session"] = sesh;
       return play
     }
     return playlist;
