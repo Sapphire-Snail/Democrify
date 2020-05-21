@@ -36,14 +36,6 @@ class TracksPage extends Component {
 
   toggleSearch() {
     this.setState({ searchShowing: !this.state.searchShowing });
-    if (this.state.searchShowing) {
-      this.componentDidMount();
-    }
-  }
-
-
-  componentDidMount() {
-    this.props.getPlaylistTracks(this.props.playlistId);
   }
 
   render() {
@@ -87,12 +79,11 @@ function mapStateToProps(state) {
       state.playlists.active_playlist.owner.id === state.user.data.id, //Only let them add songs if playlist is collab or theirs
     playlistId: window.location.pathname.split("/").pop(), //Grab playlist ID from URL
     deviceId: state.webplayer.deviceId,
-    userID: state.user.data.id,
+    userID: state.user.data ? state.user.data.id : null
   };
 }
 
 const mapDispatchToProps = {
-  getPlaylistTracks,
   createPlaylistSession,
   setCollaborative,
 };
