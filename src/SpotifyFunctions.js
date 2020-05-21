@@ -42,7 +42,7 @@ function getHashParams() {
 
 export function setAccessToken(accessToken) {
     //Setting this for use by spotify api later
-    console.log('Successfuly set access token');
+    //console.log('Successfuly set access token');
     spotifyApi.setAccessToken(accessToken);
 }
 
