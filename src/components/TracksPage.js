@@ -33,11 +33,14 @@ class TracksPage extends Component {
     }
   }
 
+  //TODO: make a componentdidmount that gets active playlist from the list of playlists based off the id from the URL
+
   toggleSearch() {
     this.setState({ searchShowing: !this.state.searchShowing });
   }
 
   render() {
+    console.log('render');
     return (
       <div>
         <Button color='primary' tag={Link} to='/playlists'> Back </Button>
