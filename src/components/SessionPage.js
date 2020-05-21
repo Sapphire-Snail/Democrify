@@ -42,7 +42,7 @@ class SessionPage extends Component {
     if (connected_session.data) {
       return (
         <div>
-          <Link to="/me">Back we go bois</Link>
+          <Button color='primary' tag={Link} to='/me'> Back </Button>
           <div className="stickyContainer">
             <h1 className="playlistTitle">{this.props.active_playlist.name}</h1>
             <p> Host ID: {this.props.session.connected_session.data.hostID} </p>
