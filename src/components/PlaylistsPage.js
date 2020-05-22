@@ -2,9 +2,6 @@ import React, { Component , useEffect, useRef } from "react";
 import { loadPlaylists, createPlaylist } from "../redux/actions/thunk";
 import { connect } from "react-redux";
 import Playlists from "./Playlists/Playlists";
-import { Link } from "react-router-dom";
-import { Collapse, CardBody, Card, Button } from "reactstrap";
-import { notify } from "react-notify-toast";
 import "./PopUP.css";
  
 class PlaylistsPage extends Component {
@@ -21,8 +18,6 @@ class PlaylistsPage extends Component {
   }
 
   render() {
-
-    
     return (
       <div> 
       <Playlists col1Name="Name" col2Name="Songs" />

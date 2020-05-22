@@ -7,7 +7,6 @@ import {
   Badge,
   Container,
   Row,
-  Col,
   Collapse,
   CardBody,
   Card,
