@@ -7,8 +7,9 @@ import {
 import Tracks from "./Tracks";
 import { Link } from "react-router-dom";
 import SearchPage from "./SearchPage";
-import { Button, Badge } from "reactstrap";
+import { Button, Badge, Container, Row } from "reactstrap";
 import "./TrackPage.css";
+import InfoBar from "./InfoBar";
 
 class TracksPage extends Component {
   constructor() {
@@ -28,10 +29,14 @@ class TracksPage extends Component {
       this.props.userID
     );
     //If the playlist is the owners, make it collaborative then create the session
-    if (this.props.activePlaylist.owner.id === this.props.userID && !this.props.activePlaylist.collaborative) {
+    if (
+      this.props.activePlaylist.owner.id === this.props.userID &&
+      !this.props.activePlaylist.collaborative
+    ) {
       this.props.setCollaborative(true, this.props.activePlaylist.id);
     }
-  }
+    this.setState({sessionId: this.props.session_code})
+  };
 
   //TODO: make a componentdidmount that gets active playlist from the list of playlists based off the id from the URL
 
@@ -66,10 +71,7 @@ class TracksPage extends Component {
         {this.state.searchShowing ? (
           <SearchPage />
         ) : (
-          <Tracks
-            col1Name="Name"
-            col2Name="Artist"
-          />
+          <Tracks col1Name="Name" col2Name="Artist" />
         )}
       </div>
     );
@@ -86,7 +88,7 @@ function mapStateToProps(state) {
       state.playlists.active_playlist.owner.id === state.user.data.id, //Only let them add songs if playlist is collab or theirs
     playlistId: window.location.pathname.split("/").pop(), //Grab playlist ID from URL
     deviceId: state.webplayer.deviceId,
-    userID: state.user.data ? state.user.data.id : null
+    userID: state.user.data ? state.user.data.id : null,
   };
 }
 

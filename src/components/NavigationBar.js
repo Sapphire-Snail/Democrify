@@ -3,14 +3,26 @@ import { connect } from "react-redux";
 import Loader from "react-loader-spinner";
 import { Redirect } from "react-router-dom";
 import { logout } from "../redux/actions/thunk";
-import { Container, Row, Col, Button } from "reactstrap";
+import {
+  Container,
+  Row,
+  Col,
+  Button,
+  Navbar,
+  NavbarToggler,
+  NavbarBrand,
+  Nav,
+  NavbarText
+} from "reactstrap";
 import * as spotify from "../SpotifyFunctions.js";
-import "./UserInfo.css";
-class UserInfo extends Component {
+import "./NavigationBar.css";
+
+class NavigationBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
       isRedirect: false,
+      title: "Top Playlists",
     };
   }
 
@@ -48,28 +60,12 @@ class UserInfo extends Component {
 
     if (data) {
       return (
-        <Container className="userGreetingContainer" fluid={true}>
-          <Container>
-            <Row>
-              <Col>
-                <p
-                  style={{ marginBottom: 0, display: "inline", color: "white" }}
-                >
-                  {" "}
-                  Welcome, {data.display_name}!{" "}
-                </p>
-                <Button
-                  onClick={this.logout}
-                  style={{ display: "inline", paddingTop: "0" }}
-                  color="link"
-                  className="logoutButton"
-                >
-                  Log out
-                </Button>
-              </Col>
-            </Row>
-          </Container>
-        </Container>
+        <div>
+          <Navbar style={{backgroundColor: "rgba(255, 255, 255, 0.3)", position:"sticky", top:"0"}}>
+            <NavbarBrand>Welcome, {data.display_name}</NavbarBrand>
+            <Button onClick={this.logout} color="link">Log out</Button>
+          </Navbar>
+        </div>
       );
     }
     return <div />;
@@ -92,4 +88,4 @@ const mapDispatchToProps = {
 };
 
 // Connect to redux store
-export default connect(mapStateToProps, mapDispatchToProps)(UserInfo);
+export default connect(mapStateToProps, mapDispatchToProps)(NavigationBar);
