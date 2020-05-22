@@ -4,15 +4,9 @@ import Loader from "react-loader-spinner";
 import { Redirect } from "react-router-dom";
 import { logout } from "../redux/actions/thunk";
 import {
-  Container,
-  Row,
-  Col,
   Button,
   Navbar,
-  NavbarToggler,
   NavbarBrand,
-  Nav,
-  NavbarText
 } from "reactstrap";
 import * as spotify from "../SpotifyFunctions.js";
 import "./LoginBar.css";
@@ -61,7 +55,7 @@ class LoginBar extends Component {
     if (data) {
       return (
         <div>
-          <Navbar style={{backgroundColor: "rgba(255, 255, 255, 0.3)", position:"sticky", top:"0"}}>
+          <Navbar style={{backgroundColor: "rgba(255, 255, 255, 0.8)"}}>
             <NavbarBrand>Welcome, {data.display_name}</NavbarBrand>
             <Button onClick={this.logout} color="link">Log out</Button>
           </Navbar>

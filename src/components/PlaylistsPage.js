@@ -1,4 +1,4 @@
-import React, { Component , useEffect, useRef } from "react";
+import React, { Component } from "react";
 import { loadPlaylists, createPlaylist } from "../redux/actions/thunk";
 import { connect } from "react-redux";
 import Playlists from "./Playlists/Playlists";

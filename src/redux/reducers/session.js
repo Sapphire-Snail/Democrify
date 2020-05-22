@@ -7,7 +7,6 @@ import {
   GET_SESSION_LOADING,
   GET_SESSION_SUCCESS,
   GET_SESSION_ERROR,
-  GET_ALLSESSIONS,
 } from "../actions/action-types";
 
 export default function user(state = [], action) {
