@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component , useEffect, useRef } from "react";
 import { loadPlaylists, createPlaylist } from "../redux/actions/thunk";
 import { connect } from "react-redux";
 import Playlists from "./Playlists/Playlists";
@@ -6,7 +6,9 @@ import { Link } from "react-router-dom";
 import { Collapse, CardBody, Card, Button } from "reactstrap";
 import { notify } from "react-notify-toast";
 import "./PopUP.css";
-
+import * as Scroll from 'react-scroll';
+import {  Element , Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
+ 
 class PlaylistsPage extends Component {
   constructor(props) {
     super(props);
@@ -26,6 +28,7 @@ class PlaylistsPage extends Component {
     this.setState({
       seen: !this.state.seen,
     });
+    this.scrollToBottom();
   };
 
   handleChange(event) {
@@ -43,25 +46,41 @@ class PlaylistsPage extends Component {
     }
   }
 
-  render() {
-    return (
-      <div>
-        <Button color='primary' tag={Link} to='/me'> Back </Button>
+  scrollToBottom() {
+    scroll.scrollToBottom();
+  }
 
+  render() {
+
+    
+    return (
+      <div> 
+        
+        <div className="UpperBtn">
+          <Button color='primary' tag={Link} to='/me'> Back </Button>
+          <Collapse isOpen={!this.state.seen}>
+            <button
+              className="btn-UpperCreate button button--loginApp-link"
+              onClick={this.togglePop} 
+            >
+              Create Playlist
+            </button>
+          </Collapse>
+        </div>
         <Playlists title="Top playlists" col1Name="Name" col2Name="Songs" />
         <div>
-          <Collapse isOpen={!this.state.seen}>
+          {/* <Collapse isOpen={!this.state.seen}>
             <button
               className="button button--loginApp-link"
               onClick={this.togglePop}
             >
               Create Playlist
             </button>
-          </Collapse>
+          </Collapse> */}
         </div>
         {/*  {this.state.isOpen ? <PopUp toggle={this.togglePop} /> : null}  */}
 
-        <Collapse isOpen={this.state.seen}>
+       <Collapse isOpen={this.state.seen}>
           <Card style={{backgroundColor: 'transparent', borderWidth: '0'}} className={"inputListnameCard"}>
             <CardBody>
               <form onSubmit={this.handleSubmit}>
@@ -76,7 +95,7 @@ class PlaylistsPage extends Component {
                   />
                 </label>
                 <br />
-                {/* <input type="submit" value="Submit" /> */}
+               
                 <Button color="success" onClick={this.handleSubmit}>
                   Submit
                 </Button>
