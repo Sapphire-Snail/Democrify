@@ -16,6 +16,21 @@ const router = express.Router();
 router.use('/playlistSession', mongooseCrudify({
     Model: PlaylistSession,
     identifyingKey: 'joinCode',
+    actions: {
+        // Override the "update" (PUT by identifer) action: when we update we add to the trackstobeaddedfield.
+        update: (req, res) => { 
+            console.log(req);
+            console.log(res);
+            PlaylistSession.update(
+                { joinCode: req.joinCode }, 
+                {
+                    $push: {
+                        tracksToAdd: req.trackToAdd
+                    }
+                }
+            )
+        }        
+    }
 }));
 
 /**

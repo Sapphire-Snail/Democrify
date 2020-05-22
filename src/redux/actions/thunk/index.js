@@ -182,6 +182,14 @@ export function addSong(activePlaylistID, songURI) {
   };
 }
 
+export function addSongToDB(sessionCode, trackToAdd) {
+  return (dispatch) => {
+    // Then call the API function with the given payload
+    Api.addSongToDB(sessionCode, trackToAdd);
+  };
+}
+
+
 export function removeSong(activePlaylistID, songURI) {
   return (dispatch) => {
     dispatch(removeSongLoading());

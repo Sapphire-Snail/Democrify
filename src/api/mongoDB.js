@@ -21,3 +21,15 @@ export async function getSessionPlaylist(sessionCode) {
         timeout: 10000
     });
 }
+
+export async function updateSessionPlaylist(sessionCode, trackToAdd) {
+    return await axios({
+        method: "put",
+        url: "/api/playlistSession/" + sessionCode,
+        timeout: 10000,
+        data: {
+            joinCode: sessionCode,
+            trackToAdd: trackToAdd
+        }
+    });
+}
