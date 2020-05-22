@@ -15,9 +15,9 @@ import {
   NavbarText
 } from "reactstrap";
 import * as spotify from "../SpotifyFunctions.js";
-import "./NavigationBar.css";
+import "./LoginBar.css";
 
-class NavigationBar extends Component {
+class LoginBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -88,4 +88,4 @@ const mapDispatchToProps = {
 };
 
 // Connect to redux store
-export default connect(mapStateToProps, mapDispatchToProps)(NavigationBar);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginBar);

@@ -12,7 +12,7 @@ import * as spotify from "./SpotifyFunctions.js";
 //Components
 import LoginPage from "./components/LoginPage";
 import Callback from "./Callback";
-import NavigationBar from "./components/NavigationBar";
+import LoginBar from "./components/LoginBar";
 import PlaylistsPage from "./components/PlaylistsPage";
 import TracksPage from "./components/TracksPage";
 import WebPlayer from "./components/WebPlayer";
@@ -48,7 +48,7 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-          <NavigationBar />
+          <LoginBar />
           <header>
             <img
               className="App-logo"
