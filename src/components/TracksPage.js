@@ -5,9 +5,7 @@ import {
   setCollaborative,
 } from "../redux/actions/thunk";
 import Tracks from "./Tracks";
-import { Link } from "react-router-dom";
 import SearchPage from "./SearchPage";
-import { Button, Badge, Container, Row } from "reactstrap";
 import "./TrackPage.css";
 import InfoBar from "./InfoBar";
 
@@ -35,7 +33,6 @@ class TracksPage extends Component {
     ) {
       this.props.setCollaborative(true, this.props.activePlaylist.id);
     }
-    this.setState({sessionId: this.props.session_code})
   };
 
   //TODO: make a componentdidmount that gets active playlist from the list of playlists based off the id from the URL
@@ -45,29 +42,16 @@ class TracksPage extends Component {
   }
 
   render() {
-    console.log('render');
+    console.log("render");
     return (
       <div>
-        <Button color='primary' tag={Link} to='/playlists'> Back </Button>
-        <Button color='primary' style={{ marginLeft: 10}} onClick={this.createSession}>Create Session!</Button>
-        <div className="stickyContainer">
-          <h1 className="playlistTitle">{this.props.activePlaylist.name}</h1>
-          <Button
-            disabled={!this.props.can_add}
-            className="addButton"
-            style={{ backgroundColor: "#c030ed", borderColor: "#c030ed" }}
-            onClick={this.toggleSearch}
-          >
-            {this.props.can_add
-              ? this.state.searchShowing
-                ? "Back"
-                : "Add track"
-              : "Cannot add track"}
-          </Button>
-          {this.props.session_code && <h1>Code: <Badge color="secondary">{this.props.session_code}</Badge></h1>}
-          {/* I regret this line of code */}
-          {(this.props.hosted_session && (this.props.playlistId === this.props.hosted_session.playlistURI)) && !this.props.session_code &&<h1>Code: <Badge color="secondary">{this.props.hosted_session.joinCode}</Badge></h1>}
-        </div>
+        <InfoBar
+          title={this.props.activePlaylist.name}
+          isTrackListPage={true}
+          backLink="/playlists"
+          createSession={this.createSession}
+          toggleSearch={this.toggleSearch}
+        />
         {this.state.searchShowing ? (
           <SearchPage />
         ) : (
@@ -80,8 +64,12 @@ class TracksPage extends Component {
 //State is entire state tree
 function mapStateToProps(state) {
   return {
-    hosted_session: state.session.hosted_session ? state.session.hosted_session.data : null,
-    session_code: state.playlists.active_playlist.session ? state.playlists.active_playlist.session.joinCode : '',
+    hosted_session: state.session.hosted_session
+      ? state.session.hosted_session.data
+      : null,
+    session_code: state.playlists.active_playlist.session
+      ? state.playlists.active_playlist.session.joinCode
+      : "",
     activePlaylist: state.playlists.active_playlist,
     can_add:
       state.playlists.active_playlist.collaborative ||

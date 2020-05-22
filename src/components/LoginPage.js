@@ -30,7 +30,7 @@ class LoginPage extends Component {
     return (
       <div className="centerContainer">
         <div style={{ display: 'block' }}>
-          <button className="button button--loginApp-link" onClick={this.callLogin}>
+          <button className="button button--loginApp-link button-large" onClick={this.callLogin}>
             🔥 Login with Spotify 🔥
           </button>
         </div>

@@ -22,7 +22,7 @@ class Playlists extends Component {
     if (data) {
       return (
         <div>
-          <InfoBar title="Top Playlists" backLink='/me' isTrackListPage={false}> </InfoBar>
+          <InfoBar title="Top Playlists" backLink='/me' isPlaylistPage={true}> </InfoBar>
           <div className="container tableContainer">
             <table className="table">
               <thead>
