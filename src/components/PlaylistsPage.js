@@ -6,8 +6,6 @@ import { Link } from "react-router-dom";
 import { Collapse, CardBody, Card, Button } from "reactstrap";
 import { notify } from "react-notify-toast";
 import "./PopUP.css";
-import * as Scroll from 'react-scroll';
-import {  Element , Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
  
 class PlaylistsPage extends Component {
   constructor(props) {

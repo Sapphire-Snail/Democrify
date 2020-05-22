@@ -12,13 +12,6 @@ import {
   CardBody,
   Card,
 } from "reactstrap";
-import {
-  Element,
-  Events,
-  animateScroll as scroll,
-  scrollSpy,
-  scroller,
-} from "react-scroll";
 import { notify } from "react-notify-toast";
 
 class InfoBar extends Component {
