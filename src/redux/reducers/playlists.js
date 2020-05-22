@@ -210,6 +210,6 @@ function playlist_allSessions(state, action) {
   playlists = merged;
 
   return {
-    ...state
+    ...state,
   };
 }
