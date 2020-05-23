@@ -2,11 +2,15 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Loader from "react-loader-spinner";
 import SingleTrack from "./SingleTrack";
-import { getPlaylistTracks } from "../redux/actions/thunk";
+import { getPlaylistTracks, getPlaylistTracksFromSpotifyAndDB } from "../redux/actions/thunk";
 
 class Tracks extends Component {
   componentDidMount() {
-    this.props.getPlaylistTracks(this.props.active_playlist.id);
+    if (this.props.session.connected_session.data.joinCode) {
+      this.props.getPlaylistTracksFromSpotifyAndDB(this.props.active_playlist.id, this.props.session.connected_session.data.joinCode);
+    } else {
+      this.props.getPlaylistTracks(this.props.active_playlist.id);
+    } 
   }
 
   render() {
@@ -61,11 +65,13 @@ function mapStateToProps(state) {
     deviceId: state.webplayer.deviceId,
     activePlaylistTitle: state.playlists.active_playlist.name,
     active_playlist: state.playlists.active_playlist, //The tracks retrieved will be those from the active playlist, which must always be kept up to date
+    session: state.session
   };
 }
 
 const mapDispatchToProps = {
   getPlaylistTracks,
+  getPlaylistTracksFromSpotifyAndDB
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Tracks);

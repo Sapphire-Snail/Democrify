@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as spotify from "../SpotifyFunctions.js";
 import { Button } from "reactstrap";
-import { removeSong, getPlaylistTracks } from "../redux/actions/thunk";
+import { removeSong, getPlaylistTracks, getPlaylistTracksFromSpotifyAndDB, removeSongFromDB } from "../redux/actions/thunk";
 import "./Playlists/Playlists.css";
 import { notify } from "react-notify-toast";
 
@@ -12,19 +12,30 @@ class SingleTrack extends Component {
     this.removeSongFromPlaylist = this.removeSongFromPlaylist.bind(this);
   }
 
-  //Stops the song playing when the + is clicked
   removeSongFromPlaylist(e) {
-    this.props.removeSong(
-      this.props.activePlaylistID,
-      this.props.trackInfo.uri
-    );
     notify.show("Removed song " + this.props.trackInfo.name, "success", 2000);
-    this.props.getPlaylistTracks(this.props.activePlaylistID);
+    //If the song is stored in DB
+    if (this.props.trackInfo.addedBy) {
+      this.props.removeSongFromDB(this.props.trackInfo.uri, this.props.session.connected_session.data.joinCode);      
+      this.props.getPlaylistTracksFromSpotifyAndDB(this.props.activePlaylistID, this.props.session.connected_session.data.joinCode);
+    } else {
+      this.props.removeSong(
+        this.props.activePlaylistID,
+        this.props.trackInfo.uri
+      );
+      this.props.getPlaylistTracks(this.props.activePlaylistID);
+    }
   }
 
   playTrack = () => {
+    //We cannot use the playlist context for tracks that are not actually added to the playlist on Spotify yet.
+    //These tracks are just in the DB so we use the album context instead.
+    var context = this.props.activePlaylistUri;
+    if (this.props.trackInfo.addedBy) {
+      context = this.props.trackInfo.album.uri;
+    }
     spotify.play(
-      this.props.activePlaylistUri,
+      context,
       this.props.deviceId,
       this.props.trackInfo.uri
     );
@@ -70,7 +81,7 @@ class SingleTrack extends Component {
 }
 
 // State is entire state tree
-function mapStateToProps(state) {
+function mapStateToProps(state, ownProps) {
   return {
     activePlaylistUri: state.playlists.active_playlist.uri,
     deviceId: state.webplayer.deviceId,
@@ -80,12 +91,15 @@ function mapStateToProps(state) {
       state.playlists.active_playlist.uri.lastIndexOf(":") + 1
     ),
     can_delete:
-      state.playlists.active_playlist.collaborative ||
-      state.playlists.active_playlist.owner.id === state.user.data.id, //Only let them delete songs if playlist is collab or theirs
+      state.playlists.active_playlist.owner.id === state.user.data.id ||
+      ownProps.trackInfo.addedBy === state.user.data.id, //Only let them delete songs if they own the playlist or they added the track, and it hasnt been added to spotify yet
+    session: state.session
   };
 }
 const mapDispatchToProps = {
   removeSong,
   getPlaylistTracks,
+  getPlaylistTracksFromSpotifyAndDB,
+  removeSongFromDB
 };
 export default connect(mapStateToProps, mapDispatchToProps)(SingleTrack);

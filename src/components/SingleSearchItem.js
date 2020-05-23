@@ -17,7 +17,7 @@ class SingleSearchItem extends Component {
         if (this.props.canAddDirectly) {
             this.props.addSong(this.props.activePlaylistID, this.props.trackInfo.uri);
         } else {
-            this.props.addSongToDB(this.props.session.connected_session.data.joinCode, this.props.trackInfo);
+            this.props.addSongToDB(this.props.session.connected_session.data.joinCode, this.props.trackInfo, this.props.userId);
         }
         notify.show("Added song " + this.props.trackInfo.name, "success", 2000);
     }
@@ -50,7 +50,8 @@ const mapStateToProps = (state) => {
         activePlaylistID: state.playlists.active_playlist.uri.substring(state.playlists.active_playlist.uri.lastIndexOf(":") + 1),
         deviceId: state.webplayer.deviceId,
         search: state.search,
-        canAddDirectly: state.playlists.active_playlist.owner.id === state.user.data.id
+        canAddDirectly: state.playlists.active_playlist.owner.id === state.user.data.id,
+        userId: state.user.data.id
     };
 }
 

@@ -140,6 +140,40 @@ export function getPlaylistTracks(playlistId) {
   };
 }
 
+export function getPlaylistTracksFromSpotifyAndDB(playlistId, sessionCode) {
+  return (dispatch) => {
+    dispatch(getPlaylistTracksLoading());
+    spotify.getPlaylistTracks(playlistId).then(
+      (tracks) => {        
+        Api.getSessionPlaylist(sessionCode).then(
+          (DBTracks) => {
+            console.log(DBTracks);
+            console.log(tracks);
+            tracks.items = tracks.items.concat(DBTracks.data.tracksToBeAdded)
+            dispatch(getPlaylistTracksSuccess(tracks));
+          },
+          (error) => {
+            var err = JSON.parse(error.response);
+            dispatch(
+              getPlaylistTracksError(
+                err.error.status + " " + err.error.message || "Unexpected error!"
+              )
+            );
+          }
+        ) 
+      },
+      (error) => {
+        var err = JSON.parse(error.response);
+        dispatch(
+          getPlaylistTracksError(
+            err.error.status + " " + err.error.message || "Unexpected error!"
+          )
+        );
+      }
+    );
+  };
+}
+
 export function setDeviceID(deviceId) {
   return (dispatch) => {
     dispatch(setDeviceId(deviceId));
@@ -182,12 +216,37 @@ export function addSong(activePlaylistID, songURI) {
   };
 }
 
-export function addSongToDB(sessionCode, trackToAdd) {
+export function addSongToDB(sessionCode, trackToAdd, addedBy) {
   return (dispatch) => {
-    // Then call the API function with the given payload
-    Api.addSongToDB(sessionCode, trackToAdd).then((res) => console.log(res))
+    dispatch(addSongLoading());
+    Api.addSongToDB(sessionCode, trackToAdd, addedBy).then(
+      () => dispatch(addSongSuccess()),
+
+      (error) => {
+        var err = JSON.parse(error.response);
+        dispatch(
+          addSongError(
+            err.error.status + " " + err.error.message || "Unexpected error!"
+          )
+        );
+      }
+    );
   };
 }
+
+export function removeSongFromDB(sessionCode, trackToRemoveURI) {
+  return () => {
+    Api.removeSongFromDB(sessionCode, trackToRemoveURI).then(
+      (data) => console.log(data),
+
+      (error) => {
+        var err = error.response;
+        console.log(err);
+      }
+    );
+  };
+}
+
 
 
 export function removeSong(activePlaylistID, songURI) {
