@@ -19,14 +19,24 @@ router.use('/playlistSession', mongooseCrudify({
     actions: {
         // Override the "update" (PUT by identifer) action: when we update we add to the trackstobeaddedfield.
         update: (req, res) => { 
+            console.log("XXXXXXXXXXXXXXXXXXXXXXX");
             console.log(req);
+            console.log("WWWWWWWWWWWWWWWWWWWWWWW");
             console.log(res);
-            PlaylistSession.update(
-                { joinCode: req.joinCode }, 
+            PlaylistSession.updateOne(
+                { joinCode: req.body.joinCode }, 
                 {
                     $push: {
-                        tracksToAdd: req.trackToAdd
+                        tracksToAdd: "req.body.trackToAdd"
                     }
+                }
+            ).then(
+                function(data) {
+                    res.json(data);
+                },
+                function(err) {
+                    console.log('Something went wrong! (create playlist)', err);
+                    res.status(err.statusCode).end();
                 }
             )
         }        

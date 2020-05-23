@@ -17,7 +17,7 @@ class SingleSearchItem extends Component {
         if (this.props.canAddDirectly) {
             this.props.addSong(this.props.activePlaylistID, this.props.trackInfo.uri);
         } else {
-            console.log(this.props.session);
+            this.props.addSongToDB(this.props.session.connected_session.data.joinCode, this.props.trackInfo);
         }
         notify.show("Added song " + this.props.trackInfo.name, "success", 2000);
     }

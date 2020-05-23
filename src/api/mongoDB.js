@@ -22,9 +22,9 @@ export async function getSessionPlaylist(sessionCode) {
     });
 }
 
-export async function updateSessionPlaylist(sessionCode, trackToAdd) {
-    return await axios({
-        method: "put",
+export function addSongToDB(sessionCode, trackToAdd) {
+    return axios({
+        method: "PUT",
         url: "/api/playlistSession/" + sessionCode,
         timeout: 10000,
         data: {
