@@ -55,9 +55,9 @@ class InfoBar extends Component {
     }
   }
 
-  createSession (){
+  createSession = () => {
+    this.setState({ sessionCreated: !this.state.sessionCreated });
     this.props.createSession();
-    this.setState({ sessionCreated: true });
   }
 
   render() {
@@ -102,7 +102,7 @@ class InfoBar extends Component {
           {" "}
           Back{" "}
         </Button>
-          {(this.state.isTrackListPage && !this.props.session_code) ? 
+          {(this.state.isTrackListPage && !this.props.session_code && !this.state.sessionCreated) ? 
             <Button
               color="primary"
               style={{ marginLeft: 10 }}
