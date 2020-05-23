@@ -135,10 +135,15 @@ export function setPlaylist(playlist) {
 }
 
 export function getPlaylistTracks(playlistId) {
+  console.log('asdasd');
+  console.log(playlistId);
   return (dispatch) => {
     dispatch(getPlaylistTracksLoading());
     spotify.getPlaylistTracks(playlistId).then(
-      (tracks) => dispatch(getPlaylistTracksSuccess(tracks)),
+      (tracks) => {
+        dispatch(getPlaylistTracksSuccess(tracks));
+        console.log("sadd");
+      },
 
       (error) => {
         var err = JSON.parse(error.response);
@@ -157,16 +162,44 @@ export function addSongsFromDBToSpotifyThenGetTracks(playlistId, sessionCode) {
     dispatch(getPlaylistTracksLoading());
     Api.getSessionPlaylist(sessionCode).then(
       (session) => {
+        console.log(session);
         if (session.data) {
           for(var i = 0; i < session.data.tracksToBeAdded.length; i++) {
             addSong(playlistId, session.data.tracksToBeAdded.track.uri);
           }
         }
-        getPlaylistTracks(playlistId);
+        spotify.getPlaylistTracks(playlistId).then(
+          (tracks) => {
+            dispatch(getPlaylistTracksSuccess(tracks));
+          },
+    
+          (error) => {
+            var err = JSON.parse(error.response);
+            dispatch(
+              getPlaylistTracksError(
+                err.error.status + " " + err.error.message || "Unexpected error!"
+              )
+            );
+          }
+        );
       },
       () => {
-        console.log("dfaef");
-        getPlaylistTracks(playlistId)}
+        console.log("error getting session");
+        spotify.getPlaylistTracks(playlistId).then(
+          (tracks) => {
+            dispatch(getPlaylistTracksSuccess(tracks));
+          },
+    
+          (error) => {
+            var err = JSON.parse(error.response);
+            dispatch(
+              getPlaylistTracksError(
+                err.error.status + " " + err.error.message || "Unexpected error!"
+              )
+            );
+          }
+        );
+      }
     )
   };
 }
