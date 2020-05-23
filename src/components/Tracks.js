@@ -9,7 +9,12 @@ class Tracks extends Component {
     if (this.props.session.connected_session != undefined) {
       this.props.getPlaylistTracksFromSpotifyAndDB(this.props.active_playlist.id, this.props.session.connected_session.data.joinCode);
     } else {
-      this.props.addSongsFromDBToSpotifyThenGetTracks(this.props.active_playlist.id, this.props.session.hosted_session.data.joinCode);
+      // if (this.props.session.hosted_session != undefined) {
+      //   console.log("yeeeet")
+      //   this.props.addSongsFromDBToSpotifyThenGetTracks(this.props.active_playlist.id, this.props.session.hosted_session.data.joinCode);
+      // } else {
+        this.props.getPlaylistTracks(this.props.active_playlist.id);
+      //}
     } 
   }
 
@@ -71,7 +76,8 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = {
   getPlaylistTracks,
-  getPlaylistTracksFromSpotifyAndDB
+  getPlaylistTracksFromSpotifyAndDB,
+  addSongsFromDBToSpotifyThenGetTracks
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Tracks);
