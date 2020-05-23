@@ -151,7 +151,10 @@ export function addSongsFromDBToSpotifyThenGetTracks(playlistId, sessionCode) {
           }
         }
         getPlaylistTracks(playlistId);
-      }
+      },
+      () => {
+        console.log("dfaef");
+        getPlaylistTracks(playlistId)}
     )
   };
 }

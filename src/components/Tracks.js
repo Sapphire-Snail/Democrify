@@ -6,7 +6,7 @@ import { getPlaylistTracks, getPlaylistTracksFromSpotifyAndDB, addSongsFromDBToS
 
 class Tracks extends Component {
   componentDidMount() {
-    if (this.props.session.connected_session.data.joinCode) {
+    if (this.props.session.connected_session != undefined) {
       this.props.getPlaylistTracksFromSpotifyAndDB(this.props.active_playlist.id, this.props.session.connected_session.data.joinCode);
     } else {
       this.props.addSongsFromDBToSpotifyThenGetTracks(this.props.active_playlist.id, this.props.session.hosted_session.data.joinCode);
