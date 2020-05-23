@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as spotify from "../SpotifyFunctions.js";
-import { Button } from 'reactstrap';
 import { addSong, addSongToDB } from '../redux/actions/thunk';
 import "./Playlists/Playlists.css"
 import { notify } from 'react-notify-toast';
+import { AiFillPlusCircle } from "react-icons/ai";
 
 class SingleSearchItem extends Component {
     constructor() {
@@ -25,17 +25,17 @@ class SingleSearchItem extends Component {
     render() {
         return(            
             <tr key={this.props.trackInfo.id}>
-                <td  class="tableCell" onClick={() => {spotify.play(this.props.trackInfo.album.uri, this.props.deviceId, this.props.trackInfo.uri)}}>
+                <td  className="tableCell" onClick={() => {spotify.play(this.props.trackInfo.album.uri, this.props.deviceId, this.props.trackInfo.uri)}}>
                     <img src={this.props.trackInfo.album.images[0] ? this.props.trackInfo.album.images[0].url : 'https://f4.bcbits.com/img/a4139357031_10.jpg'} alt="track" className="albumImage"/>
                 </td>
-                <td  class="tableCell" onClick={() => {spotify.play(this.props.trackInfo.album.uri, this.props.deviceId, this.props.trackInfo.uri)}}>
+                <td  className="tableCell" onClick={() => {spotify.play(this.props.trackInfo.album.uri, this.props.deviceId, this.props.trackInfo.uri)}}>
                     <span style={{cursor:'pointer', color:'blue'}}>{this.props.trackInfo.name}</span>
                 </td>
-                <td  class="tableCell" onClick={() => {spotify.play(this.props.trackInfo.album.uri, this.props.deviceId, this.props.trackInfo.uri)}}>
+                <td  className="tableCell" onClick={() => {spotify.play(this.props.trackInfo.album.uri, this.props.deviceId, this.props.trackInfo.uri)}}>
                     <span>{this.props.trackInfo.artists[0].name}</span>
                 </td>
-                <td  class="tableCell">
-                    <Button onClick={(e) => {this.addSongToPlaylist(e)}}>+</Button>
+                <td  className="tableCell">
+                    <AiFillPlusCircle size={25} onClick={(e) => {this.addSongToPlaylist(e)}} style={{cursor: 'pointer'}}/>
                 </td>
             </tr>
         )

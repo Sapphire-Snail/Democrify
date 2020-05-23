@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as spotify from "../SpotifyFunctions.js";
-import { Button } from "reactstrap";
 import { removeSong, getPlaylistTracks, getPlaylistTracksFromSpotifyAndDB, removeSongFromDB } from "../redux/actions/thunk";
 import "./Playlists/Playlists.css";
 import { notify } from "react-notify-toast";
+import { AiFillCloseCircle } from "react-icons/ai";
 
 class SingleTrack extends Component {
   constructor() {
@@ -65,14 +65,10 @@ class SingleTrack extends Component {
         </td>
         <td>
           {this.props.can_delete && (
-            <Button
-              onClick={(e) => {
-                e.preventDefault();
-                this.removeSongFromPlaylist(e);
-              }}
-            >
-              X
-            </Button>
+            <AiFillCloseCircle size={25} onClick={(e) => {
+              e.preventDefault();
+              this.removeSongFromPlaylist(e);
+            }} style={{cursor: 'pointer'}}/>
           )}
         </td>
       </tr>

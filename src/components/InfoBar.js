@@ -19,7 +19,7 @@ class InfoBar extends Component {
     this.state = {
       title: this.props.title,
       isTrackListPage: this.props.isTrackListPage,
-      isPlaylsitPage: this.props.isPlaylistPage,
+      isPlaylistPage: this.props.isPlaylistPage,
       sessionCreated: false,
       searchShowing: false,
       backLink: this.props.backLink,
@@ -42,7 +42,7 @@ class InfoBar extends Component {
   toggleSearch = () => {
     this.setState({ searchShowing: !this.state.searchShowing });
     this.props.toggleSearch();
-  }
+  };
 
   handleSubmit(e) {
     e.preventDefault();
@@ -51,14 +51,17 @@ class InfoBar extends Component {
     } else {
       this.setState({ seen: false, listname: "" });
       this.props.createPlaylist(this.props.userID, this.state.listname);
-      notify.show("Successfully created playlist " + this.state.listname, "success");
+      notify.show(
+        "Successfully created playlist " + this.state.listname,
+        "success"
+      );
     }
   }
 
   createSession = () => {
     this.setState({ sessionCreated: !this.state.sessionCreated });
     this.props.createSession();
-  }
+  };
 
   render() {
     return (
@@ -75,83 +78,101 @@ class InfoBar extends Component {
             >
               {this.props.can_add
                 ? this.state.searchShowing
-                  ? "Back to the playlsit"
+                  ? "Back to the playlist"
                   : "Add track"
                 : "Cannot add track"}
             </Button>
           )}
-          {this.state.isTrackListPage && this.props.session_code && <h3>Code: <Badge color="secondary">{this.props.session_code}</Badge></h3>}
+          {this.state.isTrackListPage && this.props.session_code && (
+            <h3>
+              Code: <Badge color="secondary">{this.props.session_code}</Badge>
+            </h3>
+          )}
           {/* I regret this line of code */}
-          {(this.state.isTrackListPage && this.props.hosted_session && (this.props.playlistId === this.props.hosted_session.playlistURI)) && !this.props.session_code &&<h3>Code: <Badge color="secondary">{this.props.hosted_session.joinCode}</Badge></h3>}
-
-  
-          {this.state.isPlaylsitPage && ( 
-          <div>
-            <Collapse isOpen={!this.state.seen}>
-              <button
-                className="btn-UpperCreate button button--loginApp-link"
-                onClick={this.togglePop}
-              >
-                Create Playlist
-              </button>
-            </Collapse>
-          </div>)}
+          {this.state.isTrackListPage &&
+            this.props.hosted_session &&
+            this.props.playlistId === this.props.hosted_session.playlistURI &&
+            !this.props.session_code && (
+              <h3>
+                Code:{" "}
+                <Badge color="secondary">
+                  {this.props.hosted_session.joinCode}
+                </Badge>
+              </h3>
+            )}
         </Row>
         <Row style={{ margin: "auto", display: "block" }}>
-        <Button color="primary" tag={Link} to={this.state.backLink}>
-          {" "}
-          Back{" "}
-        </Button>
-          {(this.state.isTrackListPage && !this.props.session_code && !this.state.sessionCreated) ? 
+          {!this.state.searchShowing && <Button color="primary" tag={Link} to={this.state.backLink}>
+            {" "}
+            Back{" "}
+          </Button>}
+          {!this.state.searchShowing &&
+          this.state.isTrackListPage &&
+          !this.props.session_code &&
+          !this.state.sessionCreated ? (
             <Button
               color="primary"
               style={{ marginLeft: 10 }}
               onClick={this.createSession}
             >
               Create Session!
-            </Button> : null
-          }
-        {this.state.isPlaylsitPage && (
-          <Collapse isOpen={this.state.seen}>
-            <Card
-              style={{ backgroundColor: "transparent", borderWidth: "0" }}
-              className={"inputListnameCard"}
-            >
-              <CardBody style={{ padding: "0px" }}>
-                <form onSubmit={this.handleSubmit}>
-                  <br />
-                  <label>
-                    <input
-                      placeholder="Playlist Name"
-                      type="text"
-                      className={"playlistInput"}
-                      value={this.state.listname}
-                      onChange={this.handleChange}
-                    />
-                  </label>
-                  <br />
-                  <Button color="success" onClick={this.handleSubmit}>
-                    Submit
-                  </Button>
-                  <Button className={"closeBtn"} onClick={this.togglePop}>
-                    Close
-                  </Button>
-                </form>
-              </CardBody>
-            </Card>
-          </Collapse>
-        )}
-
+            </Button>
+          ) : null}
+          {this.state.isPlaylistPage && (
+            <div style={{marginTop: 15}}>
+              <Collapse isOpen={!this.state.seen}>
+                <button
+                  className="btn-UpperCreate button button--loginApp-link"
+                  onClick={this.togglePop}
+                >
+                  Create Playlist
+                </button>
+              </Collapse>
+            </div>
+          )}
+          {this.state.isPlaylistPage && (
+            <Collapse isOpen={this.state.seen}>
+              <Card
+                style={{ backgroundColor: "transparent", borderWidth: "0" }}
+                className={"inputListnameCard"}
+              >
+                <CardBody style={{ padding: "0px" }}>
+                  <form onSubmit={this.handleSubmit}>
+                    <br />
+                    <label>
+                      <input
+                        placeholder="Playlist Name"
+                        type="text"
+                        className={"playlistInput"}
+                        value={this.state.listname}
+                        onChange={this.handleChange}
+                      />
+                    </label>
+                    <br />
+                    <Button color="success" onClick={this.handleSubmit}>
+                      Submit
+                    </Button>
+                    <Button className={"closeBtn"} onClick={this.togglePop}>
+                      Close
+                    </Button>
+                  </form>
+                </CardBody>
+              </Card>
+            </Collapse>
+          )}
         </Row>
-
       </Container>
     );
   }
 }
 function mapStateToProps(state) {
   return {
-    hosted_session: state.session.hosted_session ? state.session.hosted_session.data : null,
-    session_code: state.playlists.active_playlist.session ? state.playlists.active_playlist.session.joinCode : '',
+    hosted_session: state.session.hosted_session
+      ? state.session.hosted_session.data
+      : null,
+    session_code: state.playlists.active_playlist.session
+      ? state.playlists.active_playlist.session.joinCode
+      : "",
     activePlaylist: state.playlists.active_playlist,
     can_add:
       state.playlists.active_playlist.collaborative ||
@@ -159,7 +180,7 @@ function mapStateToProps(state) {
     playlistId: window.location.pathname.split("/").pop(), //Grab playlist ID from URL
     deviceId: state.webplayer.deviceId,
     userID: state.user.data ? state.user.data.id : null,
-   };
+  };
 }
 
 const mapDispatchToProps = {
