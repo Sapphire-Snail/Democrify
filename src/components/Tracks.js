@@ -2,14 +2,14 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Loader from "react-loader-spinner";
 import SingleTrack from "./SingleTrack";
-import { getPlaylistTracks, getPlaylistTracksFromSpotifyAndDB } from "../redux/actions/thunk";
+import { getPlaylistTracks, getPlaylistTracksFromSpotifyAndDB, addSongsFromDBToSpotifyThenGetTracks } from "../redux/actions/thunk";
 
 class Tracks extends Component {
   componentDidMount() {
     if (this.props.session.connected_session.data.joinCode) {
       this.props.getPlaylistTracksFromSpotifyAndDB(this.props.active_playlist.id, this.props.session.connected_session.data.joinCode);
     } else {
-      this.props.getPlaylistTracks(this.props.active_playlist.id);
+      this.props.addSongsFromDBToSpotifyThenGetTracks(this.props.active_playlist.id, this.props.session.hosted_session.data.joinCode);
     } 
   }
 

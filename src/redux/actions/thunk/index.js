@@ -140,6 +140,22 @@ export function getPlaylistTracks(playlistId) {
   };
 }
 
+export function addSongsFromDBToSpotifyThenGetTracks(playlistId, sessionCode) {
+  return (dispatch) => {
+    dispatch(getPlaylistTracksLoading());
+    Api.getSessionPlaylist(sessionCode).then(
+      (session) => {
+        if (session.data) {
+          for(var i = 0; i < session.data.tracksToBeAdded.length; i++) {
+            addSong(playlistId, session.data.tracksToBeAdded.track.uri);
+          }
+        }
+        getPlaylistTracks(playlistId);
+      }
+    )
+  };
+}
+
 export function getPlaylistTracksFromSpotifyAndDB(playlistId, sessionCode) {
   return (dispatch) => {
     dispatch(getPlaylistTracksLoading());
