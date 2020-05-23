@@ -20,7 +20,7 @@ class InfoBar extends Component {
       title: this.props.title,
       isTrackListPage: this.props.isTrackListPage,
       isPlaylsitPage: this.props.isPlaylistPage,
-      sessionCreated: this.props.session_code,
+      sessionCreated: false,
       searchShowing: false,
       backLink: this.props.backLink,
       listname: "",
@@ -53,6 +53,11 @@ class InfoBar extends Component {
       this.props.createPlaylist(this.props.userID, this.state.listname);
       notify.show("Successfully created playlist " + this.state.listname, "success");
     }
+  }
+
+  createSession = () => {
+    this.setState({ sessionCreated: !this.state.sessionCreated });
+    this.props.createSession();
   }
 
   render() {
@@ -97,15 +102,15 @@ class InfoBar extends Component {
           {" "}
           Back{" "}
         </Button>
-          {this.state.isTrackListPage && (
+          {(this.state.isTrackListPage && !this.props.session_code && !this.state.sessionCreated) ? 
             <Button
               color="primary"
               style={{ marginLeft: 10 }}
-              onClick={this.props.createSession}
+              onClick={this.createSession}
             >
               Create Session!
-            </Button>
-          )}
+            </Button> : null
+          }
         {this.state.isPlaylsitPage && (
           <Collapse isOpen={this.state.seen}>
             <Card
