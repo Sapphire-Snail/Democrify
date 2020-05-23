@@ -42,7 +42,6 @@ class TracksPage extends Component {
   }
 
   render() {
-    console.log("render");
     return (
       <div>
         <InfoBar
