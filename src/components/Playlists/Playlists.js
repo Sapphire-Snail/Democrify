@@ -5,6 +5,7 @@ import SinglePlaylist from "./SinglePlaylist";
 import { getUserSessions } from "../../redux/actions/thunk";
 import "./Playlists.css";
 import InfoBar from "../InfoBar";
+import {Table} from "reactstrap";
 class Playlists extends Component {
   render() {
     const { error, loading, data } = this.props.playlists;
@@ -23,8 +24,8 @@ class Playlists extends Component {
       return (
         <div>
           <InfoBar title="Top Playlists" backLink='/me' isPlaylistPage={true}> </InfoBar>
-          <div className="container tableContainer">
-            <table className="table">
+          <div className="tableContainer">
+            <Table hover size='sm' className="table">
               <thead>
                 <tr>
                   <th></th>
@@ -38,7 +39,7 @@ class Playlists extends Component {
                     <SinglePlaylist isSession={item.session} key={item.id} playlistInfo={item} />
                   ))}
               </tbody>
-            </table>
+            </Table>
           </div>
         </div>
       );
