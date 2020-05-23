@@ -4,6 +4,7 @@ import Loader from "react-loader-spinner";
 import SinglePlaylist from "./SinglePlaylist";
 import { getUserSessions } from "../../redux/actions/thunk";
 import "./Playlists.css";
+import InfoBar from "../InfoBar";
 class Playlists extends Component {
   render() {
     const { error, loading, data } = this.props.playlists;
@@ -21,9 +22,7 @@ class Playlists extends Component {
     if (data) {
       return (
         <div>
-          <div className="tableCaptionContainer">
-            <h1 style={{ color: "white" }}>{this.props.title}</h1>
-          </div>
+          <InfoBar title="Top Playlists" backLink='/me' isPlaylistPage={true}> </InfoBar>
           <div className="container tableContainer">
             <table className="table">
               <thead>

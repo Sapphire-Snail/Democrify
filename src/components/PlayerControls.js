@@ -35,15 +35,14 @@ class PlayerControls extends Component {
             <img
               src={this.props.nowPlaying.album.images[0].url}
               alt="songArt"
-              style={{ width: 100, height: 100 }}
+              style={{ width: 100, height: 100, verticalAlign: 'bottom'}}
             />
           )}
         </div>
         <div className="trackInfo">
-        <marquee  scrolldelay="200" >
-          <p>{this.props.nowPlaying.name}</p></marquee>
-          <p>{this.props.nowPlaying.artists[0].name}</p>
-          <div onClick={this.togglePlay}>
+          <p className="trackDetails">{this.props.nowPlaying.name}</p>
+          <p className="trackDetails">{"by " + this.props.nowPlaying.artists[0].name}</p>
+          <div onClick={this.togglePlay} className="trackDetails">
           <div className="pcontainer">
           <div>  <FiSkipBack size={25} onClick={this.skipBack} className="skipBtn" /></div>
             <div className={this.props.isPaused ? "pbtn play" : "pbtn pause"}>

@@ -5,7 +5,6 @@ import {
     GET_SESSION_LOADING,
     GET_SESSION_SUCCESS,
     GET_SESSION_ERROR,
-    GET_ALLSESSIONS
   } from './action-types';
 
 export function createSessionLoading() {

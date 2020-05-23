@@ -4,6 +4,7 @@ import Loader from "react-loader-spinner";
 import SingleTrack from "./SingleTrack";
 import { getPlaylistTracks } from "../redux/actions/thunk";
 
+
 class Tracks extends Component {
   componentDidMount() {
     this.props.getPlaylistTracks(this.props.active_playlist.id);
@@ -25,7 +26,6 @@ class Tracks extends Component {
     if (data) {
       return (
         <div>
-          <div className="tableCaptionContainer"></div>
           <div className="container">
             <table className="table">
               <thead>

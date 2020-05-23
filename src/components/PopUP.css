@@ -1,22 +1,18 @@
-
-.inputListnameCard{
+.inputListnameCard {
   width: 35%;
   margin: auto;
-  margin-top: 1em;
   padding: 10px;
+  padding-top: 0px;
 }
-.btn-UpperCreate{
-  position: fixed;
-  bottom: 70%;
- 
-  right: 0;
+.btn-UpperCreate {
+  margin-bottom: 1em;
 }
 
 .closeBtn {
-margin-left: 10px;
+  margin-left: 10px;
 }
 
 .playlistInput {
-border-radius: 10px;
-padding: 10px;
+  border-radius: 10px;
+  padding: 10px;
 }

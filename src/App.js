@@ -12,7 +12,7 @@ import * as spotify from "./SpotifyFunctions.js";
 //Components
 import LoginPage from "./components/LoginPage";
 import Callback from "./Callback";
-import UserInfo from "./components/UserInfo";
+import LoginBar from "./components/LoginBar";
 import PlaylistsPage from "./components/PlaylistsPage";
 import TracksPage from "./components/TracksPage";
 import WebPlayer from "./components/WebPlayer";
@@ -23,17 +23,16 @@ import SessionPage from "./components/SessionPage";
 window.onSpotifyWebPlaybackSDKReady = () => {};
 
 class App extends Component {
-
-    // Things to do before unloading/closing the tab (CURRENTLY NOTHING)
-    unloadCurrentlyPlaying = () => {
-        console.log('goodbye');
-    }
+  // Things to do before unloading/closing the tab (CURRENTLY NOTHING)
+  unloadCurrentlyPlaying = () => {
+    console.log("goodbye");
+  };
 
   //Set up listener to run code when window unmounts
   setupBeforeUnloadListener = () => {
     window.addEventListener("beforeunload", (ev) => {
-        ev.preventDefault();
-        return this.unloadCurrentlyPlaying();
+      ev.preventDefault();
+      return this.unloadCurrentlyPlaying();
     });
   };
 
@@ -49,13 +48,19 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
+          <LoginBar />
           <header>
-            <img className="App-logo" src={require("./assets/logo.svg")} alt='logo'/>
+            <img
+              className="App-logo"
+              src={require("./assets/logo.svg")}
+              alt="logo"
+            />
             <h2 className="slogan">Music for the people</h2>
-            { this.props.loggedIn && <WebPlayer />} {/* At the moment the whole app gets a web player, but in the future only load if they are hosting */}
+            {this.props.loggedIn && <WebPlayer />}{" "}
+            {/* At the moment the whole app gets a web player, but in the future only load if they are hosting */}
           </header>
           <main>
-            <div style={{marginBottom: 110}}>
+            <div style={{ marginBottom: 110 }}>
               <Switch>
                 <Route exact path="/">
                   <Redirect to="/login" />
@@ -67,27 +72,23 @@ class App extends Component {
                   <Callback />
                 </Route>
                 <Route path="/me">
-                  <UserInfo />
                   <WelcomeScreen />
                 </Route>
                 <Route path="/playlists">
-                  <UserInfo />
                   <PlaylistsPage />
                 </Route>
                 <Route path="/playlist">
-                  <UserInfo />
                   <TracksPage />
                 </Route>
                 <Route path="/session">
-                  <UserInfo />
                   <SessionPage />
                 </Route>
                 <Route path="*">
                   <p>404 Not Found!!</p>
                 </Route>
               </Switch>
-              <PlayerControls/>
-              </div>
+              <PlayerControls />
+            </div>
           </main>
         </div>
       </Router>
