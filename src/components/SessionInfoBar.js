@@ -35,10 +35,10 @@ class SessionInfoBar extends Component {
           )}
         </Row>
         <Row style={{ margin: "auto", display: "inline" }}>
-          <Button color="primary" tag={Link} to={this.state.backLink}>
+          {!this.state.searchShowing && <Button color="primary" tag={Link} to={this.state.backLink}>
             {" "}
             Back{" "}
-          </Button>
+          </Button>}
         </Row>
         <Button
           disabled={!this.props.can_add}
@@ -53,7 +53,7 @@ class SessionInfoBar extends Component {
         >
           {this.props.can_add
             ? this.state.searchShowing
-              ? "Back to the playlsit"
+              ? "Back to the playlist"
               : "Add track"
             : "Cannot add track"}
         </Button>
