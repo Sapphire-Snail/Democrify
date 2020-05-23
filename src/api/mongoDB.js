@@ -22,6 +22,30 @@ export async function getSessionPlaylist(sessionCode) {
   });
 }
 
+export function addSongToDB(sessionCode, trackToAdd, addedBy) {
+    return axios({
+        method: "PUT",
+        url: "/api/playlistSession/" + sessionCode,
+        timeout: 10000,
+        data: {
+            joinCode: sessionCode,
+            trackToAdd: trackToAdd,
+            addedBy: addedBy
+        }
+    });
+}
+
+export function removeSongFromDB(trackToRemoveURI, sessionCode) {
+    return axios({
+        method: "PUT",
+        url: "/api/playlistSession/" + sessionCode,
+        timeout: 10000,
+        data: {
+            joinCode: sessionCode,
+            trackToRemoveURI: trackToRemoveURI,
+        }
+    });
+}
 export function getCodeFromPlaylist(hostID, playlistID) {
   return axios({
     method: "post",

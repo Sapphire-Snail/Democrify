@@ -17,7 +17,7 @@ const playlistSessionSchema = new Schema({
     isLiveMode: { type: Boolean },
     currentTrackChoiceURIs: [{ type: String }],
     votes: [{ type: Schema.Types.ObjectId, ref: 'Vote' }], // This is how we reference a different collection.
-
+    tracksToBeAdded: []
 }, { /* This second object allows us to specify more config info. In this case, we're enabling automatic timetamps using the default options.
         For more options, see the URL above. */
     timestamps: {}

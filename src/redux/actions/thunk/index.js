@@ -135,11 +135,97 @@ export function setPlaylist(playlist) {
 }
 
 export function getPlaylistTracks(playlistId) {
+  console.log('asdasd');
+  console.log(playlistId);
   return (dispatch) => {
     dispatch(getPlaylistTracksLoading());
     spotify.getPlaylistTracks(playlistId).then(
-      (tracks) => dispatch(getPlaylistTracksSuccess(tracks)),
+      (tracks) => {
+        dispatch(getPlaylistTracksSuccess(tracks));
+        console.log("sadd");
+      },
 
+      (error) => {
+        var err = JSON.parse(error.response);
+        dispatch(
+          getPlaylistTracksError(
+            err.error.status + " " + err.error.message || "Unexpected error!"
+          )
+        );
+      }
+    );
+  };
+}
+
+export function addSongsFromDBToSpotifyThenGetTracks(playlistId, sessionCode) {
+  return (dispatch) => {
+    dispatch(getPlaylistTracksLoading());
+    Api.getSessionPlaylist(sessionCode).then(
+      (session) => {
+        console.log(session);
+        if (session.data) {
+          for(var i = 0; i < session.data.tracksToBeAdded.length; i++) {
+            addSong(playlistId, session.data.tracksToBeAdded.track.uri);
+          }
+        }
+        spotify.getPlaylistTracks(playlistId).then(
+          (tracks) => {
+            dispatch(getPlaylistTracksSuccess(tracks));
+          },
+    
+          (error) => {
+            var err = JSON.parse(error.response);
+            dispatch(
+              getPlaylistTracksError(
+                err.error.status + " " + err.error.message || "Unexpected error!"
+              )
+            );
+          }
+        );
+      },
+      () => {
+        console.log("error getting session");
+        spotify.getPlaylistTracks(playlistId).then(
+          (tracks) => {
+            dispatch(getPlaylistTracksSuccess(tracks));
+          },
+    
+          (error) => {
+            var err = JSON.parse(error.response);
+            dispatch(
+              getPlaylistTracksError(
+                err.error.status + " " + err.error.message || "Unexpected error!"
+              )
+            );
+          }
+        );
+      }
+    )
+  };
+}
+
+export function getPlaylistTracksFromSpotifyAndDB(playlistId, sessionCode) {
+  return (dispatch) => {
+    dispatch(getPlaylistTracksLoading());
+    spotify.getPlaylistTracks(playlistId).then(
+      (tracks) => {        
+        Api.getSessionPlaylist(sessionCode).then(
+          (DBTracks) => {
+            console.log(DBTracks);
+            console.log(tracks);
+            tracks.items = tracks.items.concat(DBTracks.data.tracksToBeAdded)
+            dispatch(getPlaylistTracksSuccess(tracks));
+          },
+          (error) => {
+            var err = JSON.parse(error.response);
+            dispatch(
+              getPlaylistTracksError(
+                err.error.status + " " + err.error.message || "Unexpected error!"
+              )
+            );
+          }
+        ) 
+      },
       (error) => {
         var err = JSON.parse(error.response);
         dispatch(
@@ -193,6 +279,39 @@ export function addSong(activePlaylistID, songURI) {
     );
   };
 }
+
+export function addSongToDB(sessionCode, trackToAdd, addedBy) {
+  return (dispatch) => {
+    dispatch(addSongLoading());
+    Api.addSongToDB(sessionCode, trackToAdd, addedBy).then(
+      () => dispatch(addSongSuccess()),
+
+      (error) => {
+        var err = JSON.parse(error.response);
+        dispatch(
+          addSongError(
+            err.error.status + " " + err.error.message || "Unexpected error!"
+          )
+        );
+      }
+    );
+  };
+}
+
+export function removeSongFromDB(sessionCode, trackToRemoveURI) {
+  return () => {
+    Api.removeSongFromDB(sessionCode, trackToRemoveURI).then(
+      (data) => console.log(data),
+
+      (error) => {
+        var err = error.response;
+        console.log(err);
+      }
+    );
+  };
+}
+
+
 
 export function removeSong(activePlaylistID, songURI) {
   return (dispatch) => {

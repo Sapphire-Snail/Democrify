@@ -16,6 +16,42 @@ const router = express.Router();
 router.use('/playlistSession', mongooseCrudify({
     Model: PlaylistSession,
     identifyingKey: 'joinCode',
+    actions: {
+        //Override the "update" (PUT by identifer) action: when we update, we add or remove from the trackstobeadded field.
+        update: (req, res) => {
+            var dbUpdateFunction;
+            //If we want to remove song
+            if (req.body.trackToRemoveURI) {
+                dbUpdateFunction = PlaylistSession.updateOne(
+                    { joinCode: req.body.joinCode },
+                    {
+                        $pull: { tracksToBeAdded: { trackURI: req.body.trackToRemoveURI } }
+                    }
+                );
+            //If we want to add song
+            } else {
+                //These 2 lines try to match the format of spotify songs fetched the traditional way as well as provide some identication from a normal spotify track
+                req.body.trackToAdd.addedBy = req.body.addedBy;
+                var track = {track: req.body.trackToAdd, trackURI: req.body.trackToAdd.uri};
+
+                dbUpdateFunction = PlaylistSession.updateOne(
+                    { joinCode: req.body.joinCode }, 
+                    {
+                        $push: {tracksToBeAdded: track}
+                    }
+                );
+            }
+            dbUpdateFunction.then(
+                function(data) {
+                    res.json(data);
+                },
+                function(err) {
+                    console.log('Something went wrong! (add/remove track to/from DB)', err);
+                    res.status(err.statusCode).end();
+                }
+            );
+        }        
+    }
 }));
 
 /**

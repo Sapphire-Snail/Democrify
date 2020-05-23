@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as spotify from "../SpotifyFunctions.js";
-import { addSong } from '../redux/actions/thunk';
+import { addSong, addSongToDB } from '../redux/actions/thunk';
 import "./Playlists/Playlists.css"
 import { notify } from 'react-notify-toast';
 import { AiFillPlusCircle } from "react-icons/ai";
@@ -14,7 +14,11 @@ class SingleSearchItem extends Component {
 
     //Stops the song playing when the + is clicked
     addSongToPlaylist (e) {
-        this.props.addSong(this.props.activePlaylistID, this.props.trackInfo.uri);
+        if (this.props.canAddDirectly) {
+            this.props.addSong(this.props.activePlaylistID, this.props.trackInfo.uri);
+        } else {
+            this.props.addSongToDB(this.props.session.connected_session.data.joinCode, this.props.trackInfo, this.props.userId);
+        }
         notify.show("Added song " + this.props.trackInfo.name, "success", 2000);
     }
 
@@ -42,14 +46,18 @@ class SingleSearchItem extends Component {
 const mapStateToProps = (state) => {
     return {
         activePlaylistUri: state.playlists.active_playlist.uri,
+        session: state.session,
         activePlaylistID: state.playlists.active_playlist.uri.substring(state.playlists.active_playlist.uri.lastIndexOf(":") + 1),
         deviceId: state.webplayer.deviceId,
-        search: state.search
+        search: state.search,
+        canAddDirectly: state.playlists.active_playlist.owner.id === state.user.data.id,
+        userId: state.user.data.id
     };
 }
 
 const mapDispatchToProps = {
-    addSong
+    addSong,
+    addSongToDB
 }
 
 
