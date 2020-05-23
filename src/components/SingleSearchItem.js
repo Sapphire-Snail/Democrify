@@ -25,16 +25,16 @@ class SingleSearchItem extends Component {
     render() {
         return(            
             <tr key={this.props.trackInfo.id}>
-                <td onClick={() => {spotify.play(this.props.trackInfo.album.uri, this.props.deviceId, this.props.trackInfo.uri)}}>
+                <td  class="tableCell" onClick={() => {spotify.play(this.props.trackInfo.album.uri, this.props.deviceId, this.props.trackInfo.uri)}}>
                     <img src={this.props.trackInfo.album.images[0] ? this.props.trackInfo.album.images[0].url : 'https://f4.bcbits.com/img/a4139357031_10.jpg'} alt="track" className="albumImage"/>
                 </td>
-                <td onClick={() => {spotify.play(this.props.trackInfo.album.uri, this.props.deviceId, this.props.trackInfo.uri)}}>
+                <td  class="tableCell" onClick={() => {spotify.play(this.props.trackInfo.album.uri, this.props.deviceId, this.props.trackInfo.uri)}}>
                     <span style={{cursor:'pointer', color:'blue'}}>{this.props.trackInfo.name}</span>
                 </td>
-                <td onClick={() => {spotify.play(this.props.trackInfo.album.uri, this.props.deviceId, this.props.trackInfo.uri)}}>
+                <td  class="tableCell" onClick={() => {spotify.play(this.props.trackInfo.album.uri, this.props.deviceId, this.props.trackInfo.uri)}}>
                     <span>{this.props.trackInfo.artists[0].name}</span>
                 </td>
-                <td>
+                <td  class="tableCell">
                     <Button onClick={(e) => {this.addSongToPlaylist(e)}}>+</Button>
                 </td>
             </tr>
