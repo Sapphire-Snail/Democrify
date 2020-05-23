@@ -2,11 +2,10 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Loader from "react-loader-spinner";
 import { getPlaylistTracks } from "../redux/actions/thunk";
-import { Button } from "reactstrap";
-import { Link } from "react-router-dom";
 import SearchPage from "./SearchPage";
 import Tracks from "./Tracks";
 import { getSession } from "../redux/actions/thunk";
+import SessionInfoBar from "./SessionInfoBar";
 
 class SessionPage extends Component {
   constructor() {
@@ -42,23 +41,7 @@ class SessionPage extends Component {
     if (connected_session.data) {
       return (
         <div>
-          <Link to="/me">Back we go bois</Link>
-          <div className="stickyContainer">
-            <h1 className="playlistTitle">{this.props.active_playlist.name}</h1>
-            <p> Host ID: {this.props.session.connected_session.data.hostID} </p>
-            <Button
-              className="addButton"
-              disabled={!this.props.can_add}
-              style={{ backgroundColor: "#c030ed", borderColor: "#c030ed" }}
-              onClick={this.toggleSearch}
-            >
-              {this.props.can_add
-                ? this.state.searchShowing
-                  ? "Back"
-                  : "Add track"
-                : "Cannot add track"}
-            </Button>
-          </div>
+        <SessionInfoBar title={this.props.active_playlist.name} hostID={this.props.session.connected_session.data.hostID} backLink='/me' toggleSearch={this.toggleSearch}/>
           {this.state.searchShowing ? (
             <SearchPage />
           ) : (

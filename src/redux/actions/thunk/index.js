@@ -37,11 +37,12 @@ import {
   setCollaborativeLoading,
   setCollaborativeSuccess,
   setCollaborativeError,
+  getAllSessions,
 } from "..";
 import * as spotify from "../../../SpotifyFunctions.js";
 import Api from "../../../api";
 
-export function loadPlaylists() {
+export function loadPlaylists(userID) {
   return (dispatch) => {
     // First, dispatch the LOAD_PLAYLISTS_LOADING action, allowing the rest of our app to detect when
     // we've started loading playlists.
@@ -49,7 +50,10 @@ export function loadPlaylists() {
 
     spotify.getUserPlaylists().then(
       // If the todos were loaded successfully, dispatch the LOAD_PLAYLISTS_SUCCESS action allowing the playlists to be added to the store
-      (playlists) => dispatch(loadPlaylistsSuccess(playlists)),
+      (playlists) => {
+        dispatch(loadPlaylistsSuccess(playlists));
+        dispatch(loadSessions(userID));
+      },
 
       // If there was an error loading todos, dispatch the LOAD_PLAYLISTS_ERROR action providing details of the error
       (error) => {
@@ -61,6 +65,14 @@ export function loadPlaylists() {
         );
       }
     );
+  };
+}
+
+//Called by loadPlaylists
+export function loadSessions(userID) {
+  return (dispatch, getState) => {
+    Api.getAllUserSessions(userID).then(
+      (sessions) => dispatch(getAllSessions(getState(), sessions)));
   };
 }
 
@@ -219,7 +231,9 @@ export function createPlaylistSession(playlistURI, hostID) {
     dispatch(createSessionLoading());
     // Then call the API function with the given payload
     Api.createSession(playlistURI, hostID).then(
-      (session) => dispatch(createSessionSuccess(session)),
+      (session) => {
+        dispatch(createSessionSuccess(session));
+      },
 
       (error) => {
         var err = JSON.parse(error.response);
@@ -284,5 +298,18 @@ export function setCollaborative(bool, playlist_id) {
         );
       }
     );
+  };
+}
+
+export function getUserSessions(hostID) {
+  return (dispatch) => {
+    Api.getAllUserSessions(hostID).then((res) => console.log(res));
+  };
+}
+
+//Not currently in use
+export function getSessionFromPlaylist(hostID, playlistID) {
+  return (dispatch) => {
+    Api.getCodeFromPlaylist(hostID, playlistID).then((res) => console.log(res));
   };
 }

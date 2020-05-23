@@ -12,6 +12,7 @@ import {
   SET_COLLABORATIVE_LOADING,
   SET_COLLABORATIVE_SUCCESS,
   SET_COLLABORATIVE_ERROR,
+  GET_ALLSESSIONS,
 } from "../actions/action-types";
 
 /**
@@ -62,6 +63,9 @@ export default function playlists(state = [], action) {
 
     case SET_COLLABORATIVE_ERROR:
       return playlists_setCollaborativeError(state, action);
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    case GET_ALLSESSIONS:
+      return playlist_allSessions(state, action);
 
     default:
       return state;
@@ -178,7 +182,7 @@ function playlists_setCollaborativeSuccess(state, action) {
     ...state,
     loading: false,
     error: null,
-    };
+  };
 }
 
 function playlists_setCollaborativeError(state, action) {
@@ -186,5 +190,26 @@ function playlists_setCollaborativeError(state, action) {
     ...state,
     loading: false,
     error: action.err,
+  };
+}
+
+/* ------------------------------------------------------GET ALL SESSIONS------*/
+function playlist_allSessions(state, action) {
+  //console.log(action.state.playlists.data.items);
+  var playlists = action.state.playlists.data.items;
+  var sessions = action.sessions.data;
+  const merged = playlists.map((playlist) => {
+    const sesh = sessions.find((inc) => inc.playlistURI === playlist.id);
+    if(sesh) {
+      const play = playlists.find((inc) => inc.id === sesh.playlistURI);
+      play["session"] = sesh;
+      return play
+    }
+    return playlist;
+  });
+  playlists = merged;
+
+  return {
+    ...state,
   };
 }

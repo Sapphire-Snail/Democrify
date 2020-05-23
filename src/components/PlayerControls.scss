@@ -3,96 +3,116 @@
   left: 0;
   bottom: 0;
   width: 100%;
-  background-color: black;
+  background-color: rgba(0, 0, 0, 0.4);
   color: white;
+  text-align: center;
 }
 
-.art{
-	width:100px;
-    height:100px;
-	border:1px solid #333;
-	border-radius: 5px;
-    margin-right:10px;
-    float:left;
+.art {
+  width: 100px;
+  height: 100px;
+  border: 1px solid #333;
+  border-radius: 5px;
+  margin-right: 1em;
+  margin-bottom: 1em;
+  margin-top: 1em;
+  display: inline-block;
 }
 
 .trackInfo {
-	width:150px;
-    height:100px;
-    margin-right:10px;
-    float:left;
+  width: 150px;
+  height: 120px;
+  margin-right: 10px;
+  text-align: center;
+  display: inline-block;
 }
 
-.skipBtn{
-	&:hover {
-		color: #333;
-		cursor: pointer;
-	}
+.skipBtn {
+  &:hover {
+    color: #333;
+    cursor: pointer;
+  }
 }
 
-.inner_div{
-    float:left;
-    margin-right:5px;
+.inner_div {
+  float: left;
+  margin-right: 5px;
 }
 
+.inlineBlock {
+  display: block;
+}
 //Code itaken from: https://codepen.io/MarioDesigns/pen/ENevMJ/
 .pcontainer {
-	position: relative;
-	width: 100px;
-	height: 100%;
-	display: flex;
-	flex-direction: column;
-	flex-wrap: nowrap;
-	justify-content: center;
-	align-items: center;
+  position: relative;
+  width: 100px;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
 }
 
 .pbtn {
-	position: relative;
-	width: 40px;
-	height: 40px;
-	// border: white 3px solid;
-	// border-radius: 50%;
-	cursor: pointer;
-	transition: border 0.1s ease-in-out;
-	
-	&:hover {
-		// border: #333 3px solid;
-		.bar {
-			background-color: #333;	
-		}
-	}
-	
-	.bar {
-		display: block;
-		position: absolute;
-		top: 10px;
-		left: 0;
-		width: 3px;
-		height: 20px;
-		border-radius: 3px;
-		background-color: white;
-		transform-origin: center;
-    transition: transform 0.4s ease-in-out, 
-    background 0.1s ease-in-out;
-	}
-	
-	&.pause {
-		.bar-1 {
-			transform: translateX(13.5px) translateY(0px) rotate(0deg);
-		}
-		.bar-2 {
-			transform: translateX(24px) translateY(0px) rotate(0deg);
-		}
-	}
-	
-	&.play {
-		.bar-1 {
-			transform: translateX(20px) translateY(-5px) rotate(-55deg);
-		}
-		.bar-2 {
-			transform: translateX(20px) translateY(5px) rotate(-125deg);
-		}
-	}
-	
+  position: relative;
+  width: 40px;
+  height: 40px;
+  // border: white 3px solid;
+  // border-radius: 50%;
+  cursor: pointer;
+  transition: border 0.1s ease-in-out;
+
+  &:hover {
+    // border: #333 3px solid;
+    .bar {
+      background-color: #333;
+    }
+  }
+
+  .bar {
+    display: block;
+    position: absolute;
+    top: 10px;
+    left: 0;
+    width: 3px;
+    height: 20px;
+    border-radius: 3px;
+    background-color: white;
+    transform-origin: center;
+    transition: transform 0.4s ease-in-out, background 0.1s ease-in-out;
+  }
+
+  &.pause {
+    .bar-1 {
+      transform: translateX(13.5px) translateY(0px) rotate(0deg);
+    }
+    .bar-2 {
+      transform: translateX(24px) translateY(0px) rotate(0deg);
+    }
+  }
+
+  &.play {
+    .bar-1 {
+      transform: translateX(20px) translateY(-5px) rotate(-55deg);
+    }
+    .bar-2 {
+      transform: translateX(20px) translateY(5px) rotate(-125deg);
+    }
+  }
+}
+
+.trackDetails {
+  width: fit-content;
+  color: white;
+  white-space: nowrap;
+  overflow: hidden;
+  margin: auto;
+  margin-left: unset;
+  box-sizing: border-box;
+}
+.trackDetails p {
+  display: inline-block;
+  padding-left: 100%;
 }

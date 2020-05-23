@@ -74,10 +74,13 @@ body {
   border: 0.1em solid #1ecd97;
   color: white;
   cursor: pointer;
-  font-size: 3vmin;
   padding: 0.7em 1.5em;
   text-transform: uppercase;
   transition: all 0.25s ease;
+}
+
+.button-large {
+  font-size: 3vmin;
 }
 
 .button:hover {

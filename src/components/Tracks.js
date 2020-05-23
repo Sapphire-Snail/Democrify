@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import Loader from "react-loader-spinner";
 import SingleTrack from "./SingleTrack";
 import { getPlaylistTracks } from "../redux/actions/thunk";
+import { Table } from "reactstrap";
+
 
 class Tracks extends Component {
   componentDidMount() {
@@ -25,9 +27,8 @@ class Tracks extends Component {
     if (data) {
       return (
         <div>
-          <div className="tableCaptionContainer"></div>
-          <div className="container">
-            <table className="table">
+          <div className="tableContainer">>
+          <Table hover size='sm' className="table">
               <thead>
                 <tr>
                   <th></th>
@@ -45,7 +46,7 @@ class Tracks extends Component {
                     />
                   ))}
               </tbody>
-            </table>
+            </Table>
           </div>
         </div>
       );

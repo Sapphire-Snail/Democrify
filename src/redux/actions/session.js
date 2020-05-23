@@ -4,7 +4,7 @@ import {
     CREATE_SESSION_ERROR,
     GET_SESSION_LOADING,
     GET_SESSION_SUCCESS,
-    GET_SESSION_ERROR
+    GET_SESSION_ERROR,
   } from './action-types';
 
 export function createSessionLoading() {

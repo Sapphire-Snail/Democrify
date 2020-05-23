@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom';
 import { setPlaylist } from '../../redux/actions/thunk';
 import { connect } from 'react-redux';
 import "./Playlists.css"
-
+import { RiRadioButtonLine} from 'react-icons/ri'
 
 class SinglePlaylist extends Component {
 
@@ -28,14 +28,15 @@ class SinglePlaylist extends Component {
 
         return(
             <tr key={this.props.playlistInfo.id}>
-                <td>
+                <td class="tableCell">
                     <img src={this.props.playlistInfo.images[0] ? this.props.playlistInfo.images[0].url : 'https://f4.bcbits.com/img/a4139357031_10.jpg'} alt="playlist" className="albumImage"/>
                 </td>
-                <td>
+                <td class="tableCell">
                     <span style={{cursor:'pointer', color:'white'}} onClick={this.handleChange(this.props.playlistInfo)}>{this.props.playlistInfo.name}</span>
                 </td>
-                <td>
+                <td class="tableCell">
                     <span style={{cursor:'pointer'}}>{this.props.playlistInfo.tracks.total}</span>
+                    {this.props.isSession && <RiRadioButtonLine size={25} style={{color: '#00ab25'}} />}
                 </td>
             </tr>
         );

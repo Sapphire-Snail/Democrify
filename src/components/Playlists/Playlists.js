@@ -2,7 +2,10 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Loader from "react-loader-spinner";
 import SinglePlaylist from "./SinglePlaylist";
+import { getUserSessions } from "../../redux/actions/thunk";
 import "./Playlists.css";
+import InfoBar from "../InfoBar";
+import {Table} from "reactstrap";
 class Playlists extends Component {
   render() {
     const { error, loading, data } = this.props.playlists;
@@ -20,11 +23,9 @@ class Playlists extends Component {
     if (data) {
       return (
         <div>
-          <div className="tableCaptionContainer">
-            <h1 style={{color: "white"}}>{this.props.title}</h1>
-          </div>
-          <div className="container tableContainer">
-            <table className="table">
+          <InfoBar title="Top Playlists" backLink='/me' isPlaylistPage={true}> </InfoBar>
+          <div className="tableContainer">
+            <Table hover size='sm' className="table">
               <thead>
                 <tr>
                   <th></th>
@@ -35,10 +36,10 @@ class Playlists extends Component {
               <tbody>
                 {data.items &&
                   data.items.map((item) => (
-                    <SinglePlaylist key={item.id} playlistInfo={item} />
+                    <SinglePlaylist isSession={item.session} key={item.id} playlistInfo={item} />
                   ))}
               </tbody>
-            </table>
+            </Table>
           </div>
         </div>
       );
@@ -51,7 +52,12 @@ class Playlists extends Component {
 function mapStateToProps(state) {
   return {
     playlists: state.playlists,
+    userID: state.user.data ? state.user.data.id : null
   };
 }
 
-export default connect(mapStateToProps)(Playlists);
+const mapDispatchToProps = {
+  getUserSessions,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Playlists);
