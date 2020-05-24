@@ -83,9 +83,10 @@ class InfoBar extends Component {
                 : "Cannot add track"}
             </Button>
           )}
+
           {this.state.isTrackListPage && this.props.session_code && (
-            <h3>
-              Code: <Badge color="secondary">{this.props.session_code}</Badge>
+            <h3 style={{marginBottom: "0.7em"}}>
+              Code: <Badge style={{backgroundColor: "#1ed760"}}>{this.props.session_code}</Badge>
             </h3>
           )}
           {/* I regret this line of code */}
@@ -101,15 +102,14 @@ class InfoBar extends Component {
               </h3>
             )}
         </Row>
-        <Row style={{ margin: "auto", display: "block" }}>
+        <Row style={{ margin: "auto", flexWrap: "wrap", display: "flex", flexDirection: "column"}}>
          
           {!this.state.searchShowing &&
           this.state.isTrackListPage &&
           !this.props.session_code &&
           !this.state.sessionCreated ? (
             <Button
-              color="primary"
-              style={{ marginLeft: 10,backgroundColor: "#1ecd97", borderColor: "#1ecd97" }}
+              style={{backgroundColor:"#1ed760", color :"white", margin: 'auto', marginBottom: "1em", borderColor: "#1ed760", boxSizing: 'border-box'}}
               onClick={this.createSession}
             >
               Create Session!
@@ -121,6 +121,7 @@ class InfoBar extends Component {
                 <button
                   className="btn-UpperCreate button button--loginApp-link"
                   onClick={this.togglePop}
+                  style={{backgroundColor:"#1ed760", color :"white"}}
                 >
                   Create Playlist
                 </button>
@@ -159,7 +160,7 @@ class InfoBar extends Component {
                 </CardBody>
               </Card>
             </Collapse>
-          )}{!this.state.searchShowing && <Button   style={{ backgroundColor: "#c030ed", borderColor: "#c030ed" }} tag={Link} to={this.state.backLink}>
+          )}{!this.state.searchShowing && <Button   style={{ backgroundColor: "#c030ed", borderColor: "#c030ed", margin: 'auto'}} tag={Link} to={this.state.backLink}>
             Back
           </Button>}
         </Row>
