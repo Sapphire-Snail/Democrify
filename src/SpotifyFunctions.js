@@ -105,3 +105,7 @@ export function getPlaylist(playlist_id) {
 export function makeCollaborative(bool, playlist_id) {
 	return spotifyApi.changePlaylistDetails(playlist_id, {public: false, collaborative: bool})
 }
+
+export function addSongs(activePlaylistID, songURIs) {
+	return spotifyApi.addTracksToPlaylist(activePlaylistID, songURIs);
+}
