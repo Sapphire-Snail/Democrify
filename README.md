@@ -28,6 +28,8 @@ This feature has proven to be quite complex to implement, but it is our next pri
 3. `npm run server` to start the backend server
 4. `npm start` to start the client 
 
+5. `npm test` to run the test suite.
+
 # Contributors
 
 |Name|upi| Primary role |
