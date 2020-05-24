@@ -200,8 +200,6 @@ export function getPlaylistTracksFromSpotifyAndDB(playlistId, sessionCode) {
       (tracks) => {        
         Api.getSessionPlaylist(sessionCode).then(
           (DBTracks) => {
-            console.log(DBTracks);
-            console.log(tracks);
             tracks.items = tracks.items.concat(DBTracks.data.tracksToBeAdded)
             dispatch(getPlaylistTracksSuccess(tracks));
           },
@@ -290,7 +288,7 @@ export function addSongToDB(sessionCode, trackToAdd, addedBy) {
 export function removeSongFromDB(sessionCode, trackToRemoveURI) {
   return () => {
     Api.removeSongFromDB(sessionCode, trackToRemoveURI).then(
-      (data) => console.log(data),
+      (data) => console.log('Removed song from db, added to Spotify ', data),
 
       (error) => {
         var err = error.response;

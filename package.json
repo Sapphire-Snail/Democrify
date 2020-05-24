@@ -21,6 +21,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-emoji-render": "^1.2.2",
+    "react-error-boundary": "^2.2.1",
     "react-icons": "^3.9.0",
     "react-loader-spinner": "^3.1.5",
     "react-marquee-text-component": "^1.0.4",

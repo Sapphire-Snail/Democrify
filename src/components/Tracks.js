@@ -12,7 +12,6 @@ class Tracks extends Component {
       this.props.getPlaylistTracksFromSpotifyAndDB(this.props.active_playlist.id, this.props.session.connected_session.data.joinCode);
     } else {
       if (this.props.active_playlist.session !== undefined) {
-        console.log(this.props.active_playlist);
         this.props.addSongsFromDBToSpotifyThenGetTracks(this.props.active_playlist.id, this.props.active_playlist.session.joinCode);
       } else {
         this.props.getPlaylistTracks(this.props.active_playlist.id);
