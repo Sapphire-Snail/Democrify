@@ -39,3 +39,6 @@ This feature has proven to be quite complex to implement, but it is our next pri
 
 ## Further info
 Please visit our [wiki](https://github.com/Sapphire-Snail/Democrify/wiki) for further information on the project and its development.
+
+## License
+This project is licensed under the MIT License. See [LICENSE](https://github.com/Sapphire-Snail/Democrify/blob/master/LICENSE) for more details.
