@@ -23,9 +23,10 @@ Switch your playlist live and let your guests to vote for the next song. Or skip
 This feature has proven to be quite complex to implement, but it is our next priority in implementation of this awesome project. You can find our vision of Live Mode [here](https://github.com/Sapphire-Snail/Democrify/wiki/Live-mode)   
 
 # Get started
-1. `npm i` to install dependencies
-2. `npm run server` to start the backend server
-2. `npm start` to start the client 
+1. Navigate to your `.\Democrify` folder
+2. `npm i` to install dependencies
+3. `npm run server` to start the backend server
+4. `npm start` to start the client 
 
 # Contributors
 
