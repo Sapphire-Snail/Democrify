@@ -19,7 +19,7 @@ Skip the desktop app altogether and play any songs using a built-in player. 🎶
 Democrify can be used on your desktop as well as your mobile. Who brings desktops to parties anyways? 🤔
 
 ### Live Mode (future feature)
-Switch your playlist live and let your guests to vote for the next song. Or skip the current one, if they think it's horrible. Party democracy in its best.   
+Switch your playlist live and let your guests to vote for the next song. Or skip the current one, if they think it's horrible. Power to the people, this is party democracy in its best! ☭   
 This feature has proven to be quite complex to implement, but it is our next priority in implementation of this awesome project. You can find our vision of Live Mode [here](https://github.com/Sapphire-Snail/Democrify/wiki/Live-mode)   
 
 # Get started
