@@ -102,7 +102,7 @@ class InfoBar extends Component {
               </h3>
             )}
         </Row>
-        <Row style={{ margin: "auto", display: "block", flexWrap: "wrap", display: "flex", flexDirection: "column"}}>
+        <Row style={{ margin: "auto", flexWrap: "wrap", display: "flex", flexDirection: "column"}}>
          
           {!this.state.searchShowing &&
           this.state.isTrackListPage &&
