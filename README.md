@@ -26,3 +26,12 @@ This feature has proven to be quite complex to implement, but it is our next pri
 1. `npm i` to install dependencies
 2. `npm run server` to start the backend server
 2. `npm start` to start the client 
+
+# Contributors
+
+|Name|upi|
+|---|---|
+|Rowan Hart|rhar768|
+|Daria Derecha|dder725|
+|Vinny Tunnell|vtun547|
+|Chris Yang|yyan734|
