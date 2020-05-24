@@ -36,8 +36,8 @@ class SinglePlaylist extends Component {
                 </td>
                 <td className="tableCell">
                     <span style={{cursor:'pointer'}}>{this.props.playlistInfo.tracks.total}</span>
-                    {this.props.isSession && <RiRadioButtonLine size={25} style={{color: '#00ab25'}} />}
                 </td>
+                <td>{this.props.isSession && <RiRadioButtonLine size={25} style={{color: '#00ab25'}} />}</td>
             </tr>
         );
     }

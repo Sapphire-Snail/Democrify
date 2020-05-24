@@ -31,6 +31,7 @@ class Playlists extends Component {
                   <th></th>
                   <th>{this.props.col1Name}</th>
                   <th>{this.props.col2Name}</th>
+                  <th style={{width: '10px'}}>Live</th>
                 </tr>
               </thead>
               <tbody>

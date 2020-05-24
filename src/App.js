@@ -44,7 +44,7 @@ class App extends Component {
             {/* the whole app gets a web player */}
           </header>
           <main>
-            <div style={{ marginBottom: 110 }}>
+            <div>
               <Switch>
                 <Route exact path="/">
                   <Redirect to="/login" />
