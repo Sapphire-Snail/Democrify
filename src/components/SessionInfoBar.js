@@ -72,7 +72,7 @@ class SessionInfoBar extends Component {
               toggle={this.toogleTooltip}
             >
               You cannot add track this playlist because it is does not belong
-              to the host. Just enjoy the music <span role="img" area-label="fire emoji">🔥</span>
+              to the host. Just enjoy the music <span role="img" aria-label="fire emoji">🔥</span>
             </Tooltip>
           )}
         </Button>
