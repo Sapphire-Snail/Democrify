@@ -102,17 +102,14 @@ class InfoBar extends Component {
             )}
         </Row>
         <Row style={{ margin: "auto", display: "block" }}>
-          {!this.state.searchShowing && <Button color="primary" tag={Link} to={this.state.backLink}>
-            {" "}
-            Back{" "}
-          </Button>}
+         
           {!this.state.searchShowing &&
           this.state.isTrackListPage &&
           !this.props.session_code &&
           !this.state.sessionCreated ? (
             <Button
               color="primary"
-              style={{ marginLeft: 10 }}
+              style={{ marginLeft: 10,backgroundColor: "#1ecd97", borderColor: "#1ecd97" }}
               onClick={this.createSession}
             >
               Create Session!
@@ -130,6 +127,9 @@ class InfoBar extends Component {
               </Collapse>
             </div>
           )}
+
+ 
+          
           {this.state.isPlaylistPage && (
             <Collapse isOpen={this.state.seen}>
               <Card
@@ -159,7 +159,9 @@ class InfoBar extends Component {
                 </CardBody>
               </Card>
             </Collapse>
-          )}
+          )}{!this.state.searchShowing && <Button   style={{ backgroundColor: "#c030ed", borderColor: "#c030ed" }} tag={Link} to={this.state.backLink}>
+            Back
+          </Button>}
         </Row>
       </Container>
     );
