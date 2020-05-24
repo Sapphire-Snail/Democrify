@@ -10,6 +10,7 @@ import {
   Collapse,
   CardBody,
   Card,
+  Tooltip,
 } from "reactstrap";
 import { notify } from "react-notify-toast";
 
@@ -24,6 +25,7 @@ class InfoBar extends Component {
       searchShowing: false,
       backLink: this.props.backLink,
       listname: "",
+      tooltipOpen: false,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -42,6 +44,10 @@ class InfoBar extends Component {
   toggleSearch = () => {
     this.setState({ searchShowing: !this.state.searchShowing });
     this.props.toggleSearch();
+  };
+
+  toogleTooltip = () => {
+    this.setState({ tooltipOpen: !this.state.tooltipOpen });
   };
 
   handleSubmit(e) {
@@ -75,18 +81,32 @@ class InfoBar extends Component {
               className="addButton"
               style={{ backgroundColor: "#c030ed", borderColor: "#c030ed" }}
               onClick={this.toggleSearch}
+              id="Tooltip"
             >
               {this.props.can_add
                 ? this.state.searchShowing
                   ? "Back to the playlist"
                   : "Add track"
                 : "Cannot add track"}
+              {!this.props.can_add && (
+                <Tooltip
+                  placement="right"
+                  isOpen={this.state.tooltipOpen}
+                  target="Tooltip"
+                  toggle={this.toogleTooltip}
+                >
+                  You cannot add track this playlist because it is not yours.
+                  Ask the owner to create a session for this playlist!
+                </Tooltip>
+              )}
             </Button>
           )}
-
           {this.state.isTrackListPage && this.props.session_code && (
-            <h3 style={{marginBottom: "0.7em"}}>
-              Code: <Badge style={{backgroundColor: "#1ed760"}}>{this.props.session_code}</Badge>
+            <h3 style={{ marginBottom: "0.7em" }}>
+              Code:{" "}
+              <Badge style={{ backgroundColor: "#1ed760" }}>
+                {this.props.session_code}
+              </Badge>
             </h3>
           )}
           {/* I regret this line of code */}
@@ -102,26 +122,39 @@ class InfoBar extends Component {
               </h3>
             )}
         </Row>
-        <Row style={{ margin: "auto", flexWrap: "wrap", display: "flex", flexDirection: "column"}}>
-         
+        <Row
+          style={{
+            margin: "auto",
+            flexWrap: "wrap",
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
           {!this.state.searchShowing &&
           this.state.isTrackListPage &&
           !this.props.session_code &&
           !this.state.sessionCreated ? (
             <Button
-              style={{backgroundColor:"#1ed760", color :"white", margin: 'auto', marginBottom: "1em", borderColor: "#1ed760", boxSizing: 'border-box'}}
+              style={{
+                backgroundColor: "#1ed760",
+                color: "white",
+                margin: "auto",
+                marginBottom: "1em",
+                borderColor: "#1ed760",
+                boxSizing: "border-box",
+              }}
               onClick={this.createSession}
             >
               Create Session!
             </Button>
           ) : null}
           {this.state.isPlaylistPage && (
-            <div style={{marginTop: 15}}>
+            <div style={{ marginTop: 15 }}>
               <Collapse isOpen={!this.state.seen}>
                 <button
                   className="btn-UpperCreate button button--loginApp-link"
                   onClick={this.togglePop}
-                  style={{backgroundColor:"#1ed760", color :"white"}}
+                  style={{ backgroundColor: "#1ed760", color: "white" }}
                 >
                   Create Playlist
                 </button>
@@ -129,8 +162,6 @@ class InfoBar extends Component {
             </div>
           )}
 
- 
-          
           {this.state.isPlaylistPage && (
             <Collapse isOpen={this.state.seen}>
               <Card
@@ -160,9 +191,20 @@ class InfoBar extends Component {
                 </CardBody>
               </Card>
             </Collapse>
-          )}{!this.state.searchShowing && <Button   style={{ backgroundColor: "#c030ed", borderColor: "#c030ed", margin: 'auto'}} tag={Link} to={this.state.backLink}>
-            Back
-          </Button>}
+          )}
+          {!this.state.searchShowing && (
+            <Button
+              style={{
+                backgroundColor: "#c030ed",
+                borderColor: "#c030ed",
+                margin: "auto",
+              }}
+              tag={Link}
+              to={this.state.backLink}
+            >
+              Back
+            </Button>
+          )}
         </Row>
       </Container>
     );
