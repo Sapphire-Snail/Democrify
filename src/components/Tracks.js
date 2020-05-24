@@ -36,7 +36,7 @@ class Tracks extends Component {
     if (data) {
       return (
         <div>
-          <div className="tableContainer">>
+          <div className="tableContainer">
           <Table hover size='sm' className="table">
               <thead>
                 <tr>
