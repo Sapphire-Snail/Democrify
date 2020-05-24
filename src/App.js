@@ -4,10 +4,12 @@ import {
   Switch,
   Route,
   Redirect,
+  Link
 } from "react-router-dom";
 import "./App.css";
 import { connect } from "react-redux";
 import * as spotify from "./SpotifyFunctions.js";
+import { Button } from "reactstrap";
 
 //Components
 import LoginPage from "./components/LoginPage";
@@ -23,32 +25,14 @@ import SessionPage from "./components/SessionPage";
 window.onSpotifyWebPlaybackSDKReady = () => {};
 
 class App extends Component {
-  // Things to do before unloading/closing the tab (CURRENTLY NOTHING)
-  unloadCurrentlyPlaying = () => {
-    console.log("goodbye");
-  };
-
-  //Set up listener to run code when window unmounts
-  setupBeforeUnloadListener = () => {
-    window.addEventListener("beforeunload", (ev) => {
-      ev.preventDefault();
-      return this.unloadCurrentlyPlaying();
-    });
-  };
-
-  componentDidMount() {
-    // Activate the event listener
-    this.setupBeforeUnloadListener();
-  }
-
   render() {
-    //When app is refreshed, reload access token from persist (will update)
+    //When app is refreshed, reload access token from persist
     spotify.setAccessToken(this.props.accessToken);
 
     return (
       <Router>
         <div className="App">
-          <LoginBar />
+        <LoginBar />
           <header>
             <img
               className="App-logo"
@@ -57,7 +41,7 @@ class App extends Component {
             />
             <h2 className="slogan">Music for the people</h2>
             {this.props.loggedIn && <WebPlayer />}{" "}
-            {/* At the moment the whole app gets a web player, but in the future only load if they are hosting */}
+            {/* the whole app gets a web player */}
           </header>
           <main>
             <div style={{ marginBottom: 110 }}>
@@ -84,7 +68,8 @@ class App extends Component {
                   <SessionPage />
                 </Route>
                 <Route path="*">
-                  <p>404 Not Found!!</p>
+                  <p>404 Not Found!</p>
+                  <Button color="primary" tag={Link} to={'/login'}> Back to safety! </Button>
                 </Route>
               </Switch>
               <PlayerControls />
