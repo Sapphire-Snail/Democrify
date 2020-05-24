@@ -162,45 +162,37 @@ export function addSongsFromDBToSpotifyThenGetTracks(playlistId, sessionCode) {
     dispatch(getPlaylistTracksLoading());
     Api.getSessionPlaylist(sessionCode).then(
       (session) => {
-        console.log(session);
-        if (session.data) {
-          for(var i = 0; i < session.data.tracksToBeAdded.length; i++) {
-            addSong(playlistId, session.data.tracksToBeAdded.track.uri);
-          }
+        var songs = [];
+        for (var i = 0; i < session.data.tracksToBeAdded.length; i++) {
+          songs.push(session.data.tracksToBeAdded[i].track.uri);
+          dispatch(removeSongFromDB(session.data.tracksToBeAdded[i].track.uri, sessionCode));
         }
-        spotify.getPlaylistTracks(playlistId).then(
-          (tracks) => {
-            dispatch(getPlaylistTracksSuccess(tracks));
-          },
-    
-          (error) => {
-            var err = JSON.parse(error.response);
-            dispatch(
-              getPlaylistTracksError(
-                err.error.status + " " + err.error.message || "Unexpected error!"
-              )
-            );
-          }
-        );
+        if(songs.length > 0)  {
+          spotify.addSongs(playlistId, songs).then(
+            () => {
+              dispatch(getPlaylistTracks(playlistId));
+            },
+
+            (error) => {
+              var err = JSON.parse(error.response);
+              dispatch(
+                addSongError(
+                  err.error.status + " " + err.error.message ||
+                    "Unexpected error!"
+                )
+              );
+            }
+          );
+        } else {
+          dispatch(getPlaylistTracks(playlistId));
+        }
       },
+
       () => {
         console.log("error getting session");
-        spotify.getPlaylistTracks(playlistId).then(
-          (tracks) => {
-            dispatch(getPlaylistTracksSuccess(tracks));
-          },
-    
-          (error) => {
-            var err = JSON.parse(error.response);
-            dispatch(
-              getPlaylistTracksError(
-                err.error.status + " " + err.error.message || "Unexpected error!"
-              )
-            );
-          }
-        );
+        dispatch(getPlaylistTracks(playlistId));
       }
-    )
+    );
   };
 }
 
