@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { loadPlaylists, createPlaylist } from "../redux/actions/thunk";
-import { Button, Badge, Container, Row } from "reactstrap";
+import { Button, Badge, Container, Row, Tooltip } from "reactstrap";
 
 class SessionInfoBar extends Component {
   constructor(props) {
@@ -13,12 +13,17 @@ class SessionInfoBar extends Component {
       backLink: this.props.backLink,
       searchShowing: false,
       listname: "",
+      tooltipOpen: false,
     };
   }
 
   toggleSearch = () => {
     this.setState({ searchShowing: !this.state.searchShowing });
     this.props.toggleSearch();
+  };
+
+  toogleTooltip = () => {
+    this.setState({ tooltipOpen: !this.state.tooltipOpen });
   };
 
   render() {
@@ -35,10 +40,12 @@ class SessionInfoBar extends Component {
           )}
         </Row>
         <Row style={{ margin: "auto", display: "inline" }}>
-          {!this.state.searchShowing && <Button color="primary" tag={Link} to={this.state.backLink}>
-            {" "}
-            Back{" "}
-          </Button>}
+          {!this.state.searchShowing && (
+            <Button color="primary" tag={Link} to={this.state.backLink}>
+              {" "}
+              Back{" "}
+            </Button>
+          )}
         </Row>
         <Button
           disabled={!this.props.can_add}
@@ -49,6 +56,7 @@ class SessionInfoBar extends Component {
             dsplay: "inline",
             marginBottom: "0px",
           }}
+          id="Tooltip"
           onClick={this.toggleSearch}
         >
           {this.props.can_add
@@ -56,6 +64,17 @@ class SessionInfoBar extends Component {
               ? "Back to the playlist"
               : "Add track"
             : "Cannot add track"}
+          {!this.props.can_add && (
+            <Tooltip
+              placement="right"
+              isOpen={this.state.tooltipOpen}
+              target="Tooltip"
+              toggle={this.toogleTooltip}
+            >
+              You cannot add track this playlist because it is does not belong
+              to the host. Just enjoy the music <span role="img" area-label="fire emoji">🔥</span>
+            </Tooltip>
+          )}
         </Button>
       </Container>
     );
