@@ -8,12 +8,10 @@ import { Table } from "reactstrap";
 
 class Tracks extends Component {
   componentDidMount() {
-    if (this.props.session.connected_session != undefined) {
+    if (this.props.session.connected_session !== undefined) {
       this.props.getPlaylistTracksFromSpotifyAndDB(this.props.active_playlist.id, this.props.session.connected_session.data.joinCode);
     } else {
-      if (this.props.active_playlist.session != undefined) {
-        console.log("yeeeet")
-        console.log(this.props.active_playlist);
+      if (this.props.active_playlist.session !== undefined) {
         this.props.addSongsFromDBToSpotifyThenGetTracks(this.props.active_playlist.id, this.props.active_playlist.session.joinCode);
       } else {
         this.props.getPlaylistTracks(this.props.active_playlist.id);
@@ -37,7 +35,7 @@ class Tracks extends Component {
     if (data) {
       return (
         <div>
-          <div className="tableContainer">>
+          <div className="tableContainer">
           <Table hover size='sm' className="table">
               <thead>
                 <tr>

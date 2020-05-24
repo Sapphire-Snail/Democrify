@@ -52,7 +52,7 @@ class LoginBar extends Component {
       );
     }
 
-    if (data) {
+    if (data && this.props.userData.loggedIn) {
       return (
         <div>
           <Navbar style={{backgroundColor: "rgba(255, 255, 255, 0.8)"}}>

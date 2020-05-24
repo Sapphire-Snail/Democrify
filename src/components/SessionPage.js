@@ -6,6 +6,7 @@ import SearchPage from "./SearchPage";
 import Tracks from "./Tracks";
 import { getSession } from "../redux/actions/thunk";
 import SessionInfoBar from "./SessionInfoBar";
+import { Redirect } from "react-router-dom";
 
 class SessionPage extends Component {
   constructor() {
@@ -38,7 +39,7 @@ class SessionPage extends Component {
       );
     }
 
-    if (connected_session.data) {
+    if (connected_session && connected_session.data) {
       return (
         <div>
         <SessionInfoBar title={this.props.active_playlist.name} hostID={this.props.session.connected_session.data.hostID} backLink='/me' toggleSearch={this.toggleSearch}/>
@@ -50,7 +51,7 @@ class SessionPage extends Component {
         </div>
       );
     }
-    return <div />;
+    return <Redirect to="/me"/>;
   }
 }
 //State is entire state tree
