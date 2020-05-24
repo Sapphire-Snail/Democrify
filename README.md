@@ -36,3 +36,6 @@ This feature has proven to be quite complex to implement, but it is our next pri
 |Daria Derecha|dder725|
 |Vinny Tunnell|vtun547|
 |Chris Yang|yyan734|
+
+## Further info
+Please visit our [wiki](https://github.com/Sapphire-Snail/Democrify/wiki) for further information on the project and its development.
