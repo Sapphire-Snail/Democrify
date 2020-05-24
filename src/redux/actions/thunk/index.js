@@ -135,14 +135,11 @@ export function setPlaylist(playlist) {
 }
 
 export function getPlaylistTracks(playlistId) {
-  console.log('asdasd');
-  console.log(playlistId);
   return (dispatch) => {
     dispatch(getPlaylistTracksLoading());
     spotify.getPlaylistTracks(playlistId).then(
       (tracks) => {
         dispatch(getPlaylistTracksSuccess(tracks));
-        console.log("sadd");
       },
 
       (error) => {
