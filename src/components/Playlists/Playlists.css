@@ -16,9 +16,6 @@
 }
 
 .tableContainer {
-  align-items: center;
-  display: flex;
-  justify-content: center;
   height: 100%;
   margin-left: 20em;
   margin-right: 20em;
@@ -31,10 +28,18 @@
   color: white;
 }
 
+/* Mobile screen users */
 @media screen and (max-width: 1000px) {
   .albumImage {
     max-width: 50px;
     max-height: 50px;
+  }
+  .tableContainer {
+    margin-left: unset;
+    margin-right: unset;
+  }
+  .card {
+    flex-direction: unset;
   }
 }
 
