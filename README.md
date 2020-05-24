@@ -30,12 +30,12 @@ This feature has proven to be quite complex to implement, but it is our next pri
 
 # Contributors
 
-|Name|upi|
-|---|---|
-|Rowan Hart|rhar768|
-|Daria Derecha|dder725|
-|Vinny Tunnell|vtun547|
-|Chris Yang|yyan734|
+|Name|upi| Primary role |
+|---|---|---|
+|Rowan Hart|rhar768| backend |
+|Daria Derecha|dder725| frontend |
+|Vinny Tunnell|vtun547| backend/frontend |
+|Chris Yang|yyan734| frontend |
 
 ## Further info
 Please visit our [wiki](https://github.com/Sapphire-Snail/Democrify/wiki) for further information on the project and its development.
