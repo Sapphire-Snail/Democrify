@@ -215,13 +215,13 @@ function mapStateToProps(state) {
     hosted_session: state.session.hosted_session
       ? state.session.hosted_session.data
       : null,
-    session_code: state.playlists.active_playlist.session
+    session_code: (state.playlists.active_playlist && state.playlists.active_playlist.session)
       ? state.playlists.active_playlist.session.joinCode
       : "",
     activePlaylist: state.playlists.active_playlist,
     can_add:
-      state.playlists.active_playlist.collaborative ||
-      state.playlists.active_playlist.owner.id === state.user.data.id, //Only let them add songs if playlist is collab or theirs
+    state.playlists.active_playlist && (state.playlists.active_playlist.collaborative ||
+      state.playlists.active_playlist.owner.id === state.user.data.id), //Only let them add songs if playlist is collab or theirs
     playlistId: window.location.pathname.split("/").pop(), //Grab playlist ID from URL
     deviceId: state.webplayer.deviceId,
     userID: state.user.data ? state.user.data.id : null,
